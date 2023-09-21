@@ -13,7 +13,6 @@ if (isset($_GET['code'])) {
       'email' => $google_account_info['email'],
       'first_name' => $google_account_info['givenName'],
       'last_name' => $google_account_info['familyName'],
-      'gender' => $google_account_info['gender'],
       'full_name' => $google_account_info['name'],
       'picture' => $google_account_info['picture'],
       'verifiedEmail' => $google_account_info['verifiedEmail'],
@@ -24,12 +23,12 @@ if (isset($_GET['code'])) {
    $sql = "SELECT * FROM wma_users_google WHERE email ='{$userinfo['email']}'";
    $result = mysqli_query($conn, $sql);
    if (mysqli_num_rows($result) > 0) {
-      // user is exists
+      // user exists
       $userinfo = mysqli_fetch_assoc($result);
       $token = $userinfo['token'];
    } else {
-      // user is not exists
-      $sql = "INSERT INTO wma_users_google (email, first_name, last_name, gender, full_name, picture, verifiedEmail, token) VALUES ('{$userinfo['email']}', '{$userinfo['first_name']}', '{$userinfo['last_name']}', '{$userinfo['gender']}', '{$userinfo['full_name']}', '{$userinfo['picture']}', '{$userinfo['verifiedEmail']}', '{$userinfo['token']}')";
+      // user does not exist
+      $sql = "INSERT INTO wma_users_google (email, first_name, last_name, full_name, picture, verifiedEmail, token) VALUES ('{$userinfo['email']}', '{$userinfo['first_name']}', '{$userinfo['last_name']}', '{$userinfo['full_name']}', '{$userinfo['picture']}', '{$userinfo['verifiedEmail']}', '{$userinfo['token']}')";
       $result = mysqli_query($conn, $sql);
       if ($result) {
          $token = $userinfo['token'];
@@ -47,11 +46,11 @@ if (isset($_GET['code'])) {
       die();
    }
 
-   // checking if user is already exists in database
+   // checking if user exists in database
    $sql = "SELECT * FROM wma_users_google WHERE token ='{$_SESSION['user_token']}'";
    $result = mysqli_query($conn, $sql);
    if (mysqli_num_rows($result) > 0) {
-      // user is exists
+      // user exists
       $userinfo = mysqli_fetch_assoc($result);
    }
 }
@@ -77,13 +76,8 @@ if (isset($_GET['code'])) {
       <li>Email Address:
          <?= $userinfo['email'] ?>
       </li>
-      <li>Gender:
-         <?= $userinfo['gender'] ?>
-      </li>
       <li><a href="logout.php">Logout</a></li>
    </ul>
 </body>
 
 </html>
-
-<!-- test change -->
