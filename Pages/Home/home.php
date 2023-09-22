@@ -50,6 +50,7 @@
                </div>
             </div>
             <a class="navbar-link" href="#">About Us</a>
+            <a class="navbar-link" href="#">Login/Sign up</a>
          </div>
       </div>
    </nav>
@@ -140,25 +141,32 @@
          <section class="footer-more-info">
             <section class="about-us">
                <h1>About Us</h1>
-               <a href="#">About us</a>
-               <a href="#">Specialization</a>
+               <div class="footer-more-info-content">
+                  <a href="#">About us</a>
+                  <a href="#">Specialization</a>
+               </div>
             </section>
             <section class="footer-process">
                <h1>Process</h1>
-               <a href="#">Family Based</a>
-               <a href="#">Study and Exchange</a>
-               <a href="#">Temporary Employment</a>
+               <div class="footer-more-info-content">
+                  <a href="#">Family Based</a>
+                  <a href="#">Study and Exchange</a>
+                  <a href="#">Temporary Employment</a>
+               </div>
             </section>
             <section class="footer-links">
                <h1>More Info</h1>
-               <a href="#">News</a>
-               <a href="#">Contact us</a>
+               <div class="footer-more-info-content">
+                  <a href="#">News</a>
+                  <a href="#">Contact us</a>
+                  <a href="#">Administrator</a>
+               </div>
             </section>
             <section class="footer-socials">
                <h1>Our Social Links</h1>
                <div class="social-content">
-                  <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                  <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="#" class="fa-brands fa-facebook"></a>
+                  <a href="#" class="fa-brands fa-instagram"></a>
                </div>
             </section>
          </section>
