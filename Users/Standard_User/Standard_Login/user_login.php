@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+require_once '../../User_Login_Google/config.php';
 
 // Check if the user is already logged in
 if (isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
@@ -102,6 +103,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </span><br>
 
       <input type="submit" value="Login">
+      <?php
+      if (isset($_SESSION['user_token'])) {
+         header("Location: welcome.php");
+      } else {
+         echo "<a href='" . $client->createAuthUrl() . "'>Google Login</a>";
+      }
+      ?>
    </form>
 </body>
 
