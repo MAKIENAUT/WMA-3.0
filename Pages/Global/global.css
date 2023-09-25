@@ -560,7 +560,7 @@ p.active i {
    }
 
    .footer-content {
-      max-width: 980px;
+      max-width: 1280px;
       padding: var(--laptop-padding);
    }
 
