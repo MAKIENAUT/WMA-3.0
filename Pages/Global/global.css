@@ -2,8 +2,9 @@
 
 
 :root {
-   --main-header: 4rem;
-   --sub-header: 2rem;
+   --hero-header: 2.75rem;
+   --main-header: 2rem;
+   --main-sub-header: 1.5rem;
    --footer-header: 1.25rem;
    --footer-subheader: 1.125rem;
    --caption-size: 0.9rem;
@@ -20,9 +21,10 @@
    --alt-background-color-3: rgb(23, 23, 23);
    --main-color: #ffd700;
    --main-color-2: #807226;
-   --alt-color: #008080;
-   --alt-color-2: #004D4D;
-   --alt-color-3: #001d1d;
+   --main-color-3: rgb(218, 165, 32);
+   --alt-color: rgb(0, 128, 128);
+   --alt-color-2: rgb(0, 77, 77);
+   --alt-color-3: rgb(0, 29, 29);
    --white: white;
    --black: black;
    --main-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
@@ -84,7 +86,7 @@
 .navbar-mobile-icon {
    width: max-content;
    height: inherit;
-   padding: 10px;
+   padding: var(--mobile-padding);
    font-size: 1.5rem;
    cursor: pointer;
    border: none;
@@ -385,7 +387,14 @@ p.active i {
 
 @media screen and (min-width: 720px) {
 
+   /* NAV SECTION */
+   .navbar-logo img {
+      padding: var(--tablet-padding);
+   }
 
+   .navbar-mobile-icon {
+      padding: var(--tablet-padding);
+   }
 
    /* FOOTER SECTION */
    .footer-parent {
@@ -396,7 +405,7 @@ p.active i {
       padding: var(--tablet-padding);
    }
 
-   .footer-main-content {
+   /* .footer-main-content {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: calc(var(--div-gap) + 0.5rem);
@@ -418,14 +427,14 @@ p.active i {
    .copyright {
       margin-top: var(--div-gap);
       padding: 10px 25px;
-   }
+   } */
 }
 
 @media screen and (min-width: 980px) {
 
    /* NAV SECTION */
    .navbar-container {
-      padding: var(--tablet-padding);
+      padding: var(--laptop-padding);
       background-color: var(--main-background-color);
       display: flex;
       align-items: center;
@@ -495,6 +504,12 @@ p.active i {
       color: var(--white);
    }
 
+   .navbar-category-container p.active {
+      border-radius: 0;
+      background-color: var(--alt-color-2);
+      color: var(--white);
+   }
+
    .navbar-category {
       width: inherit;
       height: 0;
@@ -527,7 +542,7 @@ p.active i {
 
    .navbar-category-link:not(:last-of-type) {
       border-bottom: 1px solid var(--white);
-    }
+   }
 
    /* FOOTER SECTION */
    .footer-parent {
