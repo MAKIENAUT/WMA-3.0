@@ -13,6 +13,7 @@
 
    <link rel="stylesheet" href="home.css" />
    <link rel="stylesheet" href="/Pages/Global//global.css" />
+   <link rel="icon" type="image/x-icon" href="/Photos/WMA.png">
    <script defer src="/Pages/Global/global.js"></script>
    <title>WMA Home</title>
 </head>
