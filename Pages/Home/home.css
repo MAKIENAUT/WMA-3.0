@@ -11,10 +11,6 @@ main {
    background-repeat: no-repeat;
    background-size: cover;
    background-position: center;
-   display: flex;
-   flex-flow: column;
-   align-items: center;
-   justify-content: center;
 }
 
 .hero-container {
