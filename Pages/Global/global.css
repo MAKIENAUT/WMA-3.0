@@ -4,9 +4,12 @@
 
 :root {
    /* Font sizes */
+   --laptop-hero-header: 5rem;
+   --tablet-hero-header: 4rem;
    --hero-header: 3rem;
+   --tablet-hero-paragraph: 1.25rem;
    --main-header: 2rem;
-   --main-sub-header: 1.5rem;
+   --main-subheader: 1.5rem;
    --footer-header: 1.5rem;
    --footer-subheader: 1.125rem;
 
