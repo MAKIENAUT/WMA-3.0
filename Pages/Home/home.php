@@ -80,12 +80,12 @@
             <header class="service-header">
                <h1>Services Offered</h1>
             </header>
-            <div class="service-card-container">
-               <article class="service-card">
-                  <div class="service-card-header">
-                     <img src="/Photos/studEx.jpg" alt="Study and exchange image">
+            <div class="service-content-container">
+               <article class="service-content">
+                  <div class="service-content-header">
+                     <img src="/Photos/student.jpg" alt="Study and exchange image">
                   </div>
-                  <div class="service-card-description">
+                  <div class="service-content-description">
                      <h1>Study And Exchange</h1>
                      <p>Our study and exchange programs offer excellent opportunities for those looking to further their
                         education or gain international experience. We work with top universities and institutions
@@ -96,34 +96,34 @@
                         committed to helping you find the program that best suits your needs and supports you throughout
                         the
                         application process.</p>
-                     <a href="#" class="service-card-description-button">Learn more</a>
+                     <a href="#" class="service-content-description-button">Learn more</a>
                   </div>
                </article>
-               <article class="service-card">
-                  <div class="service-card-header">
+               <article class="service-content">
+                  <div class="service-content-header">
                      <img src="/Photos/famBased.jpg" alt="Study and exchange image">
                   </div>
-                  <div class="service-card-description">
+                  <div class="service-content-description">
                      <h1>Family Based</h1>
                      <p>Family is important to us, and we understand the challenges of family-based petitions. That's
                         why we offer a personalized approach to help reunite families. Our experienced team will guide
                         you through the process, from filing the petition to preparing for the interview. We understand
                         the emotional, and legal complexities involved and are here to support you every step of the
                         way.</p>
-                     <a href="#" class="service-card-description-button">Learn more</a>
+                     <a href="#" class="service-content-description-button">Learn more</a>
                   </div>
                </article>
-               <article class="service-card">
-                  <div class="service-card-header">
+               <article class="service-content">
+                  <div class="service-content-header">
                      <img src="/Photos/h2a.jpg" alt="Study and exchange image">
                   </div>
-                  <div class="service-card-description">
+                  <div class="service-content-description">
                      <h1>Temporary Employment</h1>
                      <p>We also offer temporary employment services , which can be an excellent option for individuals
                         looking to gain work experience, explore new industries, or earn extra income. Our team works
                         with employers across various industries to provide opportunities for our clients. We take the
                         time to understand your skills and career goals to match you with the right temporary job.</p>
-                     <a href="#" class="service-card-description-button">Learn more</a>
+                     <a href="#" class="service-content-description-button">Learn more</a>
                   </div>
                </article>
             </div>
@@ -136,7 +136,7 @@
             <div class="statement-content">
                <h3>
                   At West Migration Agency, we believe in <span>providing exceptional service
-                  and personalized support</span> to help our clients achieve their goals. We
+                     and personalized support</span> to help our clients achieve their goals. We
                   understand that each individual has unique needs and circumstances and
                   are committed to delivering tailored solutions to meet those needs.
                   Contact us today to learn how we can help you with your study and
