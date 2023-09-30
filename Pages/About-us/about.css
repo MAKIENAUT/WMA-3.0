@@ -1,0 +1,107 @@
+/* MAIN SECTION */
+main {
+   color: var(--alt-color-3);
+}
+
+/* HERO SECTION */
+.hero-parent {
+   width: 100dvw;
+   height: 40dvh;
+   margin-top: 60px;
+   background-image: url(/Photos/california.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
+}
+
+.hero-container {
+   width: 100%;
+   height: 100%;
+   color: var(--white);
+   background-color: rgba(0, 77, 77, 0.75);
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.hero-content {
+   width: 100%;
+   height: 100%;
+   padding-inline: var(--mobile-padding-inline);
+   display: flex;
+   flex-flow: column;
+   justify-content: center;
+}
+
+.hero-content h1 {
+   font-size: var(--hero-header);
+   font-family: 'Lora', serif;
+   font-weight: 700;
+}
+
+/* ABOUT SECTION */
+.about-parent {
+   width: 100dvw;
+   height: max-content;
+}
+
+.about-container {
+   width: 100%;
+   height: 100%;
+   padding: 50px;
+   padding-inline: var(--mobile-padding-inline);
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.about-content {
+   display: flex;
+   flex-flow: column;
+   gap: var(--gap-1rem);
+}
+
+.about-content p {
+   line-height: 1.6;
+}
+
+@media screen and (min-width: 720px) {
+
+   /* HERO SECTION */
+   .hero-content {
+      padding-inline: var(--tablet-padding-inline);
+   }
+
+   .hero-content h1 {
+      font-size: var(--tablet-hero-header);
+   }
+
+   /* ABOUT SECTION */
+   .about-container {
+      padding-inline: var(--tablet-padding-inline);
+   }
+}
+
+@media screen and (min-width: 980px) {
+
+   /* HERO SECTION */
+   .hero-content {
+      max-width: 1280px;
+      padding-inline: var(--laptop-padding-inline);
+   }
+
+   .hero-content h1 {
+      font-size: var(--laptop-hero-header);
+   }
+
+   /* ABOUT SECTION */
+   .about-container {
+      padding-inline: var(--laptop-padding-inline);
+   }
+
+   .about-content {
+      max-width: 1280px;
+   }
+}

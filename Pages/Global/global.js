@@ -31,7 +31,7 @@ function toggleCategory2() {
 document.addEventListener('click', function (event) {
    if (
       !navCategoryContainer.contains(event.target) &&
-      event.target !== navCategory
+      !navCategory.contains(event.target)
    ) {
       navCategoryContainer.classList.remove('active');
       navCategory.classList.remove('active');
@@ -41,7 +41,7 @@ document.addEventListener('click', function (event) {
 document.addEventListener('click', function (event) {
    if (
       !navCategoryContainer2.contains(event.target) &&
-      event.target !== navCategory2
+      !navCategory2.contains(event.target)
    ) {
       navCategoryContainer2.classList.remove('active');
       navCategory2.classList.remove('active');
