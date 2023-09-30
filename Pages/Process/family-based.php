@@ -11,9 +11,8 @@
       integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" />
    <!-- FontAwesome -->
 
-   <link rel="stylesheet" href="home.css" />
+   <link rel="stylesheet" href="family-based.css" />
    <link rel="stylesheet" href="/Pages/Global//global.css" />
-   <link rel="icon" type="image/x-icon" href="/Photos/WMA.png">
    <script defer src="/Pages/Global/global.js"></script>
    <title>WMA Home</title>
 </head>
@@ -47,6 +46,7 @@
                   <a class="navbar-category-link" href="#">Family Based</a>
                   <a class="navbar-category-link" href="#">Study and Exchange (J-1)</a>
                   <a class="navbar-category-link" href="#">Temporary Employment (EB-3/H2A)</a>
+                  <a class="navbar-category-link" href="#">Other Uploads</a>
                </div>
             </div>
             <a class="navbar-link" href="#">About Us</a>
@@ -57,95 +57,79 @@
 
    <!-- MAIN SECTION -->
    <main>
-      <!-- HERO SECTION -->
-      <section class="hero-parent">
-         <div class="hero-container">
-            <div class="hero-content">
-               <h1>Venture West: <span>Where Dreams Take Flight</span></h1>
-               <p>
-                  Welcome to our employment agency! (West Migration Agency “
-                  WMA”). We are dedicated to providing high-quality services to
-                  help individuals achieve their career goals and reunite with
-                  loved ones. Our agency offers various services, including study
-                  and exchange programs, family-based petitions, and temporary
-                  employment.
-               </p>
+      
+      <!-- SAMPLE SECTION -->
+      <section class="sample-parent">
+         <header clss="header-parent">
+            <div class="header-content">
+               <h1>Process of <br>Family-Based</h1>
             </div>
-         </div>
-      </section>
+         </header>
+         <article class="article-parent">
+            <div class="article-content">
+               <div class="container">
+                  <div class="top-wrapper">
+                     <div class="top-left">
+                        <div class="detail-text">How to Apply?</div>
+                        <h3 class="top-heading">FOLLOW THESE STEPS!</h3>
+                     </div>
+                  <div class="top-right-paragraph">
+                     <p>It's crucial to research and understand the specific family-based immigration policies of the Western country you are interested in, as they can vary significantly. Additionally, immigration policies in these countries may change over time due to evolving political and social factors.</p>
+                  </div>
+               </div>
 
-      <!-- SERVICE SECTION -->
-      <section class="service-parent">
-         <div class="service-container">
-            <header class="service-header">
-               <h1>Services Offered</h1>
-            </header>
-            <div class="service-content-container">
-               <article class="service-content">
-                  <div class="service-content-header">
-                     <img src="/Photos/student.jpg" alt="Study and exchange image">
+               <div class="body-wrapper">
+                  <div class="column">
+                     <div class="box">
+                        <div class="box-number">01</div>
+                        <div class="box-text">DETERMINE<br>ELIGIBILITY</div>
+                     </div>
+                        <p>The first step in the family-based immigration process is to determine if you are eligible to apply. Generally, U.S. citizens and lawful permanent residents can petition for certain family members to immigrate to the United States.</p>
                   </div>
-                  <div class="service-content-description">
-                     <h1>Study And Exchange</h1>
-                     <p>Our study and exchange programs offer excellent opportunities for those looking to further their
-                        education or gain international experience. We work with top universities and institutions
-                        worldwide
-                        to provide our clients with access to high-quality educational programs. In addition, we work
-                        with
-                        different school districts across the United States that partner with visa sponsors. Our team is
-                        committed to helping you find the program that best suits your needs and supports you throughout
-                        the
-                        application process.</p>
-                     <a href="#" class="service-content-description-button">Learn more</a>
+                  <div class="column">
+                     <div class="box">
+                        <div class="box-number">02</div>
+                        <div class="box-text">FILE FORM<br>I-30</div>
+                     </div>
+                        <p>Once you have determined your eligibility, the next step is to file Form I-130, Petition for Alien Relative, with U.S. Citizenship and Immigration Services (USCIS). This form establishes the relationship between the petitioner and the intending immigrant and serves as the first step in the immigration process.</p>
                   </div>
-               </article>
-               <article class="service-content">
-                  <div class="service-content-header">
-                     <img src="/Photos/famBased.jpg" alt="Study and exchange image">
+                  <div class="column">
+                     <div class="box">
+                        <div class="box-number">03</div>
+                        <div class="box-text">WAIT FOR<br>PROCESSING</div>
+                     </div>
+                        <p>After submitting the Form I-130, you will need to wait for USCIS to process the petition. The processing time can vary depending on the complexity of the case and the volume of petitions being processed.</p>
                   </div>
-                  <div class="service-content-description">
-                     <h1>Family Based</h1>
-                     <p>Family is important to us, and we understand the challenges of family-based petitions. That's
-                        why we offer a personalized approach to help reunite families. Our experienced team will guide
-                        you through the process, from filing the petition to preparing for the interview. We understand
-                        the emotional, and legal complexities involved and are here to support you every step of the
-                        way.</p>
-                     <a href="#" class="service-content-description-button">Learn more</a>
-                  </div>
-               </article>
-               <article class="service-content">
-                  <div class="service-content-header">
-                     <img src="/Photos/h2a.jpg" alt="Study and exchange image">
-                  </div>
-                  <div class="service-content-description">
-                     <h1>Temporary Employment</h1>
-                     <p>We also offer temporary employment services , which can be an excellent option for individuals
-                        looking to gain work experience, explore new industries, or earn extra income. Our team works
-                        with employers across various industries to provide opportunities for our clients. We take the
-                        time to understand your skills and career goals to match you with the right temporary job.</p>
-                     <a href="#" class="service-content-description-button">Learn more</a>
-                  </div>
-               </article>
-            </div>
-         </div>
-      </section>
+               </div>
 
-      <!-- STATEMENT SECTION -->
-      <section class="statement-parent">
-         <div class="statement-container">
-            <div class="statement-content">
-               <h3>
-                  At West Migration Agency, we believe in <span>providing exceptional service
-                     and personalized support</span> to help our clients achieve their goals. We
-                  understand that each individual has unique needs and circumstances and
-                  are committed to delivering tailored solutions to meet those needs.
-                  Contact us today to learn how we can help you with your study and
-                  exchange program, family-based petition, or temporary employment
-                  needs.
-               </h3>
+               <div class="body-wrapper">
+                  <div class="column">
+                     <div class="box">
+                        <div class="box-number">04</div>
+                        <div class="box-text">FILE FORM<br>I-485</div>
+                     </div>
+                        <p>Once the Form I-130 is approved, the intending immigrant can file Form I-485, Application to Register Permanent Residence or Adjust Status, if they are already in the United States. If the intending immigrant is outside the United States, they will need to apply for an immigrant visa at a U.S. embassy or consulate.</p>
+                  </div>
+                  <div class="column">
+                     <div class="box">
+                        <div class="box-number">05</div>
+                        <div class="box-text">ATTEND A<br>VISA INTERVIEW</div>
+                     </div>
+                        <p>If the intending immigrant is applying for an immigrant visa at a U.S. embassy or consulate, they will be required to attend a visa interview. During the interview, a consular officer will ask questions about the relationship between the petitioner and the intending immigrant, as well as other aspects of the immigrant's background.</p>
+                  </div>
+                  <div class="column">
+                     <div class="box">
+                        <div class="box-number">06</div>
+                        <div class="box-text">RECEIVE A<br>GREEN CARD</div>
+                     </div>
+                        <p>If the immigrant visa application is approved, the intending immigrant will receive a green card, which grants them permanent residence in the United States. If the intending immigrant filed Form I-485, they will receive the green card after their application is approved.
+                     </p>
+                  </div> 
+                  </div>
+               </div>
             </div>
-         </div>
-      </section>
+         </article>
+      </section>  
    </main>
 
    <!-- FOOTER SECTION -->
