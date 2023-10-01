@@ -13,6 +13,7 @@
 
    <link rel="stylesheet" href="family-based.css" />
    <link rel="stylesheet" href="/Pages/Global//global.css" />
+   <link rel="icon" type="image/x-icon" href="/Photos/WMA.png">
    <script defer src="/Pages/Global/global.js"></script>
    <title>WMA Home</title>
 </head>
@@ -57,79 +58,91 @@
 
    <!-- MAIN SECTION -->
    <main>
-      
-      <!-- SAMPLE SECTION -->
-      <section class="sample-parent">
-         <header clss="header-parent">
+      <!-- PROCESS HEADER SECTION -->
+      <header class="header-parent">
+         <div class="header-container">
             <div class="header-content">
-               <h1>Process of <br>Family-Based</h1>
+               <h1>Process of Family-Based</h1>
             </div>
-         </header>
-         <article class="article-parent">
-            <div class="article-content">
-               <div class="container">
-                  <div class="top-wrapper">
-                     <div class="top-left">
-                        <div class="detail-text">How to Apply?</div>
-                        <h3 class="top-heading">FOLLOW THESE STEPS!</h3>
-                     </div>
-                  <div class="top-right-paragraph">
-                     <p>It's crucial to research and understand the specific family-based immigration policies of the Western country you are interested in, as they can vary significantly. Additionally, immigration policies in these countries may change over time due to evolving political and social factors.</p>
-                  </div>
-               </div>
+         </div>
+      </header>
 
-               <div class="body-wrapper">
-                  <div class="column">
-                     <div class="box">
-                        <div class="box-number">01</div>
-                        <div class="box-text">DETERMINE<br>ELIGIBILITY</div>
-                     </div>
-                        <p>The first step in the family-based immigration process is to determine if you are eligible to apply. Generally, U.S. citizens and lawful permanent residents can petition for certain family members to immigrate to the United States.</p>
-                  </div>
-                  <div class="column">
-                     <div class="box">
-                        <div class="box-number">02</div>
-                        <div class="box-text">FILE FORM<br>I-30</div>
-                     </div>
-                        <p>Once you have determined your eligibility, the next step is to file Form I-130, Petition for Alien Relative, with U.S. Citizenship and Immigration Services (USCIS). This form establishes the relationship between the petitioner and the intending immigrant and serves as the first step in the immigration process.</p>
-                  </div>
-                  <div class="column">
-                     <div class="box">
-                        <div class="box-number">03</div>
-                        <div class="box-text">WAIT FOR<br>PROCESSING</div>
-                     </div>
-                        <p>After submitting the Form I-130, you will need to wait for USCIS to process the petition. The processing time can vary depending on the complexity of the case and the volume of petitions being processed.</p>
-                  </div>
+      <!-- PROCESS STEPS SECTION -->
+      <article class="steps-parent">
+         <div class="steps-container">
+            <div class="steps-content">
+               <div class="steps-header">
+                  <p>How to Apply?</p>
+                  <h1>FOLLOW THESE STEPS!</h1>
+                  <p>It's crucial to research and understand the specific family-based immigration policies of the
+                     Western country you are interested in, as they can vary significantly. Additionally,
+                     immigration policies in these countries may change over time due to evolving political and
+                     social factors.</p>
                </div>
-
-               <div class="body-wrapper">
-                  <div class="column">
-                     <div class="box">
-                        <div class="box-number">04</div>
-                        <div class="box-text">FILE FORM<br>I-485</div>
+               <div class="steps-description">
+                  <div class="steps-card">
+                     <div class="steps-card-header">
+                        <h1>01</h1>
+                        <h1>DETERMINE ELIGIBILITY</h1>
                      </div>
-                        <p>Once the Form I-130 is approved, the intending immigrant can file Form I-485, Application to Register Permanent Residence or Adjust Status, if they are already in the United States. If the intending immigrant is outside the United States, they will need to apply for an immigrant visa at a U.S. embassy or consulate.</p>
+                     <p>The first step in the family-based immigration process is to determine if you are eligible to
+                        apply. Generally, U.S. citizens and lawful permanent residents can petition for certain
+                        family members to immigrate to the United States.</p>
                   </div>
-                  <div class="column">
-                     <div class="box">
-                        <div class="box-number">05</div>
-                        <div class="box-text">ATTEND A<br>VISA INTERVIEW</div>
+                  <div class="steps-card">
+                     <div class="steps-card-header">
+                        <h1>02</h1>
+                        <h1>FILE FORM I-30</h1>
                      </div>
-                        <p>If the intending immigrant is applying for an immigrant visa at a U.S. embassy or consulate, they will be required to attend a visa interview. During the interview, a consular officer will ask questions about the relationship between the petitioner and the intending immigrant, as well as other aspects of the immigrant's background.</p>
+                     <p>Once you have determined your eligibility, the next step is to file Form I-130, Petition for
+                        Alien Relative, with U.S. Citizenship and Immigration Services (USCIS). This form establishes
+                        the relationship between the petitioner and the intending immigrant and serves as the first
+                        step in the immigration process.</p>
                   </div>
-                  <div class="column">
-                     <div class="box">
-                        <div class="box-number">06</div>
-                        <div class="box-text">RECEIVE A<br>GREEN CARD</div>
+                  <div class="steps-card">
+                     <div class="steps-card-header">
+                        <h1>03</h1>
+                        <h1>WAIT FOR PROCESSING</h1>
                      </div>
-                        <p>If the immigrant visa application is approved, the intending immigrant will receive a green card, which grants them permanent residence in the United States. If the intending immigrant filed Form I-485, they will receive the green card after their application is approved.
+                     <p>After submitting the Form I-130, you will need to wait for USCIS to process the petition. The
+                        processing time can vary depending on the complexity of the case and the volume of petitions
+                        being processed.</p>
+                  </div>
+                  <div class="steps-card">
+                     <div class="steps-card-header">
+                        <h1>04</h1>
+                        <h1>FILE FORM I-485</h1>
+                     </div>
+                     <p>Once the Form I-130 is approved, the intending immigrant can file Form I-485, Application to
+                        Register Permanent Residence or Adjust Status, if they are already in the United States. If
+                        the intending immigrant is outside the United States, they will need to apply for an
+                        immigrant visa at a U.S. embassy or consulate.</p>
+                  </div>
+                  <div class="steps-card">
+                     <div class="steps-card-header">
+                        <h1>05</h1>
+                        <h1>ATTEND A VISA INTERVIEW</h1>
+                     </div>
+                     <p>If the intending immigrant is applying for an immigrant visa at a U.S. embassy or consulate,
+                        they will be required to attend a visa interview. During the interview, a consular officer
+                        will ask questions about the relationship between the petitioner and the intending immigrant,
+                        as well as other aspects of the immigrant's background.</p>
+                  </div>
+                  <div class="steps-card">
+                     <div class="steps-card-header">
+                        <h1>06</h1>
+                        <h1>RECEIVE A GREEN CARD</h1>
+                     </div>
+                     <p>If the immigrant visa application is approved, the intending immigrant will receive a green
+                        card, which grants them permanent residence in the United States. If the intending immigrant
+                        filed Form I-485, they will receive the green card after their application is approved.
                      </p>
-                  </div> 
                   </div>
                </div>
             </div>
-         </article>
-      </section>  
+         </div>
+         </div>
+      </article>
    </main>
 
    <!-- FOOTER SECTION -->
