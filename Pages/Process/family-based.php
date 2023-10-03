@@ -139,6 +139,13 @@
                      </p>
                   </div>
                </div>
+               <div class="steps-conclusion">
+                     <p>Overall, the family-based immigration process can be complex and time-consuming. It is important to work with an experienced immigration attorney and prepare thoroughly for the visa interview to ensure a smooth and successful application process.</p>
+                     
+               </div>
+               <div class="link">
+                  <a href="#">Learn More</a>
+               </div>
             </div>
          </div>
          </div>
