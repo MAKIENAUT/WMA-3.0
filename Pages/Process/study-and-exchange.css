@@ -1,0 +1,185 @@
+/* MAIN SECTION */
+main {
+     margin-top: 60px;
+     color: var(--alt-color-3);
+  }
+  
+  /* PROCESS HEADER SECTION */
+  .header-parent {
+     width: 100dvw;
+     height: 40dvh;
+     height: 100%;
+     background-image: url(/Photos/student_exchange.jpg);
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center center;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+  }  
+  
+  .header-container {
+     width: 100%;
+     height: 100%;
+     background-color: rgba(218, 165, 32, 0.75);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+  }
+  
+  .header-content {
+     width: 100%;
+     padding-inline: var(--mobile-padding-inline);
+  }
+  
+  .header-content h1 {
+     font-size: var(--hero-header);
+     font-family: "Lora", serif;
+     color: var(--white);
+  }
+  
+  
+  /* PROCESS STEPS SECTION */
+  .steps-parent {
+     width: 100dvw;
+  }
+  
+  .steps-container {
+     width: 100%;
+     background-color: antiquewhite;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+  }
+  
+  .steps-content {
+     width: 100%;
+     padding: 50px;
+     padding-inline: var(--mobile-padding-inline);
+     display: flex;
+     flex-flow: column;
+     gap: var(--gap-2rem);
+     text-align: justify;
+  }
+  
+  .steps-header h1 {
+     font-size: var(--main-header);
+     color: var(--main-color-3);
+     font-family: "Lora", serif;
+  }
+  
+  .steps-header p:first-child {
+     font-style: italic;
+  }
+
+  .steps-header p:last-child {
+     line-height: 1.6;
+  }
+  
+  .steps-description {
+     display: flex;
+     flex-flow: column;
+     gap: var(--gap-3rem);
+  }
+  
+  .steps-card {
+     display: flex;
+     flex-flow: column;
+     gap: var(--gap-point5rem);
+  }
+  
+  .steps-card-header {
+     aspect-ratio: 16/9;
+     padding: 10px;
+     background-color: var(--main-color-3);
+     border-radius: 5px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: var(--gap-1rem);
+     position: relative;
+  }
+  
+  .steps-card-header h1 {
+     color: var(--white);
+     font-size: var(--main-header);
+     text-align: center;
+  }
+  
+  .steps-card-header h1:first-child {
+     position: absolute;
+     top: 0;
+     left: 0;
+     padding: inherit;
+  }
+  
+  .steps-card-header h1:last-child {
+     line-height: 1;
+  }
+  
+  .steps-conclusion {
+     display: flex;
+     flex-flow: column nowrap;
+     margin-top: 15px;
+  }
+  
+  .link {
+     place-self: center;
+  }
+  
+  .link a {
+     padding: 10px;
+     color: var(--white);
+     border-radius: 7px;
+     border: 1px solid teal;
+     background-color: var(--main-color-3);
+     text-align: center;
+     font-size: var(--main-subheader);
+     text-decoration: none;
+  }
+  
+  footer {
+     margin-top: 0 !important;
+  }
+  
+  @media screen and (min-width: 720px) {
+  
+     /* PROCESS HEADER SECTION */
+     .header-content {
+        padding-inline: var(--tablet-padding-inline);
+     }
+  
+     /*  PROCESS STEPS SECTION  */
+     .steps-content {
+        padding-inline: var(--tablet-padding-inline);
+     }
+  
+     .steps-description {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+     }
+  }
+  
+  @media screen and (min-width: 980px) {
+  
+     /* PROCESS HEADER SECTION */
+     .header-parent {
+        height: 60dvh;
+     }
+  
+     .header-content {
+        max-width: 1280px;
+        padding-inline: var(--laptop-padding-inline);
+     }
+  
+     /*  PROCESS STEPS SECTION  */
+     .steps-content {
+        max-width: 1280px;
+        padding-inline: var(--laptop-padding-inline);
+     }
+  
+     .steps-description {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+     }
+  }
