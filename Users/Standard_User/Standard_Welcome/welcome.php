@@ -31,6 +31,7 @@ if (!isset($_SESSION["id"]) || empty($_SESSION["id"])) {
     <?php endif; ?>
 
     <a href="../Standard_Logout/logout.php">Logout</a>
+    <a href="../../../Pages/Categories/Study_and_Exchange/study_and_exchange.php">Study and Exchange</a>
 </body>
 
 </html>
