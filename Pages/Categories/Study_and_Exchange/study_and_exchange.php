@@ -299,6 +299,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="study_and_exchange.js"></script>
    <title>User Profile</title>
 </head>
 
@@ -333,7 +334,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
    <!-- Add the form for user input -->
    <h2>Submit J1 Visa Application</h2>
-   <form action="" method="post" enctype="multipart/form-data">
+   <form name="myForm" method="post" enctype="multipart/form-data">
       <label for="first_name">First Name:</label>
       <input type="text" id="first_name" name="first_name" required><br>
 
@@ -361,45 +362,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input type="email" id="email_address" name="email_address" required><br>
 
       <label for="profession">Profession:</label>
-      <select id="profession" name="profession" required>
-         <option value="">Select a profession</option>
+      <select id="profession" name="profession" onclick="validate()"
+         onchange="showfield(this.options[this.selectedIndex].value)">
+         <option value="" disabled selected hidden>Choose Profession</option>
          <option value="Intern">Intern</option>
          <option value="Teacher">Teacher</option>
          <option value="Trainee">Trainee</option>
          <option value="Physician">Physician</option>
          <option value="Specialist">Specialist</option>
-         <option value="AuPair/Educare">AuPair/Educare</option>
-         <option value="Short-Term Scholar">Short-Term Scholar</option>
+         <option value="Au Pair/Educare">Au Pair/Educare</option>
+         <option value="Short-term Scholar">Short-term Scholar</option>
          <option value="Student: College/University">Student: College/University</option>
          <option value="Professor or Research Scholar">Professor or Research Scholar</option>
-         <option value="Others">Others</option>
-      </select><br>
-
-      <!-- Hidden input for Others -->
-      <div id="otherProfessionInput" style="display: none;">
-         <label for="otherProfession">Other Profession:</label>
-         <input type="text" id="otherProfession" name="otherProfession">
+         <option value="Other" id="other">Other</option>
+      </select>
+      <div id="div1">If Other: <input type="text" name="other_option" id="other_option" onclick="change()"
+            onchange="change()" />
       </div>
-
-      <!-- JavaScript to handle the conditional appearance of the text input field -->
-      <!-- JavaScript to handle the conditional appearance of the text input field -->
-      <script>
-         document.getElementById('profession').addEventListener('change', function () {
-            var otherProfessionInput = document.getElementById('otherProfessionInput');
-            var selectedProfession = this.value;
-
-            if (selectedProfession === 'Others') {
-               otherProfessionInput.style.display = 'block';
-               // Make the "Other Profession" field required when selected
-               document.getElementById('otherProfession').required = true;
-            } else {
-               otherProfessionInput.style.display = 'none';
-               // Make the "Other Profession" field not required when not selected
-               document.getElementById('otherProfession').required = false;
-            }
-         });
-      </script>
-
 
       <label for="date_submitted">Date Submitted:</label>
       <input type="date" id="date_submitted" name="date_submitted" required><br>
