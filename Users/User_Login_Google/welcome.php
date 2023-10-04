@@ -77,6 +77,7 @@ if (isset($_GET['code'])) {
          <?= $userinfo['email'] ?>
       </li>
       <li><a href="logout.php">Logout</a></li>
+      <li><a href="../../Pages/Categories/Study_and_Exchange/study_and_exchange.php">Study and Exchange</a></li>
    </ul>
 </body>
 
