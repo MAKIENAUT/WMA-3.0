@@ -1,6 +1,7 @@
 <?php
 require_once '../../../Users/User_Login_Google/config.php';
 
+$errors = "";
 
 $countries = [
    'Afghanistan',
@@ -210,6 +211,7 @@ if (!isset($_SESSION['user_token']) && !isset($_SESSION['id'])) {
 if (isset($_SESSION['user_token'])) {
    $credentialType = 'user_token';
    $sql = "SELECT * FROM wma_users_google WHERE token = '{$_SESSION['user_token']}'";
+
 } elseif (isset($_SESSION['id'])) {
    $credentialType = 'id';
    $sql = "SELECT * FROM wma_users_standard WHERE id = '{$_SESSION['id']}'";
@@ -220,7 +222,7 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
    $userinfo = mysqli_fetch_assoc($result);
 } else {
-   echo "User not found in the database.";
+   $errors .= "User not found in the database. \n";
    die(); // Exit the script if the user is not found
 }
 
@@ -233,7 +235,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    $phone_number = $_POST['phone_number'];
    $email_address = $_POST['email_address'];
    $profession = $_POST['profession'];
-   $date_submitted = $_POST['date_submitted'];
 
    // Use the value of the "Other Profession" input field when "Others" is selected
    if ($profession === 'Others' && isset($_POST['profession'])) {
@@ -250,23 +251,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    $emailCheckResult = mysqli_query($conn, $emailCheckSql);
 
    if (mysqli_num_rows($emailCheckResult) > 0) {
-      echo "Error: Email address already exists in the database.";
+      $errors .= "Error: Email address already exists in the database. \n";
    } else {
       // Create a variable with the value 'first_name' . '_' . 'last_name'
-      $file_input_value = $first_name . '_' . $last_name;
+      $file_input_value = $email_address;
 
       // Insert data into the j1_visa table in the wma_forms database
-      $insert_sql = "INSERT INTO wma_forms.j1_visa (first_name, last_name, full_address, country, phone_number, email_address, profession, date_submitted, file)
-                    VALUES ('$first_name', '$last_name', '$full_address', '$country', '$phone_number', '$email_address', '$profession', '$date_submitted', '$file_input_value')";
+      $insert_sql = "INSERT INTO wma_forms.j1_visa (first_name, last_name, full_address, country, phone_number, email_address, profession, file)
+                    VALUES ('$first_name', '$last_name', '$full_address', '$country', '$phone_number', '$email_address', '$profession', '$file_input_value')";
 
       if (mysqli_query($conn, $insert_sql)) {
-         echo "Data inserted successfully.";
+         $errors .= "Data inserted successfully. \n";
       } else {
-         echo "Error: " . mysqli_error($conn);
+         $errors .= "Error: " . mysqli_error($conn) . "\n";
       }
 
       // Create a directory for the user if it doesn't exist
-      $userDirectory = "../../../Administrator/Applicant_Files/{$first_name}_{$last_name}";
+      $userDirectory = "../../../Administrator/Applicant_Files/{$email_address}";
       if (!file_exists($userDirectory)) {
          mkdir($userDirectory, 0777, true);
       }
@@ -275,18 +276,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $resumeFileName = $_FILES['resume']['name'];
       $resumeFilePath = $userDirectory . '/' . $resumeFileName;
       if (move_uploaded_file($_FILES['resume']['tmp_name'], $resumeFilePath)) {
-         echo "Resume uploaded successfully.";
+         $errors .= "Resume uploaded successfully. \n";
       } else {
-         echo "Error uploading resume.";
+         $errors .= "Error uploading resume. \n";
       }
 
       // Upload and move the passport file to the user's directory
       $passportFileName = $_FILES['passport']['name'];
       $passportFilePath = $userDirectory . '/' . $passportFileName;
       if (move_uploaded_file($_FILES['passport']['tmp_name'], $passportFilePath)) {
-         echo "Passport uploaded successfully.";
+         $errors .= "Passport uploaded successfully. \n";
       } else {
-         echo "Error uploading passport.";
+         $errors .= "Error uploading passport. \n";
       }
    }
 }
@@ -300,6 +301,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script src="study_and_exchange.js"></script>
+   <link rel="stylesheet" href="study_and_exchange.css">
    <title>User Profile</title>
 </head>
 
@@ -330,69 +332,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <?php echo $credentialType; ?>
    </p>
 
-   <a href="../../../Users/Standard_User/Standard_Logout/logout.php">logout</a>
+   <a href="../../../Users/User_Login_Google/logout.php">logout</a>
 
-   <!-- Add the form for user input -->
-   <h2>Submit J1 Visa Application</h2>
-   <form name="myForm" method="post" enctype="multipart/form-data">
-      <label for="first_name">First Name:</label>
-      <input type="text" id="first_name" name="first_name" required><br>
+   <main>
+      <h2>Submit J1 Visa Application</h2>
+      <p>
+         <?php echo $errors; ?>
+      </p>
+      <form name="myForm" method="post" enctype="multipart/form-data">
+         <!-- PERSONAL INFORMATION FIELDSET -->
+         <div class="top_left">
+            <fieldset class="personal_info">
+               <label for="first_name">First Name:</label>
+               <input type="text" id="first_name" name="first_name" value="<?php echo $userinfo['first_name']; ?>"
+                  required><br>
+               <label for="last_name">Last Name:</label>
+               <input type="text" id="last_name" name="last_name" value="<?php echo $userinfo['last_name']; ?>"
+                  required><br>
+               <label for="full_address">Full Address:</label>
+               <input type="text" id="full_address" name="full_address" required><br>
+               <!-- Replace the country input with a select field -->
+               <label for="country">Country:</label>
+               <select id="country" name="country" required>
+                  <option value="" disabled selected>Select a country</option>
+                  <?php
+                  foreach ($countries as $countryOption) {
+                     echo "<option value=\"$countryOption\">$countryOption</option>";
+                  }
+                  ?>
+               </select><br>
+               <label for="profession">Profession:</label>
+               <select id="profession" name="profession" onclick="validate()"
+                  onchange="showfield(this.options[this.selectedIndex].value)">
+                  <option value="" disabled selected hidden>Choose Profession</option>
+                  <option value="Intern">Intern</option>
+                  <option value="Teacher">Teacher</option>
+                  <option value="Trainee">Trainee</option>
+                  <option value="Physician">Physician</option>
+                  <option value="Specialist">Specialist</option>
+                  <option value="Au Pair/Educare">Au Pair/Educare</option>
+                  <option value="Short-term Scholar">Short-term Scholar</option>
+                  <option value="Student: College/University">Student: College/University</option>
+                  <option value="Professor or Research Scholar">Professor or Research Scholar</option>
+                  <option value="Other" id="other">Other</option>
+               </select>
+               <div id="div1">If Other: <input type="text" name="other_option" id="other_option" onclick="change()"
+                     onchange="change()" />
+               </div>
+            </fieldset>
+         </div>
+         <!-- PERSONAL INFORMATION FIELDSET -->
 
-      <label for="last_name">Last Name:</label>
-      <input type="text" id="last_name" name="last_name" required><br>
+         <div class="top_right">
+            <!-- CONTACTvINFORMATION FIELDSET -->
+            <fieldset class="contact_info">
+               <label for="phone_number">Phone Number:</label>
+               <input type="tel" id="phone_number" name="phone_number" required><br>
+               <label for="email_address">Email Address:</label>
+               <input type="email" id="email_address" name="email_address" value="<?php echo $userinfo['email']; ?>"
+                  required><br>
+            </fieldset>
+            <!-- CONTACT INFORMATION FIELDSET -->
+            <!-- FILE UPLOAD FIELDSET -->
+            <fieldset class="file_upload">
+               <label for="resume">Resume (PDF only):</label>
+               <input type="file" id="resume" name="resume" accept=".pdf" required><br>
+               <label for="passport">Passport (PDF only):</label>
+               <input type="file" id="passport" name="passport" accept=".pdf" required><br>
+               <input type="hidden" id="file" name="file" value="<?php echo $file_input_value; ?>">
+            </fieldset>
+            <!-- FILE UPLOAD FIELDSET -->
+         </div>
 
-      <label for="full_address">Full Address:</label>
-      <input type="text" id="full_address" name="full_address" required><br>
+         <div class="bottom_left">
+            <!-- ELIGIBILTY SECTION FIELDSET -->
+            <fieldset class="eligibility_section">
+            
+            </fieldset>
+            <!-- ELIGIBILTY SECTION FIELDSET -->
+         </div>
 
-      <!-- Replace the country input with a select field -->
-      <label for="country">Country:</label>
-      <select id="country" name="country" required>
-         <option value="" disabled selected>Select a country</option>
-         <?php
-         foreach ($countries as $countryOption) {
-            echo "<option value=\"$countryOption\">$countryOption</option>";
-         }
-         ?>
-      </select><br>
+         <div class="bottom_right">
+            <!-- PRIVACY POLICY FIELDSET -->
+            <fieldset class="privacy_policy">
+            </fieldset>
+            <!-- PRIVACY POLICY FIELDSET -->
+         </div>
 
-      <label for="phone_number">Phone Number:</label>
-      <input type="tel" id="phone_number" name="phone_number" required><br>
-
-      <label for="email_address">Email Address:</label>
-      <input type="email" id="email_address" name="email_address" required><br>
-
-      <label for="profession">Profession:</label>
-      <select id="profession" name="profession" onclick="validate()"
-         onchange="showfield(this.options[this.selectedIndex].value)">
-         <option value="" disabled selected hidden>Choose Profession</option>
-         <option value="Intern">Intern</option>
-         <option value="Teacher">Teacher</option>
-         <option value="Trainee">Trainee</option>
-         <option value="Physician">Physician</option>
-         <option value="Specialist">Specialist</option>
-         <option value="Au Pair/Educare">Au Pair/Educare</option>
-         <option value="Short-term Scholar">Short-term Scholar</option>
-         <option value="Student: College/University">Student: College/University</option>
-         <option value="Professor or Research Scholar">Professor or Research Scholar</option>
-         <option value="Other" id="other">Other</option>
-      </select>
-      <div id="div1">If Other: <input type="text" name="other_option" id="other_option" onclick="change()"
-            onchange="change()" />
-      </div>
-
-      <label for="date_submitted">Date Submitted:</label>
-      <input type="date" id="date_submitted" name="date_submitted" required><br>
-
-      <label for="resume">Resume (PDF only):</label>
-      <input type="file" id="resume" name="resume" accept=".pdf" required><br>
-
-      <label for="passport">Passport (PDF only):</label>
-      <input type="file" id="passport" name="passport" accept=".pdf" required><br>
-
-      <input type="hidden" id="file" name="file" value="<?php echo $file_input_value; ?>">
-
-      <input type="submit" value="Submit Application">
-   </form>
+         <input type="submit" value="Submit Application">
+      </form>
+   </main>
 </body>
 
 </html>
