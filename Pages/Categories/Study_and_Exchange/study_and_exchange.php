@@ -306,121 +306,214 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-   <h1>Welcome,
-      <?php echo $userinfo['first_name']; ?>
-   </h1>
-
-   <!-- Display the profile picture -->
-   <?php if ($credentialType === 'user_token'): ?>
-      <img src="<?php echo $userinfo['picture']; ?>" alt="Profile Picture">
-   <?php elseif ($credentialType === 'id'): ?>
-      <?php if (!empty($_SESSION["profile_picture"])): ?>
-         <?php $profile_pic = str_replace('../', '', $_SESSION["profile_picture"]); ?>
-         <img src="../../../Users/Standard_User/<?php echo $profile_pic; ?>"
-            alt="../../../Users/Standard_User<?php echo $profile_pic; ?>">
-      <?php else: ?>
-         <!-- Default profile picture or placeholder image if profile picture is not set -->
-         <img src="default_profile_picture.jpg" alt="Default Profile Picture">
-      <?php endif; ?>
-   <?php endif; ?>
-
-   <p>Email:
-      <?php echo $userinfo['email']; ?>
-   </p>
-
-   <p>Credential Type:
-      <?php echo $credentialType; ?>
-   </p>
-
-   <a href="../../../Users/User_Login_Google/logout.php">logout</a>
-
    <main>
-      <h2>Submit J1 Visa Application</h2>
-      <p>
-         <?php echo $errors; ?>
-      </p>
-      <form name="myForm" method="post" enctype="multipart/form-data">
-         <!-- PERSONAL INFORMATION FIELDSET -->
-         <div class="top_left">
+      <div class="main_left">
+         <h2>Submit J1 Visa Application</h2>
+         <p>
+            <?php echo $errors; ?>
+         </p>
+
+         <h1>Welcome,
+            <?php echo $userinfo['first_name']; ?>
+         </h1>
+
+         <?php if ($credentialType === 'user_token'): ?>
+            <img src="<?php echo $userinfo['picture']; ?>" alt="Profile Picture">
+         <?php elseif ($credentialType === 'id'): ?>
+            <?php if (!empty($_SESSION["profile_picture"])): ?>
+               <?php $profile_pic = str_replace('../', '', $_SESSION["profile_picture"]); ?>
+               <img src="../../../Users/Standard_User/<?php echo $profile_pic; ?>"
+                  alt="../../../Users/Standard_User<?php echo $profile_pic; ?>">
+            <?php else: ?>
+               <!-- Default profile picture or placeholder image if profile picture is not set -->
+               <img src="default_profile_picture.jpg" alt="Default Profile Picture">
+            <?php endif; ?>
+         <?php endif; ?>
+      </div>
+      <div class="main_right">
+         <form name="myForm" method="post" enctype="multipart/form-data">
+            <!-- PERSONAL INFORMATION FIELDSET -->
             <fieldset class="personal_info">
-               <label for="first_name">First Name:</label>
-               <input type="text" id="first_name" name="first_name" value="<?php echo $userinfo['first_name']; ?>"
-                  required><br>
-               <label for="last_name">Last Name:</label>
-               <input type="text" id="last_name" name="last_name" value="<?php echo $userinfo['last_name']; ?>"
-                  required><br>
-               <label for="full_address">Full Address:</label>
-               <input type="text" id="full_address" name="full_address" required><br>
-               <!-- Replace the country input with a select field -->
-               <label for="country">Country:</label>
-               <select id="country" name="country" required>
-                  <option value="" disabled selected>Select a country</option>
-                  <?php
-                  foreach ($countries as $countryOption) {
-                     echo "<option value=\"$countryOption\">$countryOption</option>";
-                  }
-                  ?>
-               </select><br>
-               <label for="profession">Profession:</label>
-               <select id="profession" name="profession" onclick="validate()"
-                  onchange="showfield(this.options[this.selectedIndex].value)">
-                  <option value="" disabled selected hidden>Choose Profession</option>
-                  <option value="Intern">Intern</option>
-                  <option value="Teacher">Teacher</option>
-                  <option value="Trainee">Trainee</option>
-                  <option value="Physician">Physician</option>
-                  <option value="Specialist">Specialist</option>
-                  <option value="Au Pair/Educare">Au Pair/Educare</option>
-                  <option value="Short-term Scholar">Short-term Scholar</option>
-                  <option value="Student: College/University">Student: College/University</option>
-                  <option value="Professor or Research Scholar">Professor or Research Scholar</option>
-                  <option value="Other" id="other">Other</option>
-               </select>
-               <div id="div1">If Other: <input type="text" name="other_option" id="other_option" onclick="change()"
-                     onchange="change()" />
+               <h2>1. Personal Information</h2>
+               <div class="name_fields">
+                  <label class="name">Full Name <b>*</b></label>
+                  <div class="name_inputs">
+                     <input type="text" id="first_name" name="first_name" placeholder="First Name:"
+                        value="<?php echo $userinfo['first_name']; ?>" required>
+                     <input type="text" id="last_name" name="last_name" placeholder="Last Name:"
+                        value="<?php echo $userinfo['last_name']; ?>" required>
+                  </div>
+               </div>
+
+               <div class="address_fields">
+
+                  <label class="address">Full Address <b>*</b></label>
+                  <div class="address_inputs">
+                     <select id="country" name="country" required>
+                        <option value="" disabled selected>Select a country</option>
+                        <?php
+                        foreach ($countries as $countryOption) {
+                           echo "<option value=\"$countryOption\">$countryOption</option>";
+                        }
+                        ?>
+                     </select>
+                     <input type="text" id="full_address" name="full_address"
+                        placeholder="# Street, City, State/Province" required>
+                  </div>
+               </div>
+
+
+
+               <div class="profession_fields">
+                  <label for="profession">Profession <b>*</b></label>
+                  <div class="profession_inputs">
+                     <select id="profession" name="profession" onclick="validate()"
+                        onchange="showfield(this.options[this.selectedIndex].value)">
+                        <option value="" disabled selected hidden>Choose Profession</option>
+                        <option value="Intern">Intern</option>
+                        <option value="Teacher">Teacher</option>
+                        <option value="Trainee">Trainee</option>
+                        <option value="Physician">Physician</option>
+                        <option value="Specialist">Specialist</option>
+                        <option value="Au Pair/Educare">Au Pair/Educare</option>
+                        <option value="Short-term Scholar">Short-term Scholar</option>
+                        <option value="Student: College/University">Student: College/University</option>
+                        <option value="Professor or Research Scholar">Professor or Research Scholar</option>
+                        <option value="Other" id="other">Other</option>
+                     </select>
+                     <div id="div1" style="display: none;">If Other: <input type="text" name="other_option"
+                           id="other_option" onclick="change()" onchange="change()" />
+                     </div>
+                  </div>
                </div>
             </fieldset>
-         </div>
-         <!-- PERSONAL INFORMATION FIELDSET -->
+            <!-- PERSONAL INFORMATION FIELDSET -->
 
-         <div class="top_right">
             <!-- CONTACTvINFORMATION FIELDSET -->
             <fieldset class="contact_info">
-               <label for="phone_number">Phone Number:</label>
-               <input type="tel" id="phone_number" name="phone_number" required><br>
-               <label for="email_address">Email Address:</label>
-               <input type="email" id="email_address" name="email_address" value="<?php echo $userinfo['email']; ?>"
-                  required><br>
+               <h2>2. Contact Information</h2>
+               <div class="contact_fields">
+                  <div class="phone_input">
+                     <label for="phone_number">Phone Number <b>*</b></label>
+                     <input type="tel" id="phone_number" name="phone_number" required>
+                  </div>
+                  <div class="email_input">
+                     <label for="email_address">Email Address <b>*</b></label>
+                     <input type="email" id="email_address" name="email_address"
+                        value="<?php echo $userinfo['email']; ?>" required>
+                  </div>
+               </div>
             </fieldset>
             <!-- CONTACT INFORMATION FIELDSET -->
+
             <!-- FILE UPLOAD FIELDSET -->
             <fieldset class="file_upload">
-               <label for="resume">Resume (PDF only):</label>
-               <input type="file" id="resume" name="resume" accept=".pdf" required><br>
-               <label for="passport">Passport (PDF only):</label>
-               <input type="file" id="passport" name="passport" accept=".pdf" required><br>
-               <input type="hidden" id="file" name="file" value="<?php echo $file_input_value; ?>">
+               <h2>3. Required File Upload</h2>
+               <div class="file_fields">
+                  <div class="resume_input">
+                     <label for="resume">Resume (PDF only) <b>*</b></label>
+                     <div class="file_container" id="resume_container">
+                        <div>Drag & drop your resume here</div>
+                        <input type="file" id="resume" class="file_input_field" name="resume" accept=".pdf" required>
+                        <div class="file_name" id="resume_name"></div>
+                     </div>
+                  </div>
+                  <div class="passport_input">
+                     <label for="passport">Passport (PDF only) <b>*</b></label>
+                     <div class="file_container" id="passport_container">
+                        <div>Drag & drop your passport here</div>
+                        <input type="file" id="passport" class="file_input_field" name="passport" accept=".pdf" required>
+                        <div class="file_name" id="passport_name"></div>
+                     </div>
+                  </div>
+                  <input type="hidden" id="file" name="file" value="<?php echo $file_input_value; ?>">
+               </div>
             </fieldset>
-            <!-- FILE UPLOAD FIELDSET -->
-         </div>
 
-         <div class="bottom_left">
+            <script>
+               const resumeContainer = document.getElementById('resume_container');
+               const resumeInput = resumeContainer.querySelector('.file_input_field');
+               const resumeFileNameDisplay = resumeContainer.querySelector('.file_name');
+
+               const passportContainer = document.getElementById('passport_container');
+               const passportInput = passportContainer.querySelector('.file_input_field');
+               const passportFileNameDisplay = passportContainer.querySelector('.file_name');
+
+               resumeContainer.addEventListener('dragover', (e) => {
+                  e.preventDefault();
+                  resumeContainer.style.border = '2px solid #333'; // Change border color on dragover
+               });
+
+               resumeContainer.addEventListener('dragleave', () => {
+                  resumeContainer.style.border = '2px dashed #ccc'; // Restore border color on dragleave
+               });
+
+               resumeContainer.addEventListener('drop', (e) => {
+                  e.preventDefault();
+                  resumeContainer.style.border = '2px dashed #ccc'; // Restore border color on drop
+
+                  const files = e.dataTransfer.files;
+                  resumeInput.files = files;
+                  resumeFileNameDisplay.textContent = files[0].name; // Display file name
+                  resumeContainer.classList.add('uploaded'); // Add 'uploaded' class for green glow
+               });
+
+               resumeInput.addEventListener('change', () => {
+                  resumeFileNameDisplay.textContent = resumeInput.files[0].name; // Display file name
+                  resumeContainer.classList.add('uploaded'); // Add 'uploaded' class for green glow
+               });
+
+               passportContainer.addEventListener('dragover', (e) => {
+                  e.preventDefault();
+                  passportContainer.style.border = '2px solid #333'; // Change border color on dragover
+               });
+
+               passportContainer.addEventListener('dragleave', () => {
+                  passportContainer.style.border = '2px dashed #ccc'; // Restore border color on dragleave
+               });
+
+               passportContainer.addEventListener('drop', (e) => {
+                  e.preventDefault();
+                  passportContainer.style.border = '2px dashed #ccc'; // Restore border color on drop
+
+                  const files = e.dataTransfer.files;
+                  passportInput.files = files;
+                  passportFileNameDisplay.textContent = files[0].name; // Display file name
+                  passportContainer.classList.add('uploaded'); // Add 'uploaded' class for green glow
+               });
+
+               passportInput.addEventListener('change', () => {
+                  passportFileNameDisplay.textContent = passportInput.files[0].name; // Display file name
+                  passportContainer.classList.add('uploaded'); // Add 'uploaded' class for green glow
+               });
+            </script>
+            <!-- FILE UPLOAD FIELDSET -->
+
             <!-- ELIGIBILTY SECTION FIELDSET -->
             <fieldset class="eligibility_section">
-            
+               <h2>4. Program Category Requirements</h2>
+               <div class="category_images">
+                  <img src="../../../Photos/category.jpg" alt="">
+                  <img src="../../../Photos/category2.PNG" alt="">
+               </div>
+               <div class="eligibility_confirmation">
+                  <label for="yes">Yes</label>
+                  <input type="radio" name="confirm_eligibility" id="yes">
+
+                  <label for="no">No</label>
+                  <input type="radio" name="confirm_eligibility" id="no">
+               </div>
             </fieldset>
             <!-- ELIGIBILTY SECTION FIELDSET -->
-         </div>
 
-         <div class="bottom_right">
             <!-- PRIVACY POLICY FIELDSET -->
             <fieldset class="privacy_policy">
             </fieldset>
             <!-- PRIVACY POLICY FIELDSET -->
-         </div>
 
-         <input type="submit" value="Submit Application">
-      </form>
+            <input type="submit" value="Submit Application">
+         </form>
+      </div>
    </main>
 </body>
 
