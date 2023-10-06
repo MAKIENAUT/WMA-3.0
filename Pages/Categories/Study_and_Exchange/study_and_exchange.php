@@ -422,7 +422,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      <label for="passport">Passport (PDF only) <b>*</b></label>
                      <div class="file_container" id="passport_container">
                         <div>Drag & drop your passport here</div>
-                        <input type="file" id="passport" class="file_input_field" name="passport" accept=".pdf" required>
+                        <input type="file" id="passport" class="file_input_field" name="passport" accept=".pdf"
+                           required>
                         <div class="file_name" id="passport_name"></div>
                      </div>
                   </div>
@@ -430,84 +431,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                </div>
             </fieldset>
 
-            <script>
-               const resumeContainer = document.getElementById('resume_container');
-               const resumeInput = resumeContainer.querySelector('.file_input_field');
-               const resumeFileNameDisplay = resumeContainer.querySelector('.file_name');
-
-               const passportContainer = document.getElementById('passport_container');
-               const passportInput = passportContainer.querySelector('.file_input_field');
-               const passportFileNameDisplay = passportContainer.querySelector('.file_name');
-
-               resumeContainer.addEventListener('dragover', (e) => {
-                  e.preventDefault();
-                  resumeContainer.style.border = '2px solid #333'; // Change border color on dragover
-               });
-
-               resumeContainer.addEventListener('dragleave', () => {
-                  resumeContainer.style.border = '2px dashed #ccc'; // Restore border color on dragleave
-               });
-
-               resumeContainer.addEventListener('drop', (e) => {
-                  e.preventDefault();
-                  resumeContainer.style.border = '2px dashed #ccc'; // Restore border color on drop
-
-                  const files = e.dataTransfer.files;
-                  resumeInput.files = files;
-                  resumeFileNameDisplay.textContent = files[0].name; // Display file name
-                  resumeContainer.classList.add('uploaded'); // Add 'uploaded' class for green glow
-               });
-
-               resumeInput.addEventListener('change', () => {
-                  resumeFileNameDisplay.textContent = resumeInput.files[0].name; // Display file name
-                  resumeContainer.classList.add('uploaded'); // Add 'uploaded' class for green glow
-               });
-
-               passportContainer.addEventListener('dragover', (e) => {
-                  e.preventDefault();
-                  passportContainer.style.border = '2px solid #333'; // Change border color on dragover
-               });
-
-               passportContainer.addEventListener('dragleave', () => {
-                  passportContainer.style.border = '2px dashed #ccc'; // Restore border color on dragleave
-               });
-
-               passportContainer.addEventListener('drop', (e) => {
-                  e.preventDefault();
-                  passportContainer.style.border = '2px dashed #ccc'; // Restore border color on drop
-
-                  const files = e.dataTransfer.files;
-                  passportInput.files = files;
-                  passportFileNameDisplay.textContent = files[0].name; // Display file name
-                  passportContainer.classList.add('uploaded'); // Add 'uploaded' class for green glow
-               });
-
-               passportInput.addEventListener('change', () => {
-                  passportFileNameDisplay.textContent = passportInput.files[0].name; // Display file name
-                  passportContainer.classList.add('uploaded'); // Add 'uploaded' class for green glow
-               });
-            </script>
+            <script src="file_upload.js"></script>
             <!-- FILE UPLOAD FIELDSET -->
 
             <!-- ELIGIBILTY SECTION FIELDSET -->
             <fieldset class="eligibility_section">
                <h2>4. Program Category Requirements</h2>
+               <p>- Double click/tap to zoom</p>
                <div class="category_images">
-                  <img src="../../../Photos/category.jpg" alt="">
-                  <img src="../../../Photos/category2.PNG" alt="">
+                  <img src="../../../Photos/category.jpg" alt="" class="zoomable">
+                  <img src="../../../Photos/category2.PNG" alt="" class="zoomable">
                </div>
                <div class="eligibility_confirmation">
-                  <label for="yes">Yes</label>
-                  <input type="radio" name="confirm_eligibility" id="yes">
+                  <label class="confirm_eligibility">
+                     Do you meet the eligibility requirement for the specific program? <b>*</b>
+                  </label>
+                  <div class="eligibility_fields">
+                     <div class="yes_button">
+                        <input type="radio" name="confirm_eligibility" id="yes">
+                        <label for="yes">Yes</label>
+                     </div>
+                     <div class="no_button">
 
-                  <label for="no">No</label>
-                  <input type="radio" name="confirm_eligibility" id="no">
+                        <input type="radio" name="confirm_eligibility" id="no">
+                        <label for="no">No</label>
+                     </div>
+                  </div>
                </div>
             </fieldset>
+
+            <script src="zoom_image.js"></script>
             <!-- ELIGIBILTY SECTION FIELDSET -->
 
             <!-- PRIVACY POLICY FIELDSET -->
             <fieldset class="privacy_policy">
+               <h2>5. Privacy Policy</h2>
+
+               <p>
+                  Read the Privacy Policy and give permission for West Migration Agency LLC to share my information and discuss my candidacy with any US Sponsors as part of the visa process.
+               </p>
+
+               
+               <a href="">Click & Read!</a>
+
+               <label for="terms_and_condition">Terms and Conditions</label>
+               <input type="checkbox" name="terms_and_condition" id="terms_and_condition">
+
             </fieldset>
             <!-- PRIVACY POLICY FIELDSET -->
 
