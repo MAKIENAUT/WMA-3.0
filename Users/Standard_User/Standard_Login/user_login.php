@@ -2,6 +2,7 @@
 
 require_once '../../User_Login_Google/config.php';
 
+
 // Check if the user is already logged in
 if (isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
    header("location: ../Standard_Welcome/welcome.php");
@@ -77,40 +78,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-   <title>Login Page</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="user_login.css">
+   <script src="user_login.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+   <title>Document</title>
 </head>
 
 <body>
-   <h2>Login</h2>
-   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <!-- Email Address -->
-      <label for="email">Email Address:</label>
-      <input type="email" name="email" value="<?php echo $email; ?>" required>
-      <span>
-         <?php echo $email_err; ?>
-      </span><br>
+   <main>
+      <h1>Login</h1>
+      <div class="error_display">
+         <span>
+            <?php echo $email_err; ?>
+         </span>
+         <span>
+            <?php echo $password_err; ?>
+         </span>
+      </div>
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-      <!-- Password -->
-      <label for="password">Password:</label>
-      <input type="password" name="password" required>
-      <span>
-         <?php echo $password_err; ?>
-      </span><br>
+         <!-- Email Address -->
+         <div class="email_field">
+            <label for="email">Email Address:</label>
+            <input type="email" name="email" value="<?php echo $email; ?>" placeholder="Enter Email Address" required>
+         </div>
 
-      <input type="submit" value="Login">
-      <?php
-      if (isset($_SESSION['user_token'])) {
-         header("Location: welcome.php");
-      } else {
-         echo "<a href='" . $client->createAuthUrl() . "'>Google Login</a>";
-      }
-      ?>
-   </form>
+         <!-- Password -->
+         <div class="password_field">
+            <label for="password">
+               Password:
+               <!-- Password View Toggle -->
+               <div class="view_toggle">
+                  <span id="eye" class="fa-regular fa-eye" style="cursor:pointer;" onclick="togglePassword()"></span>
+                  <span id="eye-slash" class="fa-regular fa-eye-slash" style="cursor:pointer; display:none;"
+                     onclick="togglePassword()"></span>
+               </div>
+            </label>
+            <input type="password" name="password" id="password" placeholder="Enter Password" required>
+         </div>
+
+         <div class="login_option">
+            <input type="submit" value="Sign In">
+
+            <p>Or</p>
+
+            <?php
+            if (isset($_SESSION['user_token'])) {
+               header("Location: welcome.php");
+            } else { ?>
+               <a href="<?php echo $client->createAuthUrl() ?>">
+                  <img src="../../../Photos/Google_Logo.svg" alt="">
+                  Sign Up with Google
+               </a>
+               <?php
+            }
+            ?>
+         </div>
+      </form>
+      <div class="register_link">
+         <p>Don't have an account yet?</p>
+         <a href="../Standard_Register/register.php">Create an Account.</a>
+      </div>
+   </main>
 </body>
 
 </html>
