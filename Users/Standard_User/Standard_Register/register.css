@@ -9,6 +9,10 @@
    font-family: 'Poppins', sans-serif;
 }
 
+b {
+   color: red;
+}
+
 body {
    width: 100%;
    height: 100vh;
@@ -18,7 +22,7 @@ body {
    position: relative;
 }
 
-main {  
+main {
    top: 50%;
    right: 15%;
    bottom: 50%;
@@ -33,11 +37,92 @@ main {
    display: flex;
    align-items: center;
    flex-direction: column;
-   justify-content: center;
+   justify-content: space-around;
 }
 
 main h1 {
    display: flex;
    align-items: center;
    justify-content: center;
+}
+
+form {
+   width: 90%;
+   height: 85%;
+   padding: 10px;
+   box-sizing: border-box;
+
+   gap: 10px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: start;
+   border: 1px solid white;
+}
+
+.name_fields, 
+.password_fields{
+   width: 100%;
+   box-sizing: border-box;
+
+   gap: 10px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: center;
+}
+
+.name_fields label, .password_fields label {
+   width: 100%;
+   font-size: 15px;
+   box-sizing: border-box;
+   border-bottom: 1px solid rgb(220, 220, 220, 0.3);
+
+   gap: 10px;
+   display: flex;
+}
+
+.name_inputs, 
+.password_inputs{
+   width: 100%;
+   gap: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+
+.number_field,
+.birthdate_field,
+.email_field {
+   width: 100%;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.name_inputs input, 
+.password_inputs input{
+   width: 50%;
+   height: 35px;
+   font-size: 12px;
+   text-indent: 10px;
+   border-radius: 5px;
+   box-sizing: border-box;
+   background-color: transparent;
+   border: 1px solid rgb(220, 220, 220, 0.3);
+}
+
+.number_field input,
+.birthdate_field input,
+.email_field input {
+   width: 100%;
+   height: 35px;
+   font-size: 12px;
+   text-indent: 10px;
+   border-radius: 5px;
+   box-sizing: border-box;
+   background-color: transparent;
+   border: 1px solid rgb(220, 220, 220, 0.3);
 }
