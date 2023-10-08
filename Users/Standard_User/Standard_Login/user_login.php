@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   $_SESSION["profile_picture"] = $profile_picture; // Add profile picture
 
                   // Redirect to a welcome page
-                  header("location: ../Standard_Welcome/welcome.php");
+                  header("location: ../../../Pages/Home/home.php");
                } else {
                   // Display an error message if the password is incorrect
                   $password_err = "The password you entered is incorrect.";
@@ -77,7 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
