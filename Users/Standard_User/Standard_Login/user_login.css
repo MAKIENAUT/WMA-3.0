@@ -1,146 +1,119 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
-
-* {
-   color: white;
-   padding: 0;
-   margin: 0;
-
-   font-family: 'Poppins', sans-serif;
-}
-
 body {
-   width: 100%;
+   width: 100dvw;
    height: 100vh;
-   box-sizing: border-box;
-   background-color: black;
-
-   position: relative;
-}
-
-main {  
-   top: 50%;
-   right: 15%;
-   bottom: 50%;
-   width: 420px;
-   margin: auto 0;
-   aspect-ratio: 3/4;
-   position: absolute;
-   border-radius: 5px;
-   box-sizing: border-box;
-   border: 1px solid gold;
-
+   padding-inline: var(--mobile-padding-inline);
    display: flex;
    align-items: center;
-   flex-direction: column;
    justify-content: center;
+}
+
+main {
+   width: 100%;
+   max-width: 720px;
+   padding: 15px;
+   border-radius: 5px;
+   border: 3px solid var(--main-color-3);
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+   justify-content: center;
+   gap: var(--gap-1rem);
 }
 
 main h1 {
-
-   display: flex;
-   align-items: center;
-   justify-content: center;
-}
-
-form {
-   width: 90%;
-   height: 70%;
-   padding: 10px;
-   box-sizing: border-box;
-
-   gap: 30px;
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   justify-content: flex-start;
+   font-size: var(--main-header);
+   font-family: "Lora", serif;
+   font-weight: 700;
 }
 
 .error_display {
+   display: none;
+}
+
+form {
    width: 100%;
-   height: 25px;
+   display: flex;
+   flex-flow: column;
+   gap: var(--gap-1rem);
+}
+
+.email_field,
+.password_field {
+   display: flex;
+   flex-flow: column;
+   gap: var(--gap-point5rem);
+}
+
+.email_field label,
+.password_field label {
+   font-size: 1.125rem;
    display: flex;
    align-items: center;
-   justify-content: center;
-}
-
-.email_field, .password_field {
-   width: 100%;
-   height: 70px;
-
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   justify-content: space-between;
-}
-
-.email_field label, .password_field label {
-   width: 100%;
-   font-size: 15px;
-   border-bottom: 1px solid rgb(220, 220, 220, 0.3);
-
-   gap: 10px;
-   display: flex;
-}
-
-.email_field input, .password_field input {
-   width: 100%;
-   height: 35px;
-   font-size: 15px;
-   text-indent: 10px;
-   border-radius: 5px;
-   background-color: transparent;
-   border: 1px solid rgb(220, 220, 220, 0.3);
+   gap: var(--gap-point5rem);
 }
 
 .view_toggle {
-   height: 100%;
-   aspect-ratio: 1/1;
-
    display: flex;
    align-items: center;
    justify-content: center;
+}
+
+.email_field input,
+.password_field input {
+   padding: 5px;
+   font-size: 1.125rem;
+   border-radius: 5px;
+   border: 1px solid rgba(0, 77, 77, 0.3);
 }
 
 .login_option {
-   height: 100px;
-   width: 100%;
-
+   font-size: 1.125rem;
    display: flex;
+   flex-flow: column;
    align-items: center;
-   flex-direction: column;
-   justify-content: space-between;
-}
-
-.login_option input, .login_option a {
-   gap: 10px;
-   width: 70%;
-   height: 35%;
-   display: flex;
-   font-size: 15px;
-   border-radius: 5px;
-   align-items: center;
-   transition: all 0.25s;
    justify-content: center;
-   background-color: transparent;
-   border: 1px solid rgb(220, 220, 220, 0.3);
+   gap: var(--gap-point5rem);
 }
 
-.login_option input:hover, .login_option a:hover {
+.login_option input,
+.login_option a {
+   width: 80%;
+   padding: 5px;
+   font-size: 1.125rem;
+   text-decoration: none;
+   cursor: pointer;
+   color: var(--black);
+   background-color: transparent;
+   border: 1px solid transparent;
+   border-radius: 5px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
    transition: all 0.25s;
-   border: 1px solid rgba(255, 255, 255, 0.7);
-} 
+}
 
-.login_option a img{
+.login_option input {
+   border: 1px solid rgba(218, 165, 32, 0.3);
+}
+
+.login_option input:hover {
+   color: var(--white);
+   background-color: var(--main-color-3);
+}
+
+.login_option a:hover {
+   background-color: rgba(218, 165, 32, 0.2);
+}
+
+.login_option a img {
    height: 70%;
    aspect-ratio: 1/1;
 }
 
 .register_link {
-   width: 100%;
-
    display: flex;
+   flex-flow: column;
    align-items: center;
-   flex-direction: column;
    justify-content: center;
 }
