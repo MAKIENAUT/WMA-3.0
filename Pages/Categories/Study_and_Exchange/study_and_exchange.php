@@ -1,6 +1,7 @@
 <?php
 require_once '../../../Users/User_Login_Google/config.php';
 
+$errors = "";
 
 $countries = [
    'Afghanistan',
@@ -210,6 +211,7 @@ if (!isset($_SESSION['user_token']) && !isset($_SESSION['id'])) {
 if (isset($_SESSION['user_token'])) {
    $credentialType = 'user_token';
    $sql = "SELECT * FROM wma_users_google WHERE token = '{$_SESSION['user_token']}'";
+
 } elseif (isset($_SESSION['id'])) {
    $credentialType = 'id';
    $sql = "SELECT * FROM wma_users_standard WHERE id = '{$_SESSION['id']}'";
@@ -220,7 +222,7 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
    $userinfo = mysqli_fetch_assoc($result);
 } else {
-   echo "User not found in the database.";
+   $errors .= "User not found in the database. \n";
    die(); // Exit the script if the user is not found
 }
 
@@ -233,7 +235,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    $phone_number = $_POST['phone_number'];
    $email_address = $_POST['email_address'];
    $profession = $_POST['profession'];
-   $date_submitted = $_POST['date_submitted'];
 
    // Use the value of the "Other Profession" input field when "Others" is selected
    if ($profession === 'Others' && isset($_POST['profession'])) {
@@ -250,23 +251,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    $emailCheckResult = mysqli_query($conn, $emailCheckSql);
 
    if (mysqli_num_rows($emailCheckResult) > 0) {
-      echo "Error: Email address already exists in the database.";
+      $errors .= "Error: Email address already exists in the database. \n";
    } else {
       // Create a variable with the value 'first_name' . '_' . 'last_name'
-      $file_input_value = $first_name . '_' . $last_name;
+      $file_input_value = $email_address;
 
       // Insert data into the j1_visa table in the wma_forms database
-      $insert_sql = "INSERT INTO wma_forms.j1_visa (first_name, last_name, full_address, country, phone_number, email_address, profession, date_submitted, file)
-                    VALUES ('$first_name', '$last_name', '$full_address', '$country', '$phone_number', '$email_address', '$profession', '$date_submitted', '$file_input_value')";
+      $insert_sql = "INSERT INTO wma_forms.j1_visa (first_name, last_name, full_address, country, phone_number, email_address, profession, file)
+                    VALUES ('$first_name', '$last_name', '$full_address', '$country', '$phone_number', '$email_address', '$profession', '$file_input_value')";
 
       if (mysqli_query($conn, $insert_sql)) {
-         echo "Data inserted successfully.";
+         $errors .= "Data inserted successfully. \n";
       } else {
-         echo "Error: " . mysqli_error($conn);
+         $errors .= "Error: " . mysqli_error($conn) . "\n";
       }
 
       // Create a directory for the user if it doesn't exist
-      $userDirectory = "../../../Administrator/Applicant_Files/{$first_name}_{$last_name}";
+      $userDirectory = "../../../Administrator/Applicant_Files/{$email_address}";
       if (!file_exists($userDirectory)) {
          mkdir($userDirectory, 0777, true);
       }
@@ -275,18 +276,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $resumeFileName = $_FILES['resume']['name'];
       $resumeFilePath = $userDirectory . '/' . $resumeFileName;
       if (move_uploaded_file($_FILES['resume']['tmp_name'], $resumeFilePath)) {
-         echo "Resume uploaded successfully.";
+         $errors .= "Resume uploaded successfully. \n";
       } else {
-         echo "Error uploading resume.";
+         $errors .= "Error uploading resume. \n";
       }
 
       // Upload and move the passport file to the user's directory
       $passportFileName = $_FILES['passport']['name'];
       $passportFilePath = $userDirectory . '/' . $passportFileName;
       if (move_uploaded_file($_FILES['passport']['tmp_name'], $passportFilePath)) {
-         echo "Passport uploaded successfully.";
+         $errors .= "Passport uploaded successfully. \n";
       } else {
-         echo "Error uploading passport.";
+         $errors .= "Error uploading passport. \n";
       }
    }
 }
@@ -300,99 +301,189 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script src="study_and_exchange.js"></script>
+   <link rel="stylesheet" href="study_and_exchange.css">
    <title>User Profile</title>
 </head>
 
 <body>
-   <h1>Welcome,
-      <?php echo $userinfo['first_name']; ?>
-   </h1>
+   <main>
+      <div class="main_left">
+         <h2>Submit J1 Visa Application</h2>
+         <p>
+            <?php echo $errors; ?>
+         </p>
 
-   <!-- Display the profile picture -->
-   <?php if ($credentialType === 'user_token'): ?>
-      <img src="<?php echo $userinfo['picture']; ?>" alt="Profile Picture">
-   <?php elseif ($credentialType === 'id'): ?>
-      <?php if (!empty($_SESSION["profile_picture"])): ?>
-         <?php $profile_pic = str_replace('../', '', $_SESSION["profile_picture"]); ?>
-         <img src="../../../Users/Standard_User/<?php echo $profile_pic; ?>"
-            alt="../../../Users/Standard_User<?php echo $profile_pic; ?>">
-      <?php else: ?>
-         <!-- Default profile picture or placeholder image if profile picture is not set -->
-         <img src="default_profile_picture.jpg" alt="Default Profile Picture">
-      <?php endif; ?>
-   <?php endif; ?>
+         <h1>Welcome,
+            <?php echo $userinfo['first_name']; ?>
+         </h1>
 
-   <p>Email:
-      <?php echo $userinfo['email']; ?>
-   </p>
-
-   <p>Credential Type:
-      <?php echo $credentialType; ?>
-   </p>
-
-   <a href="../../../Users/Standard_User/Standard_Logout/logout.php">logout</a>
-
-   <!-- Add the form for user input -->
-   <h2>Submit J1 Visa Application</h2>
-   <form name="myForm" method="post" enctype="multipart/form-data">
-      <label for="first_name">First Name:</label>
-      <input type="text" id="first_name" name="first_name" required><br>
-
-      <label for="last_name">Last Name:</label>
-      <input type="text" id="last_name" name="last_name" required><br>
-
-      <label for="full_address">Full Address:</label>
-      <input type="text" id="full_address" name="full_address" required><br>
-
-      <!-- Replace the country input with a select field -->
-      <label for="country">Country:</label>
-      <select id="country" name="country" required>
-         <option value="" disabled selected>Select a country</option>
-         <?php
-         foreach ($countries as $countryOption) {
-            echo "<option value=\"$countryOption\">$countryOption</option>";
-         }
-         ?>
-      </select><br>
-
-      <label for="phone_number">Phone Number:</label>
-      <input type="tel" id="phone_number" name="phone_number" required><br>
-
-      <label for="email_address">Email Address:</label>
-      <input type="email" id="email_address" name="email_address" required><br>
-
-      <label for="profession">Profession:</label>
-      <select id="profession" name="profession" onclick="validate()"
-         onchange="showfield(this.options[this.selectedIndex].value)">
-         <option value="" disabled selected hidden>Choose Profession</option>
-         <option value="Intern">Intern</option>
-         <option value="Teacher">Teacher</option>
-         <option value="Trainee">Trainee</option>
-         <option value="Physician">Physician</option>
-         <option value="Specialist">Specialist</option>
-         <option value="Au Pair/Educare">Au Pair/Educare</option>
-         <option value="Short-term Scholar">Short-term Scholar</option>
-         <option value="Student: College/University">Student: College/University</option>
-         <option value="Professor or Research Scholar">Professor or Research Scholar</option>
-         <option value="Other" id="other">Other</option>
-      </select>
-      <div id="div1">If Other: <input type="text" name="other_option" id="other_option" onclick="change()"
-            onchange="change()" />
+         <?php if ($credentialType === 'user_token'): ?>
+            <img src="<?php echo $userinfo['picture']; ?>" alt="Profile Picture">
+         <?php elseif ($credentialType === 'id'): ?>
+            <?php if (!empty($_SESSION["profile_picture"])): ?>
+               <?php $profile_pic = str_replace('../', '', $_SESSION["profile_picture"]); ?>
+               <img src="../../../Users/Standard_User/<?php echo $profile_pic; ?>"
+                  alt="../../../Users/Standard_User<?php echo $profile_pic; ?>">
+            <?php else: ?>
+               <!-- Default profile picture or placeholder image if profile picture is not set -->
+               <img src="default_profile_picture.jpg" alt="Default Profile Picture">
+            <?php endif; ?>
+         <?php endif; ?>
       </div>
+      <div class="main_right">
+         <form name="myForm" method="post" enctype="multipart/form-data">
+            <!-- PERSONAL INFORMATION FIELDSET -->
+            <fieldset class="personal_info">
+               <h2>1. Personal Information</h2>
+               <div class="name_fields">
+                  <label class="name">Full Name <b>*</b></label>
+                  <div class="name_inputs">
+                     <input type="text" id="first_name" name="first_name" placeholder="First Name:"
+                        value="<?php echo $userinfo['first_name']; ?>" required>
+                     <input type="text" id="last_name" name="last_name" placeholder="Last Name:"
+                        value="<?php echo $userinfo['last_name']; ?>" required>
+                  </div>
+               </div>
 
-      <label for="date_submitted">Date Submitted:</label>
-      <input type="date" id="date_submitted" name="date_submitted" required><br>
+               <div class="address_fields">
 
-      <label for="resume">Resume (PDF only):</label>
-      <input type="file" id="resume" name="resume" accept=".pdf" required><br>
+                  <label class="address">Full Address <b>*</b></label>
+                  <div class="address_inputs">
+                     <select id="country" name="country" required>
+                        <option value="" disabled selected>Select a country</option>
+                        <?php
+                        foreach ($countries as $countryOption) {
+                           echo "<option value=\"$countryOption\">$countryOption</option>";
+                        }
+                        ?>
+                     </select>
+                     <input type="text" id="full_address" name="full_address"
+                        placeholder="# Street, City, State/Province" required>
+                  </div>
+               </div>
 
-      <label for="passport">Passport (PDF only):</label>
-      <input type="file" id="passport" name="passport" accept=".pdf" required><br>
 
-      <input type="hidden" id="file" name="file" value="<?php echo $file_input_value; ?>">
 
-      <input type="submit" value="Submit Application">
-   </form>
+               <div class="profession_fields">
+                  <label for="profession">Profession <b>*</b></label>
+                  <div class="profession_inputs">
+                     <select id="profession" name="profession" onclick="validate()"
+                        onchange="showfield(this.options[this.selectedIndex].value)">
+                        <option value="" disabled selected hidden>Choose Profession</option>
+                        <option value="Intern">Intern</option>
+                        <option value="Teacher">Teacher</option>
+                        <option value="Trainee">Trainee</option>
+                        <option value="Physician">Physician</option>
+                        <option value="Specialist">Specialist</option>
+                        <option value="Au Pair/Educare">Au Pair/Educare</option>
+                        <option value="Short-term Scholar">Short-term Scholar</option>
+                        <option value="Student: College/University">Student: College/University</option>
+                        <option value="Professor or Research Scholar">Professor or Research Scholar</option>
+                        <option value="Other" id="other">Other</option>
+                     </select>
+                     <div id="div1" style="display: none;">If Other: <input type="text" name="other_option"
+                           id="other_option" onclick="change()" onchange="change()" />
+                     </div>
+                  </div>
+               </div>
+            </fieldset>
+            <!-- PERSONAL INFORMATION FIELDSET -->
+
+            <!-- CONTACTvINFORMATION FIELDSET -->
+            <fieldset class="contact_info">
+               <h2>2. Contact Information</h2>
+               <div class="contact_fields">
+                  <div class="phone_input">
+                     <label for="phone_number">Phone Number <b>*</b></label>
+                     <input type="tel" id="phone_number" name="phone_number" required>
+                  </div>
+                  <div class="email_input">
+                     <label for="email_address">Email Address <b>*</b></label>
+                     <input type="email" id="email_address" name="email_address"
+                        value="<?php echo $userinfo['email']; ?>" required>
+                  </div>
+               </div>
+            </fieldset>
+            <!-- CONTACT INFORMATION FIELDSET -->
+
+            <!-- FILE UPLOAD FIELDSET -->
+            <fieldset class="file_upload">
+               <h2>3. Required File Upload</h2>
+               <div class="file_fields">
+                  <div class="resume_input">
+                     <label for="resume">Resume (PDF only) <b>*</b></label>
+                     <div class="file_container" id="resume_container">
+                        <div>Drag & drop your resume here</div>
+                        <input type="file" id="resume" class="file_input_field" name="resume" accept=".pdf" required>
+                        <div class="file_name" id="resume_name"></div>
+                     </div>
+                  </div>
+                  <div class="passport_input">
+                     <label for="passport">Passport (PDF only) <b>*</b></label>
+                     <div class="file_container" id="passport_container">
+                        <div>Drag & drop your passport here</div>
+                        <input type="file" id="passport" class="file_input_field" name="passport" accept=".pdf"
+                           required>
+                        <div class="file_name" id="passport_name"></div>
+                     </div>
+                  </div>
+                  <input type="hidden" id="file" name="file" value="<?php echo $file_input_value; ?>">
+               </div>
+            </fieldset>
+
+            <script src="file_upload.js"></script>
+            <!-- FILE UPLOAD FIELDSET -->
+
+            <!-- ELIGIBILTY SECTION FIELDSET -->
+            <fieldset class="eligibility_section">
+               <h2>4. Program Category Requirements</h2>
+               <p>- Double click/tap to zoom</p>
+               <div class="category_images">
+                  <img src="../../../Photos/category.jpg" alt="" class="zoomable">
+                  <img src="../../../Photos/category2.PNG" alt="" class="zoomable">
+               </div>
+               <div class="eligibility_confirmation">
+                  <label class="confirm_eligibility">
+                     Do you meet the eligibility requirement for the specific program? <b>*</b>
+                  </label>
+                  <div class="eligibility_fields">
+                     <div class="yes_button">
+                        <input type="radio" name="confirm_eligibility" id="yes">
+                        <label for="yes">Yes</label>
+                     </div>
+                     <div class="no_button">
+
+                        <input type="radio" name="confirm_eligibility" id="no">
+                        <label for="no">No</label>
+                     </div>
+                  </div>
+               </div>
+            </fieldset>
+
+            <script src="zoom_image.js"></script>
+            <!-- ELIGIBILTY SECTION FIELDSET -->
+
+            <!-- PRIVACY POLICY FIELDSET -->
+            <fieldset class="privacy_policy">
+               <h2>5. Privacy Policy</h2>
+
+               <p>
+                  Read the Privacy Policy and give permission for West Migration Agency LLC to share my information and discuss my candidacy with any US Sponsors as part of the visa process.
+               </p>
+
+               
+               <a href="">Click & Read!</a>
+
+               <label for="terms_and_condition">Terms and Conditions</label>
+               <input type="checkbox" name="terms_and_condition" id="terms_and_condition">
+
+            </fieldset>
+            <!-- PRIVACY POLICY FIELDSET -->
+
+            <input type="submit" value="Submit Application">
+         </form>
+      </div>
+   </main>
 </body>
 
 </html>
