@@ -40,45 +40,14 @@ if (isset($_GET['code'])) {
 
    // save user data into session
    $_SESSION['user_token'] = $token;
+
+   // Redirect to home page
+   header("Location: ../../Pages/Home/home.php");
+   die(); // Ensure script stops executing after redirect
 } else {
    if (!isset($_SESSION['user_token'])) {
-      header("Location: index.php");
+      header("Location: ../../Users/Standard_User/Standard_Login/user_login.php");
       die();
    }
-
-   // checking if user exists in database
-   $sql = "SELECT * FROM wma_users_google WHERE token ='{$_SESSION['user_token']}'";
-   $result = mysqli_query($conn, $sql);
-   if (mysqli_num_rows($result) > 0) {
-      // user exists
-      $userinfo = mysqli_fetch_assoc($result);
-   }
 }
-
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Welcome</title>
-</head>
-
-<body>
-   <img src="<?= $userinfo['picture'] ?>" alt="" width="90px" height="90px">
-   <ul>
-      <li>Full Name:
-         <?= $userinfo['full_name'] ?>
-      </li>
-      <li>Email Address:
-         <?= $userinfo['email'] ?>
-      </li>
-      <li><a href="logout.php">Logout</a></li>
-      <li><a href="../../Pages/Categories/Study_and_Exchange/study_and_exchange.php">Study and Exchange</a></li>
-   </ul>
-</body>
-
-</html>

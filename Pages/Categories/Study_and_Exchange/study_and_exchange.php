@@ -204,7 +204,8 @@ $countries = [
 ];
 
 if (!isset($_SESSION['user_token']) && !isset($_SESSION['id'])) {
-   header("Location: ../../../Users/User_Login_Google/index.php"); // Redirect to the login page if the user is not logged in
+
+   header("Location: ../../../Users/Standard_User/Standard_Login/user_login.php");
    die();
 }
 
@@ -304,7 +305,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    <link rel="stylesheet" href="study_and_exchange.css">
    <title>User Profile</title>
 </head>
-
 <body>
    <main>
       <div class="main_left">
@@ -405,7 +405,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                </div>
             </fieldset>
             <!-- CONTACT INFORMATION FIELDSET -->
-
+            
             <!-- FILE UPLOAD FIELDSET -->
             <fieldset class="file_upload">
                <h2>3. Required File Upload</h2>

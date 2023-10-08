@@ -1,0 +1,119 @@
+body {
+   width: 100dvw;
+   height: 100vh;
+   padding-inline: var(--mobile-padding-inline);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+main {
+   width: 100%;
+   max-width: 720px;
+   padding: 15px;
+   border-radius: 5px;
+   border: 3px solid var(--main-color-3);
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+   justify-content: center;
+   gap: var(--gap-1rem);
+}
+
+main h1 {
+   font-size: var(--main-header);
+   font-family: "Lora", serif;
+   font-weight: 700;
+}
+
+.error_display {
+   display: none;
+}
+
+form {
+   width: 100%;
+   display: flex;
+   flex-flow: column;
+   gap: var(--gap-1rem);
+}
+
+.email_field,
+.password_field {
+   display: flex;
+   flex-flow: column;
+   gap: var(--gap-point5rem);
+}
+
+.email_field label,
+.password_field label {
+   font-size: 1.125rem;
+   display: flex;
+   align-items: center;
+   gap: var(--gap-point5rem);
+}
+
+.view_toggle {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.email_field input,
+.password_field input {
+   padding: 5px;
+   font-size: 1.125rem;
+   border-radius: 5px;
+   border: 1px solid rgba(0, 77, 77, 0.3);
+}
+
+.login_option {
+   font-size: 1.125rem;
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+   justify-content: center;
+   gap: var(--gap-point5rem);
+}
+
+.login_option input,
+.login_option a {
+   width: 80%;
+   padding: 5px;
+   font-size: 1.125rem;
+   text-decoration: none;
+   cursor: pointer;
+   color: var(--black);
+   background-color: transparent;
+   border: 1px solid transparent;
+   border-radius: 5px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   transition: all 0.25s;
+}
+
+.login_option input {
+   border: 1px solid rgba(218, 165, 32, 0.3);
+}
+
+.login_option input:hover {
+   color: var(--white);
+   background-color: var(--main-color-3);
+}
+
+.login_option a:hover {
+   background-color: rgba(218, 165, 32, 0.2);
+}
+
+.login_option a img {
+   height: 70%;
+   aspect-ratio: 1/1;
+}
+
+.register_link {
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+   justify-content: center;
+}
