@@ -1,6 +1,8 @@
 <?php
 require_once '../../../Administrator/Database/database.php';
 
+$errors = []; // Initialize an array to store error messages
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $first_name = $_POST["first_name"];
    $last_name = $_POST["last_name"];
@@ -13,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $valid = true;
 
    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      echo "Invalid email address. ";
+      $errors[] = "Invalid email address.";
       $valid = false;
    }
 
@@ -26,12 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $check_stmt->close();
 
    if ($existing_count > 0) {
-      echo "This email address is already registered. Please use a different email.";
+      $errors[] = "This email address is already registered. Please use a different email.";
       $valid = false;
    }
 
    if ($password != $confirm_password) {
-      echo "Passwords do not match. ";
+      $errors[] = "Passwords do not match.";
       $valid = false;
    }
 
@@ -43,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $user_directory = $base_directory . $first_name . ', ' . $last_name;
       if (!is_dir($user_directory)) {
          if (!mkdir($user_directory, 0755, true)) {
-            echo "Failed to create user directory.";
+            $errors[] = "Failed to create user directory.";
             exit;
          }
       }
@@ -54,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
          if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_file)) {
          } else {
-            echo "Sorry, there was an error uploading your profile picture.";
+            $errors[] = "Sorry, there was an error uploading your profile picture.";
          }
       }
 
@@ -66,13 +68,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if ($stmt->execute()) {
          header("location: ../../Standard_User/Standard_Login/user_login.php");
+         exit;
       } else {
-         echo "Registration failed. Please try again later.";
+         $errors[] = "Registration failed. Please try again later.";
       }
 
       $stmt->close();
    } else {
-      echo "Registration failed. Please correct the errors.";
+      $errors[] = "Registration failed. Please correct the errors.";
    }
 }
 ?>
@@ -92,6 +95,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
    <main>
       <h1>Register</h1>
+      <p class="error_handler">
+         <?php
+         if (!empty($errors)) {
+            foreach ($errors as $error) {
+               echo $error . "<br>";
+            }
+         }
+         ?>
+      </p>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
 
          <div class="name_fields">

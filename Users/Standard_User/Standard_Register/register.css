@@ -46,6 +46,18 @@ main h1 {
    justify-content: center;
 }
 
+.error_handler {
+   width: 100%;
+   font-size: 10px;
+   font-weight: 300;
+   text-align: center;
+   color: rgb(255, 74, 74);
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
 form {
    width: 90%;
    height: 85%;
@@ -159,7 +171,7 @@ form {
 }
 
 .pfp_field.uploaded {
-   border-color: #4caf50;
+   border-color: teal;
 }
 
 .file_input_field {
@@ -190,6 +202,6 @@ input[type=submit] {
 input[type=submit]:hover {
    transition: all 0.25s;
    color: teal;
-   font-size: 14px;
+   font-size: 13px;
    border: 1px solid rgba(255, 255, 255, 0.7);
 }

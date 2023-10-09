@@ -58,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                   // Redirect to a welcome page
                   header("location: ../../../Pages/Home/home.php");
+                  exit;
                } else {
                   // Display an error message if the password is incorrect
                   $password_err = "The password you entered is incorrect.";
