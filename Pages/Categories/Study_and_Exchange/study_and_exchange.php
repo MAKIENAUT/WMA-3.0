@@ -204,38 +204,40 @@ $countries = [
 ];
 
 if (!isset($_SESSION['user_token']) && !isset($_SESSION['id'])) {
-
    header("Location: ../../../Users/Standard_User/Standard_Login/user_login.php");
    die();
 }
 
 if (isset($_SESSION['user_token'])) {
    $credentialType = 'user_token';
-   $sql = "SELECT * FROM wma_users_google WHERE token = '{$_SESSION['user_token']}'";
-
+   $sql = $conn->prepare("SELECT * FROM wma_users_google WHERE token = ?");
+   $sql->bind_param("s", $_SESSION['user_token']);
+   $sql->execute();
+   $result = $sql->get_result();
 } elseif (isset($_SESSION['id'])) {
    $credentialType = 'id';
-   $sql = "SELECT * FROM wma_users_standard WHERE id = '{$_SESSION['id']}'";
+   $sql = $conn->prepare("SELECT * FROM wma_users_standard WHERE id = ?");
+   $sql->bind_param("i", $_SESSION['id']);
+   $sql->execute();
+   $result = $sql->get_result();
 }
 
-$result = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-   $userinfo = mysqli_fetch_assoc($result);
+if ($result->num_rows > 0) {
+   $userinfo = $result->fetch_assoc();
 } else {
    $errors .= "User not found in the database. \n";
-   die(); // Exit the script if the user is not found
+   die();
 }
 
-// Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-   $first_name = $_POST['first_name'];
-   $last_name = $_POST['last_name'];
-   $full_address = $_POST['full_address'];
+   // Sanitize and validate input
+   $first_name = htmlspecialchars($_POST['first_name'], ENT_QUOTES, 'UTF-8');
+   $last_name = htmlspecialchars($_POST['last_name'], ENT_QUOTES, 'UTF-8');
+   $full_address = htmlspecialchars($_POST['full_address'], ENT_QUOTES, 'UTF-8');
    $country = $_POST['country']; // The selected country
-   $phone_number = $_POST['phone_number'];
-   $email_address = $_POST['email_address'];
-   $profession = $_POST['profession'];
+   $phone_number = htmlspecialchars($_POST['phone_number'], ENT_QUOTES, 'UTF-8');
+   $email_address = filter_var($_POST['email_address'], FILTER_SANITIZE_EMAIL);
+   $profession = htmlspecialchars($_POST['profession'], ENT_QUOTES, 'UTF-8');
 
    // Use the value of the "Other Profession" input field when "Others" is selected
    if ($profession === 'Others' && isset($_POST['profession'])) {
@@ -305,6 +307,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    <link rel="stylesheet" href="study_and_exchange.css">
    <title>User Profile</title>
 </head>
+
 <body>
    <main>
       <div class="main_left">
@@ -405,7 +408,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                </div>
             </fieldset>
             <!-- CONTACT INFORMATION FIELDSET -->
-            
+
             <!-- FILE UPLOAD FIELDSET -->
             <fieldset class="file_upload">
                <h2>3. Required File Upload</h2>
@@ -422,8 +425,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      <label for="passport">Passport (PDF only) <b>*</b></label>
                      <div class="file_container" id="passport_container">
                         <div>Drag & drop your passport here</div>
-                        <input type="file" id="passport" class="file_input_field" name="passport" accept=".pdf"
-                           required>
+                        <input type="file" id="passport" class="file_input_field" name="passport" accept=".pdf" required>
                         <div class="file_name" id="passport_name"></div>
                      </div>
                   </div>
@@ -468,10 +470,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                <h2>5. Privacy Policy</h2>
 
                <p>
-                  Read the Privacy Policy and give permission for West Migration Agency LLC to share my information and discuss my candidacy with any US Sponsors as part of the visa process.
+                  Read the Privacy Policy and give permission for West Migration Agency LLC to share my information and
+                  discuss my candidacy with any US Sponsors as part of the visa process.
                </p>
 
-               
+
                <a href="">Click & Read!</a>
 
                <label for="terms_and_condition">Terms and Conditions</label>

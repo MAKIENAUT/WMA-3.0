@@ -5,7 +5,7 @@ require_once '../../User_Login_Google/config.php';
 
 // Check if the user is already logged in
 if (isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
-   header("location: ../Standard_Welcome/welcome.php");
+   header("location: ../../../Pages/Home/home.php");
    exit;
 }
 

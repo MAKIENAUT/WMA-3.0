@@ -36,7 +36,7 @@
                </p>
                <div id="navbarCategory" class="navbar-category">
                   <a class="navbar-category-link" href="#">Family Based</a>
-                  <a class="navbar-category-link" href="#">Study and Exchange</a>
+                  <a class="navbar-category-link" href="../Categories/Study_and_Exchange/study_and_exchange.php">Study and Exchange</a>
                   <a class="navbar-category-link" href="#">Temporary Employment</a>
                </div>
             </div>

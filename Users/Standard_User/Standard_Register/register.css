@@ -37,7 +37,7 @@ main {
    display: flex;
    align-items: center;
    flex-direction: column;
-   justify-content: space-around;
+   justify-content: flex-start;
 }
 
 main h1 {
@@ -57,11 +57,11 @@ form {
    align-items: center;
    flex-direction: column;
    justify-content: start;
-   border: 1px solid white;
 }
 
 .name_fields, 
-.password_fields{
+.password_fields,
+.miscellaneous_fields{
    width: 100%;
    box-sizing: border-box;
 
@@ -83,7 +83,8 @@ form {
 }
 
 .name_inputs, 
-.password_inputs{
+.password_inputs,
+.miscellaneous_inputs{
    width: 100%;
    gap: 10px;
    display: flex;
@@ -103,9 +104,10 @@ form {
 }
 
 .name_inputs input, 
-.password_inputs input{
+.password_inputs input,
+.miscellaneous_inputs input{
    width: 50%;
-   height: 35px;
+   height: 30px;
    font-size: 12px;
    text-indent: 10px;
    border-radius: 5px;
@@ -118,11 +120,76 @@ form {
 .birthdate_field input,
 .email_field input {
    width: 100%;
-   height: 35px;
+   height: 30px;
    font-size: 12px;
    text-indent: 10px;
    border-radius: 5px;
    box-sizing: border-box;
    background-color: transparent;
    border: 1px solid rgb(220, 220, 220, 0.3);
+}
+
+.pfp_input {
+   width: 70%;
+   cursor: pointer;
+}
+
+.file_input {
+   margin-bottom: 0;
+}
+
+.file_input label {
+   font-weight: bold;
+}
+
+.pfp_field {
+   position: relative;
+   width: 100%;
+   height: 75px;
+   border: 2px dashed #ccc;
+   text-align: center;
+   padding: 10px;
+   cursor: pointer;
+   box-sizing: border-box;
+   word-wrap: break-word;
+}
+
+.subtitle {
+   font-size: 12px;
+}
+
+.pfp_field.uploaded {
+   border-color: #4caf50;
+}
+
+.file_input_field {
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   opacity: 0;
+}
+
+.file_name {
+   font-size: 12px;
+   margin-top: -10px;
+}
+
+input[type=submit] {
+   width: 40%;
+   height: 30px;
+   font-size: 12px;
+   border-radius: 5px;
+   box-sizing: border-box;
+   transition: all 0.25s;
+   background-color: transparent;
+   border: 1px solid rgb(220, 220, 220, 0.3);
+}
+
+input[type=submit]:hover {
+   transition: all 0.25s;
+   color: teal;
+   font-size: 14px;
+   border: 1px solid rgba(255, 255, 255, 0.7);
 }

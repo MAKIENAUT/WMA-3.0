@@ -35,6 +35,10 @@ main {
    border: 1px solid gold;
 }
 
+.main_left img {
+   width: 200px;
+}
+
 .main_right {
    width: 60%;
    height: 100%;

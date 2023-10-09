@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $stmt->bind_param("sssssss", $first_name, $last_name, $phone_number, $birth_date, $email, $hashed_password, $target_file);
 
       if ($stmt->execute()) {
-         echo "Registration successful!";
+         header("location: ../../Standard_User/Standard_Login/user_login.php");
       } else {
          echo "Registration failed. Please try again later.";
       }
@@ -82,8 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
    <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="register.css">
+   <link rel="icon" type="image/x-icon" href="../../../Photos/WMA.png">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
    <title>Registration Page</title>
 </head>
 
@@ -93,19 +95,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
 
          <div class="name_fields">
-            <label>Full Name <b>*</b></label>
+            <label>Personal Information <b>*</b></label>
             <div class="name_inputs">
                <input type="text" name="first_name" required placeholder="First Name">
                <input type="text" name="last_name" required placeholder="Last Name">
             </div>
          </div>
 
-         <div class="number_field">
-            <input type="tel" name="phone_number" required placeholder="Phone Number"><br>
-         </div>
-
-         <div class="birthdate_field">
-            <input type="date" name="birth_date" required placeholder="Birth Date"><br>
+         <div class="miscellaneous_fields">
+            <div class="miscellaneous_inputs">
+               <input type="tel" name="phone_number" required placeholder="Phone Number">
+               <input type="date" name="birth_date" required placeholder="Birth Date">
+            </div>
          </div>
 
          <div class="email_field">
@@ -120,11 +121,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
          </div>
 
-         <div class="pfp_field">
-            <label for="profile_picture">Profile Picture:</label>
-            <input type="file" name="profile_picture" accept="image/*"><br>
+         <div class="pfp_input">
+            <label for="profile">Passport (PDF only) <b>*</b></label>
+            <div class="pfp_field" id="pfp_field">
+               <div class="subtitle">Drag & drop your Profile Picture here</div>
+               <input type="file" id="profile_picture" class="file_input_field" name="profile_picture" accept="image/*"
+                  required><br>
+               <div class="file_name" id="pfp_name"></div>
+            </div>
          </div>
-
+         <script src="register.js"></script>
+         <div class="g-recaptcha" data-sitekey="6LfaUYkoAAAAAK9Qg6i0SqqoW7mF0ioNFkCb1EPz"></div>
          <input type="submit" value="Register">
       </form>
    </main>
