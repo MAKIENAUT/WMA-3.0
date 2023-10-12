@@ -3,7 +3,7 @@
 $servername = "localhost"; // Replace with your database server hostname or IP address
 $username = "root"; // Replace with your database username
 $password = ""; // Replace with your database password
-$database = "wma_users"; // Replace with your database name
+$database = "wma_administrator"; // Replace with your database name
 
 // Create a database connection
 $conn = new mysqli($servername, $username, $password, $database);
