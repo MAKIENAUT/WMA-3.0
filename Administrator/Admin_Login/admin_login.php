@@ -2,11 +2,6 @@
 session_start();
 require_once '../Database/database.php';
 
-if (!isset($_SESSION["id"]) && empty($_SESSION["id"])) {
-   header("Location: ../Admin_Register/admin_register.php");
-   exit();
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $email = mysqli_real_escape_string($conn, $_POST['email_or_username']);
    $password = mysqli_real_escape_string($conn, $_POST['password']);

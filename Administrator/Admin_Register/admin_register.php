@@ -58,10 +58,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($disableFields)) {
 
 <body>
    <h2>Register</h2>
+   <a href="../Admin_Logout/admin_logout.php">Logout</a>
    <p>
       <?php echo $user['access_credential']; ?>
    </p>
 
+   <a href="../Admin_Dashboard/Dash_Home/dash_home.php">hello jes</a>
    <?php if (isset($error)): ?>
       <div style="color: red;">
          <?php echo $error; ?>
