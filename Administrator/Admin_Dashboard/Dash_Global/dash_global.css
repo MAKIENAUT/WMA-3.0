@@ -6,7 +6,7 @@ body {
    width: 100%;
    padding: 15px;
    height: 100vh;
-   background-color: black;
+   background-color: rgb(15, 15, 15);
 
    gap: 10PX;
    display: flex;

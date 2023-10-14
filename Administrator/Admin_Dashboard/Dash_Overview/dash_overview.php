@@ -16,6 +16,7 @@ if (isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
 
 <head>
    <meta charset="UTF-8">
+   <script src="dash_overview.js"></script>
    <link rel="stylesheet" href="dash_overview.css">
    <link rel="stylesheet" href="../Dash_Global/dash_global.css">
    <link rel="stylesheet" href="../../../Pages/Global/global.css" />
@@ -25,7 +26,6 @@ if (isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
 
 <body>
    <nav>
-      Navigation Bar
       <div class="home_section">
          <a href="../../../Pages/Home/home.php">
             <img src="../../../Photos/wma-logo.png" alt="">
@@ -50,7 +50,12 @@ if (isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
                <h3>Applicants</h3>
                <div class="toolkit">
                   <div class="search_bar">
-                     <input name="searchbar" id="searchbar" type="text" placeholder="🔎 Search">
+                     <input 
+                        type="text" 
+                        id="searchbar" 
+                        name="searchbar" 
+                        placeholder="🔎 Search" 
+                        oninput="applicant_search()">
                   </div>
                </div>
             </div>
@@ -94,23 +99,6 @@ if (isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
                ?>
             </div>
          </div>
-
-         <script>
-            document.getElementById('searchbar').addEventListener('input', function () {
-               var searchText = this.value.toLowerCase();
-               var cards = document.querySelectorAll('.applicant_card');
-
-               cards.forEach(function (card) {
-                  var searchableText = card.getAttribute('data-search').toLowerCase();
-                  if (searchableText.includes(searchText)) {
-                     card.style.display = 'flex';
-                  } else {
-                     card.style.display = 'none';
-                  }
-               });
-            });
-         </script>
-
 
          <div class="demographic_stats">
             User Demographic Statistic
