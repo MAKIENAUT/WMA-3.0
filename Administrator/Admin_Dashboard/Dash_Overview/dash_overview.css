@@ -1,0 +1,154 @@
+main {
+   width: 80%;
+   height: 100%;
+   border-radius: 5px;
+
+   gap: 10px;
+   display: flex;
+}
+   .main_left {
+      width: 70%;
+
+      gap: 10px;
+      display: flex;
+      flex-direction: column;
+   }
+      .main_title {
+         height: 5%;
+         width: 40%;
+         padding-left: 10px;
+
+         display: flex;
+         align-items: center;
+      }
+         .main_title h1 {
+            height: 100%;
+            display: flex;
+            align-items: center;
+         }
+
+      .applicant_database {
+         width: 100%;
+         height: 55%;
+         padding: 10px;
+         border-radius: 5px;
+         border: 1px solid goldenrod;
+         
+         gap: 10px;
+         display: flex;
+         align-items: center;
+         flex-direction: column;
+         justify-content: center;
+      }
+         .applicant_navigator {
+            width: 100%;
+            height: 10%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+         }
+            .search_bar input {
+               height: 30px;
+               border-radius: 5px;
+               text-indent: 10px;
+               background-color: transparent;
+               border: 1px solid rgb(149, 149, 149, 0.8);
+            }     
+         .applicant_card_container {
+            width: 100%;
+            height: 90%;
+            flex-wrap: wrap;
+            overflow-y: scroll;
+
+            gap: 10px;
+            display: flex;
+            justify-content: flex-start;
+         }
+            .applicant_card {
+               width: 24%;
+               aspect-ratio: 3/4;
+               border-radius: 5px;
+               padding: 5px;
+               border: 1px solid rgb(72, 72, 72);
+
+               display: flex;
+               align-items: center;
+               flex-direction: column;
+               justify-content: flex-start;
+            }
+            
+               .applicant_picture {
+                  width: 100%;
+                  aspect-ratio: 1/1;
+                  border-radius: 5px;
+                  position: relative;
+
+                  background-size: cover;
+                  background-position: center;
+                  background-repeat: no-repeat;
+               }
+
+                  .applicant_nameplate {
+                     bottom: 0px;
+                     width: 100%;
+                     padding: 5px;
+                     font-size: 1rem;
+                     position: absolute;
+                     background-color: rgb(0, 0, 0, 0.5);
+                  }
+                  .other_details,
+                  .email_address {
+                     width: 100%;
+                     font-size: 0.8rem;
+                  }
+
+                  .other_details {
+                     height: 10%;
+
+                     display: flex;
+                     align-items: center;
+                     justify-content: space-between;
+                  }
+                  .email_address {
+                     height: 15%;
+                     word-wrap: break-word;
+                  }
+
+      .demographic_stats {
+         width: 100%;
+         height: 40%;
+         padding: 10px;
+         border-radius: 5px;
+         border: 1px solid teal ;
+      }
+
+   .main_right {
+      width: 30%;
+      height: 100%;
+
+      gap: 10px;
+      display: flex;
+      flex-direction: column;
+   }
+      .post_stats {
+         width: 100%;
+         height: 40%;
+         padding: 10px;
+         border-radius: 5px;
+         border: 1px solid red;
+      }
+      .admin_profile {
+         width: 100%;
+         height: 25%;
+         padding: 10px;
+         border-radius: 5px;
+         border: 1px solid lightgreen;
+      }
+      .admin_stats {
+         width: 100%;
+         height: 35%;
+         padding: 10px;
+         border-radius: 5px;
+         border: 1px solid lightblue;
+      }

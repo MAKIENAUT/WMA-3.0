@@ -1,0 +1,42 @@
+* {
+   color: white;
+}
+
+body {
+   width: 100%;
+   padding: 15px;
+   height: 100vh;
+   background-color: black;
+
+   gap: 10PX;
+   display: flex;
+}
+
+nav {
+   width: 20%;
+   height: 100%;
+   padding: 10px;
+   border-radius: 5px;
+   border: 1px solid whitesmoke;
+}
+   .home_section {
+      width: 100%;
+      height: 10%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+      .home_section a {
+         width: 100%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+         .home_section a img {
+            transition: all 0.25s;
+            width: 80%;
+         }
+         .home_section a img:hover {
+            transition: all 0.25s;
+            opacity: 0.8;
+         }

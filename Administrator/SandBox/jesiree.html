@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <link rel="stylesheet" href="jesiree.css">
+   <title>Hi, Jes :></title>
+   <style>
+      body {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         margin: 0;
+      }
+
+      .button-container {
+         text-align: center;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="message_section">
+      <h3>Wassup, Boss.</h3>
+      <h3>Krass mo ba si Makri?</h3>
+      <p>IS THAT YOUR FINAL ANSWER?</p>
+      
+   </div>
+   <div class="button-container">
+      <button id="yesButton">Yes</button>
+      <button id="noButton">No</button>
+   </div>
+
+   <script>
+      document.getElementById("noButton").addEventListener("click", function () {
+         const randomX = Math.random() * (window.innerWidth - 100);
+         const randomY = Math.random() * (window.innerHeight - 50);
+
+         this.style.position = "absolute";
+         this.style.left = randomX + "px";
+         this.style.top = randomY + "px";
+      });
+
+      document.getElementById("yesButton").addEventListener("click", function () {
+         const messageSection = document.querySelector(".message_section");
+         messageSection.innerHTML = '<h1>ror</h1><img src="dancing_cat.gif" alt="Dancing Cat">';
+      });
+   </script>
+</body>
+
+</html>
