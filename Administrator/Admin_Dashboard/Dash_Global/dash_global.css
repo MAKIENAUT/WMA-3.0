@@ -18,6 +18,11 @@ nav {
    padding: 10px;
    border-radius: 5px;
    border: 1px solid whitesmoke;
+
+   gap: 20px;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
 }
    .home_section {
       width: 100%;
@@ -25,6 +30,7 @@ nav {
       display: flex;
       align-items: center;
       justify-content: center;
+
    }
       .home_section a {
          width: 100%;
@@ -34,9 +40,51 @@ nav {
       }
          .home_section a img {
             transition: all 0.25s;
-            width: 80%;
+            width: 100%;
          }
          .home_section a img:hover {
             transition: all 0.25s;
             opacity: 0.8;
+         }
+   .admin_commands {
+      width: 100%;
+      height: 10%;
+   }
+      .admin_commands img {
+         height: 100%;
+         aspect-ratio: 1/1;
+         border-radius: 5px;
+      }
+   .dash_pages {
+      width: 100%;
+      height: 75%;
+
+      gap: 15px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: flex-start;
+   }
+      .dash_links {
+         width: 100%;
+         height: 45px;
+         padding: 5px;
+         border-radius: 5px;
+         transition: all 0.25s;
+      }
+         .dash_links:hover {
+            transition: all 0.25s;
+            background-color: rgba(255, 255, 255, 0.1);
+         }
+         .dash_links a {
+            width: 100%;
+            height: 100%;
+            text-indent: 15px;
+            font-size: 1.2rem;
+            text-decoration: none;
+
+            gap: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
          }

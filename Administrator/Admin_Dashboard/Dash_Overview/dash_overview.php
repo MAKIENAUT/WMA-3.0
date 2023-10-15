@@ -3,17 +3,24 @@
 require_once "../../Database/wma_administrator.php";
 require_once "../Dashboard_Scripts/j1_visa.php";
 
-if (isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
+if (isset($user_id) && !empty($user_id)) {
    header('Location: ../../Admin_Login/admin_login.php');
    exit(); // Make sure to exit after a header redirect
 }
+session_start();
+
+// Fetch session variables
+$user_id = $_SESSION['id'];
+$email_address = $_SESSION['email_address'];
+$username = $_SESSION['username'];
+$access_credential = $_SESSION['access_credential'];
 
 // Pagination Variables
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $cardsPerPage = 20;
 $start = ($page - 1) * $cardsPerPage;
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +32,9 @@ $start = ($page - 1) * $cardsPerPage;
    <link rel="stylesheet" href="../Dash_Global/dash_global.css">
    <link rel="stylesheet" href="../../../Pages/Global/global.css" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
    <title>Overview</title>
 </head>
 
@@ -36,16 +46,45 @@ $start = ($page - 1) * $cardsPerPage;
          </a>
       </div>
 
-      <div class="dash_pages">
-
+      <div class="admin_commands">
+         <img src="../../Admin_Profile/Profile_Picture/<?php echo $_SESSION['email_address'] . ".jpg"; ?>" alt="">
+         
       </div>
+
+      <div class="dash_pages">
+         <div class="overview_link dash_links" style="background-color: rgba(255, 255, 255, 0.1);">
+            <a href="../../Admin_Dashboard/Dash_Overview/dash_overview.php">
+               <i class="fa-regular fa-eye" style="color: goldenrod;"></i>
+               <p style="color: goldenrod;">Overview</p>
+            </a>
+         </div>
+         <div class="applicants_link dash_links">
+            <a href="../../Admin_Dashboard/Dash_Applicants/dash_applicants.php">
+               <i class="fa-solid fa-users-rectangle"></i>
+               <p>Applicants</p>
+            </a>
+         </div>
+         <div class="demographic_link dash_links">
+            <a href="../../Admin_Dashboard/Dash_Demographic/dash_demographic.php">
+               <i class="fa-solid fa-user-plus"></i>
+               <p>Demographic</p>
+            </a>
+         </div>
+         <div class="administrator_link dash_links">
+            <a href="../../Admin_Dashboard/Dash_Administrators/dash_administrators.php">
+               <i class="fa-solid fa-user-clock"></i>
+               <p>Administrators</p>
+            </a>
+         </div>
+      </div>
+      <p>Copyright 2023</p>
    </nav>
 
    <main>
       <div class="main_left">
          <div class="main_title">
             <h1>
-               Overview
+               <i class="fa-regular fa-eye"></i> &nbsp; Overview
             </h1>
          </div>
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../Database/database.php';
+require_once '../Database/wma_administrator.php';
 
 // Check if user is logged in
 if (!isset($_SESSION["id"]) && empty($_SESSION["id"])) {
@@ -21,7 +21,7 @@ if ($user['access_credential'] !== 'super_admin') {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($disableFields)) {
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
+   $email = mysqli_real_escape_string($conn, $_POST['email_address']);
    $username = mysqli_real_escape_string($conn, $_POST['username']);
    $password = mysqli_real_escape_string($conn, $_POST['password']);
    $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
@@ -34,15 +34,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($disableFields)) {
 
    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-   $query = "INSERT INTO wma_admin (email_address, username, password, access_credential) VALUES ('$email', '$username', '$hashed_password', '$access_credential')";
-   $result = mysqli_query($conn, $query);
+   // Handle profile picture upload
+   $targetDirectory = "../Admin_Profile/Profile_Picture/";
+   $targetFile = $targetDirectory . basename($_FILES["profile_picture"]["name"]);
+   $uploadOk = 1;
+   $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-   if ($result) {
-      header("Location: ../Admin_Login/admin_login.php");
+   if (isset($_POST["submit"])) {
+      $check = getimagesize($_FILES["profile_picture"]["tmp_name"]);
+      if ($check !== false) {
+         $uploadOk = 1;
+      } else {
+         $error = "File is not an image.";
+         $uploadOk = 0;
+      }
+   }
+
+   if (file_exists($targetFile)) {
+      $error = "Sorry, file already exists.";
+      $uploadOk = 0;
+   }
+
+   if ($_FILES["profile_picture"]["size"] > 500000) {
+      $error = "Sorry, your file is too large.";
+      $uploadOk = 0;
+   }
+
+   if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+      $error = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+      $uploadOk = 0;
+   }
+
+   if ($uploadOk == 0) {
+      header("Location: admin_register.php?error=3");
       exit();
    } else {
-      header("Location: admin_register.php?error=2");
-      exit();
+      if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $targetFile)) {
+         $query = "INSERT INTO wma_admin (email_address, username, password, access_credential, profile_picture) VALUES ('$email', '$username', '$hashed_password', '$access_credential', '$targetFile')";
+         $result = mysqli_query($conn, $query);
+
+         if ($result) {
+            header("Location: ../Admin_Login/admin_login.php");
+            exit();
+         } else {
+            header("Location: admin_register.php?error=2");
+            exit();
+         }
+      } else {
+         header("Location: admin_register.php?error=4");
+         exit();
+      }
    }
 }
 ?>
@@ -63,16 +104,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($disableFields)) {
       <?php echo $user['access_credential']; ?>
    </p>
 
-   <a href="../Admin_Dashboard/Dash_Home/dash_home.php">hello jes</a>
+   <a href="../Admin_Dashboard/Dash_Overview/dash_overview.php">hello jes</a>
    <?php if (isset($error)): ?>
       <div style="color: red;">
          <?php echo $error; ?>
       </div>
    <?php endif; ?>
 
-
-
-   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
       <label for="email_address">Email Address:</label>
       <input type="email" id="email_address" name="email_address" required <?php if (isset($disableFields))
          echo "disabled"; ?>><br><br>
@@ -95,6 +134,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($disableFields)) {
          <option value="super_admin">Super Admin</option>
          <option value="admin">Admin</option>
       </select><br><br>
+
+      <label for="profile_picture">Profile Picture:</label>
+      <input type="file" id="profile_picture" name="profile_picture" accept="image/*" <?php if (isset($disableFields))
+         echo "disabled"; ?>><br><br>
 
       <input type="submit" value="Register" <?php if (isset($disableFields))
          echo "disabled"; ?>>

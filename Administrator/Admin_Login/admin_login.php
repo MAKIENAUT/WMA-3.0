@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../Database/database.php';
+require_once '../Database/wma_administrator.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $email = mysqli_real_escape_string($conn, $_POST['email_or_username']);
@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $_SESSION['username'] = $user['username'];
          $_SESSION['access_credential'] = $user['access_credential'];
 
-         header("Location: ../Admin_Register/admin_register.php");
+         header("Location: ../Admin_Dashboard/Dash_Overview/dash_overview.php");
          exit();
       } else {
          header("Location: admin_login.php?error=1");
