@@ -436,9 +436,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   </div>
                </div>
             </fieldset>
-            <!-- PERSONAL INFORMATION FIELDSET -->
 
-            <!-- CONTACTvINFORMATION FIELDSET -->
+            <!-- CONTACT INFORMATION FIELDSET -->
             <fieldset class="contact_info">
                <h2>2. Contact Information</h2>
                <div class="contact_fields">
@@ -453,7 +452,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   </div>
                </div>
             </fieldset>
-            <!-- CONTACT INFORMATION FIELDSET -->
 
             <!-- FILE UPLOAD FIELDSET -->
             <fieldset class="file_upload">
@@ -481,7 +479,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </fieldset>
 
             <script src="file_upload.js"></script>
-            <!-- FILE UPLOAD FIELDSET -->
 
             <!-- ELIGIBILTY SECTION FIELDSET -->
             <fieldset class="eligibility_section">
@@ -509,7 +506,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   </div>
                </div>
             </fieldset>
-            <!-- ELIGIBILTY SECTION FIELDSET -->
 
             <!-- PRIVACY POLICY FIELDSET -->
             <fieldset class="privacy_policy">
@@ -529,7 +525,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                </div>
 
             </fieldset>
-            <!-- PRIVACY POLICY FIELDSET -->
 
             <input type="submit" value="Submit Application">
          </form>

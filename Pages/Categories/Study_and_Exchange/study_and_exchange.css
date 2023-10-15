@@ -4,34 +4,48 @@ b {
 
 main {
    width: 100dvw;
-   margin-top: 85px;
-   padding-inline: var(--mobile-padding-inline);
    display: flex;
    flex-flow: column;
    gap: var(--gap-2rem);
 }
 
-.main_left {}
+.main_left {
+   padding-top: 100px;
+   padding-bottom: 25px;
+   padding-inline: var(--mobile-padding-inline);
+   background-color: var(--alt-color-2);
+   color: var(--white);
+}
 
-.main_left img {}
-
-.main_right {}
+.main_right {
+   padding-inline: var(--mobile-padding-inline);
+}
 
 form {
    display: flex;
    flex-flow: column;
-   gap: var(--gap-1rem);
+   gap: var(--gap-2rem);
 }
 
 .personal_info,
 .contact_info,
 .file_upload,
-.eligibility_section {
-   padding: 15px;
+.eligibility_section,
+.privacy_policy {
+   padding: 25px 15px;
    border-radius: 5px;
-   border: 1px solid goldenrod;
+   border: 2px solid var(--main-color-3);
    display: flex;
    flex-flow: column;
+   gap: var(--gap-1rem);
+}
+
+.personal_info label,
+.contact_info label,
+.file_upload label,
+.eligibility_section label,
+.privacy_policy label {
+   font-weight: 600;
 }
 
 .name_fields,
@@ -44,17 +58,24 @@ form {
    flex-flow: column;
 }
 
-.name_fields label,
-.address_fields label,
-.profession_fields label,
-.phone_input label,
-.email_input label {}
+.contact_fields,
+.file_fields,
+.eligibility_confirmation {
+   gap: var(--gap-1rem);
+}
 
 .name_inputs,
 .address_inputs,
 .profession_inputs {
+   width: 100%;
+   display: flex;
+   flex-flow: column;
+   gap: var(--gap-1rem);
+}
+
+.name_inputs {
    display: grid;
-   gap: 10px;
+   grid-template-columns: repeat(2, 1fr);
 }
 
 .name_fields input,
@@ -85,6 +106,7 @@ form {
 
 .address_fields select,
 .profession_fields select {
+   width: 100%;
    padding: 5px;
    font-size: 15px;
    border-radius: 5px;
@@ -96,14 +118,6 @@ form {
 .profession_fields select option {
    background-color: transparent;
 }
-
-.phone_input,
-.email_input {}
-
-.resume_input,
-.passport_input {}
-
-.file_input {}
 
 .file_container {
    position: relative;
@@ -139,91 +153,61 @@ form {
 }
 
 .category_images {
-   width: 100%;
    height: 562px;
    position: relative;
    overflow: scroll;
 }
 
 .eligibility_section img {
-   max-width: 737px;
    height: 562px;
    position: absolute;
    top: 0;
    left: 0;
 }
 
-.confirm_eligibility {}
-
 .eligibility_fields {
    display: flex;
-   align-items: center;
    gap: 20px;
 }
 
 .yes_button input[type="radio"],
 .no_button input[type="radio"] {
    display: none;
-   /* Hide the actual radio input */
 }
 
 .yes_button label,
 .no_button label {
    cursor: pointer;
    font-size: 16px;
-   user-select: none;
    position: relative;
    padding-left: 30px;
-   /* Add some space for a custom radio button */
 }
 
 .yes_button label::before,
 .no_button label::before {
    content: "";
-   display: inline-block;
    width: 20px;
-   /* Size of the custom radio button */
    height: 20px;
    border-radius: 50%;
    border: 1px solid #000;
-   /* Customize the border color */
    background-color: #fff;
-   /* Background color of the custom radio button */
    position: absolute;
    left: 0;
-   top: 50%;
-   transform: translateY(-50%);
 }
 
 .yes_button input[type="radio"]:checked+label::before,
 .no_button input[type="radio"]:checked+label::before {
    background-color: gold;
-   /* Change background color when checked */
 }
 
-/* Optional styles for when the label is clicked */
 .yes_button label:hover::before,
 .no_button label:hover::before {
    border-color: #555;
-   /* Change border color on hover */
 }
 
-.yes_button label:hover {
-   color: #555;
-   /* Change text color on hover */
-}
-
+.yes_button label:hover,
 .no_button label:hover {
    color: #555;
-   /* Change text color on hover */
-}
-
-.privacy_policy {
-   padding: 15px;
-   border-radius: 5px;
-   border: 1px solid goldenrod;
-   display: flex;
-   flex-flow: column;
 }
 
 .terms_and_conditions {
@@ -235,11 +219,72 @@ input[type=submit] {
    padding: 15px;
    border-radius: 5px;
    background-color: transparent;
-   border: 1px solid transparent;
+   border: 1px solid var(--alt-background-color-2);
    cursor: pointer;
+   font-weight: 600;
 }
 
 input[type=submit]:hover,
 input[type=submit]:active {
    background-color: rgb(210, 210, 210);
+}
+
+@media screen and (min-width: 720px) {
+   .main_left {
+      padding-inline: var(--tablet-padding-inline);
+   }
+
+   .main_right {
+      padding-inline: var(--tablet-padding-inline);
+   }
+
+   .contact_fields,
+   .file_fields {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--gap-2rem);
+   }
+
+   .name_inputs {
+      gap: var(--gap-2rem);
+   }
+
+   .category_images {
+      height: 720px;
+   }
+
+   .eligibility_section img {
+      height: 720px;
+   }
+}
+
+@media screen and (min-width: 980px) {
+   main {
+      margin-top: 60px;
+      flex-flow: row;
+      gap: 0;
+   }
+
+   .main_left {
+      padding-top: 25px;
+      padding-bottom: 0;
+      padding-inline: var(--laptop-padding-inline) 37.5px;
+   }
+
+   .main_right {
+      padding: 25px;
+      padding-inline: var(--laptop-padding-inline);
+   }
+
+   .category_images {
+      height: 980px;
+   }
+
+   .eligibility_section img {
+      height: 980px;
+   }
+
+   footer {
+      margin-top: 0 !important;
+   }
 }
