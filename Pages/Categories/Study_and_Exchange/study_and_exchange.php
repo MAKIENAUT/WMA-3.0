@@ -209,13 +209,13 @@ if (!isset($_SESSION['user_token']) && !isset($_SESSION['id'])) {
 }
 
 if (isset($_SESSION['user_token'])) {
-   $credentialType = 'user_token';
+   $credentialType = 'google_login';
    $sql = $conn->prepare("SELECT * FROM wma_users_google WHERE token = ?");
    $sql->bind_param("s", $_SESSION['user_token']);
    $sql->execute();
    $result = $sql->get_result();
 } elseif (isset($_SESSION['id'])) {
-   $credentialType = 'id';
+   $credentialType = 'standard_login';
    $sql = $conn->prepare("SELECT * FROM wma_users_standard WHERE id = ?");
    $sql->bind_param("i", $_SESSION['id']);
    $sql->execute();
@@ -238,6 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    $phone_number = htmlspecialchars($_POST['phone_number'], ENT_QUOTES, 'UTF-8');
    $email_address = filter_var($_POST['email_address'], FILTER_SANITIZE_EMAIL);
    $profession = htmlspecialchars($_POST['profession'], ENT_QUOTES, 'UTF-8');
+   $login_method = $credentialType;
 
    // Use the value of the "Other Profession" input field when "Others" is selected
    if ($profession === 'Others' && isset($_POST['profession'])) {
@@ -260,8 +261,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $file_input_value = $email_address;
 
       // Insert data into the j1_visa table in the wma_forms database
-      $insert_sql = "INSERT INTO wma_forms.j1_visa (first_name, last_name, full_address, country, phone_number, email_address, profession, file)
-                    VALUES ('$first_name', '$last_name', '$full_address', '$country', '$phone_number', '$email_address', '$profession', '$file_input_value')";
+      $insert_sql = "INSERT INTO wma_forms.j1_visa (first_name, last_name, full_address, country, phone_number, email_address, profession, file, login_method)
+                    VALUES ('$first_name', '$last_name', '$full_address', '$country', '$phone_number', '$email_address', '$profession', '$file_input_value', '$login_method')";
 
       if (mysqli_query($conn, $insert_sql)) {
          $errors .= "Data inserted successfully. \n";
@@ -319,10 +320,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          <h1>Welcome,
             <?php echo $userinfo['first_name']; ?>
          </h1>
+         <a href="../../../Users/User_Login_Google/logout.php">Logout</a>
 
-         <?php if ($credentialType === 'user_token'): ?>
+         <?php if ($credentialType === 'google_login'): ?>
             <img src="<?php echo $userinfo['picture']; ?>" alt="Profile Picture">
-         <?php elseif ($credentialType === 'id'): ?>
+         <?php elseif ($credentialType === 'standard_login'): ?>
             <?php if (!empty($_SESSION["profile_picture"])): ?>
                <?php $profile_pic = str_replace('../', '', $_SESSION["profile_picture"]); ?>
                <img src="../../../Users/Standard_User/<?php echo $profile_pic; ?>"

@@ -1,5 +1,5 @@
 <?php
-require_once '../../../Administrator/Database/database.php';
+require_once '../../../Administrator/Database/wma_users.php';
 
 $errors = []; // Initialize an array to store error messages
 
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $errors[] = "Invalid email address.";
       $valid = false;
-   }
+   } 
 
    $check_sql = "SELECT COUNT(*) FROM wma_users_standard WHERE email = ?";
    $check_stmt = $conn->prepare($check_sql);
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       $base_directory = '../Standard_Profile/Profile_Pictures/';
 
-      $user_directory = $base_directory . $first_name . ', ' . $last_name;
+      $user_directory = $base_directory . $email; // Use email as directory name
       if (!is_dir($user_directory)) {
          if (!mkdir($user_directory, 0755, true)) {
             $errors[] = "Failed to create user directory.";
@@ -52,9 +52,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if ($_FILES["profile_picture"]["error"] == 0) {
          $target_dir = $user_directory . "/";
-         $target_file = $target_dir . basename($_FILES["profile_picture"]["name"]);
+         $target_file = $target_dir . 'profile_picture.jpg'; // Rename the file
 
          if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_file)) {
+            // File uploaded successfully
          } else {
             $errors[] = "Sorry, there was an error uploading your profile picture.";
          }
@@ -134,10 +135,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          </div>
 
          <div class="pfp_input">
-            <label for="profile">Passport (PDF only) <b>*</b></label>
+            <label for="profile">Profile Picture (.jpg only) <b>*</b></label>
             <div class="pfp_field" id="pfp_field">
                <div class="subtitle">Drag & drop your Profile Picture here</div>
-               <input type="file" id="profile_picture" class="file_input_field" name="profile_picture" accept="image/*"
+               <input type="file" id="profile_picture" class="file_input_field" name="profile_picture" accept=".jpg"
                   required><br>
                <div class="file_name" id="pfp_name"></div>
             </div>
