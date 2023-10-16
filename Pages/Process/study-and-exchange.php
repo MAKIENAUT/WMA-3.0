@@ -23,7 +23,7 @@
    <nav class="navbar-parent">
       <div class="navbar-container">
          <div class="navbar-main-container">
-            <a class="navbar-logo" href="#">
+            <a class="navbar-logo" href="/Pages/Home/home.php">
                <img src="/Photos/wma-logo.png" alt="WMA Logo" />
             </a>
             <button id="navbarMobileIcon" class="navbar-mobile-icon fa fa-bars burger-icon" onclick="toggleNavbar()">
@@ -35,9 +35,10 @@
                <p id="navbarCategoryContainer" onclick="toggleCategory()">Process<i class="fa-solid fa-caret-down"></i>
                </p>
                <div id="navbarCategory" class="navbar-category">
-                  <a class="navbar-category-link" href="#">Family Based</a>
-                  <a class="navbar-category-link" href="#">Study and Exchange</a>
-                  <a class="navbar-category-link" href="#">Temporary Employment</a>
+                  <a class="navbar-category-link" href="/Pages/Process/family-based.php">Family Based</a>
+                  <a class="navbar-category-link" href="/Pages/Process/study-and-exchange.php">Study and Exchange</a>
+                  <a class="navbar-category-link" href="/Pages/Process/temporary-employment.php">Temporary
+                     Employment</a>
                </div>
             </div>
             <div class="navbar-category-container" href="javascript:void(0)">
@@ -47,10 +48,9 @@
                   <a class="navbar-category-link" href="#">Family Based</a>
                   <a class="navbar-category-link" href="#">Study and Exchange (J-1)</a>
                   <a class="navbar-category-link" href="#">Temporary Employment (EB-3/H2A)</a>
-                  <a class="navbar-category-link" href="#">Other Uploads</a>
                </div>
             </div>
-            <a class="navbar-link" href="#">About Us</a>
+            <a class="navbar-link" href="/Pages/About-us/about.php">About Us</a>
             <a class="navbar-link" href="#">Login/Sign up</a>
          </div>
       </div>
@@ -74,7 +74,7 @@
                <div class="steps-header">
                   <p>How to Apply?</p>
                   <h1>FOLLOW THESE STEPS!</h1>
-                
+
                </div>
                <div class="steps-description">
                   <div class="steps-card">
@@ -82,42 +82,54 @@
                         <h1>01</h1>
                         <h1>FIND A <br>J1 PROGRAM SPONSOR</h1>
                      </div>
-                     <p>The first step in obtaining a J1 visa is to identify a J1 program sponsor. The program sponsor is responsible for issuing the DS-2019 form, which is required to apply for the J1 visa.</p>
+                     <p>The first step in obtaining a J1 visa is to identify a J1 program sponsor. The program sponsor
+                        is responsible for issuing the DS-2019 form, which is required to apply for the J1 visa.</p>
                   </div>
                   <div class="steps-card">
                      <div class="steps-card-header">
                         <h1>02</h1>
                         <h1>SUBMIT AN APPLICATION</h1>
                      </div>
-                     <p>Once you have identified a J1 program sponsor, you will need to submit an application to participate in the program. The application process will vary depending on the specific program, but typically involves submitting personal information, academic transcripts, and a statement of purpose.</p>
+                     <p>Once you have identified a J1 program sponsor, you will need to submit an application to
+                        participate in the program. The application process will vary depending on the specific program,
+                        but typically involves submitting personal information, academic transcripts, and a statement of
+                        purpose.</p>
                   </div>
                   <div class="steps-card">
                      <div class="steps-card-header">
                         <h1>03</h1>
                         <h1>RECEIVE THE <br>DS-2019 FORM</h1>
                      </div>
-                     <p>After your application has been approved, the program sponsor will issue the DS-2019 form. This form is required to apply for the J1 visa.</p>
+                     <p>After your application has been approved, the program sponsor will issue the DS-2019 form. This
+                        form is required to apply for the J1 visa.</p>
                   </div>
                   <div class="steps-card">
                      <div class="steps-card-header">
                         <h1>04</h1>
                         <h1>PAY THE SEVIS FEE</h1>
                      </div>
-                     <p>Before you can apply for the J1 visa, you must pay the SEVIS fee. This fee supports the Student and Exchange Visitor Program, which manages student and exchange visitor information in the United States.</p>
+                     <p>Before you can apply for the J1 visa, you must pay the SEVIS fee. This fee supports the Student
+                        and Exchange Visitor Program, which manages student and exchange visitor information in the
+                        United States.</p>
                   </div>
                   <div class="steps-card">
                      <div class="steps-card-header">
                         <h1>05</h1>
                         <h1>APPLY FOR THE <br>J1 VISA</h1>
                      </div>
-                     <p>Once you have received the DS-2019 form and paid the SEVIS fee, you can apply for the J1 visa at a U.S. embassy or consulate in your home country. The application process typically involves submitting the DS-2019 form, a completed visa application form, and any other required documents.</p>
+                     <p>Once you have received the DS-2019 form and paid the SEVIS fee, you can apply for the J1 visa at
+                        a U.S. embassy or consulate in your home country. The application process typically involves
+                        submitting the DS-2019 form, a completed visa application form, and any other required
+                        documents.</p>
                   </div>
                   <div class="steps-card">
                      <div class="steps-card-header">
                         <h1>06</h1>
                         <h1>ATTEND A VISA INTERVIEW</h1>
                      </div>
-                     <p>After submitting your application, you will be required to attend a visa interview at the U.S. embassy or consulate. During the interview, a consular officer will ask you questions about your program, your background, and your intentions for visiting the United States.
+                     <p>After submitting your application, you will be required to attend a visa interview at the U.S.
+                        embassy or consulate. During the interview, a consular officer will ask you questions about your
+                        program, your background, and your intentions for visiting the United States.
                      </p>
                   </div>
                   <div class="steps-card">
@@ -125,13 +137,18 @@
                         <h1>07</h1>
                         <h1>RECEIVE THE <br>J1 VISA</h1>
                      </div>
-                     <p>If your visa application is approved, you will receive the J1 visa in your passport. The visa will specify the duration of your stay in the United States, which will be determined by the length of your J1 program.
+                     <p>If your visa application is approved, you will receive the J1 visa in your passport. The visa
+                        will specify the duration of your stay in the United States, which will be determined by the
+                        length of your J1 program.
                      </p>
                   </div>
                </div>
                <div class="steps-conclusion">
-                     <p>Overall, the process of obtaining a J1 visa can take several weeks or months, so it is important to plan ahead and start the application process early. Working with an experienced J1 program sponsor and preparing thoroughly for the visa interview can help ensure a smooth and successful application process.</p>
-                     
+                  <p>Overall, the process of obtaining a J1 visa can take several weeks or months, so it is important to
+                     plan ahead and start the application process early. Working with an experienced J1 program sponsor
+                     and preparing thoroughly for the visa interview can help ensure a smooth and successful application
+                     process.</p>
+
                </div>
                <div class="link">
                   <a href="#">Learn More</a>
@@ -202,16 +219,16 @@
             <section class="about-us">
                <h1>About Us</h1>
                <div class="footer-more-info-content">
-                  <a href="#">About us</a>
+                  <a href="/Pages/About-us/about.php">About us</a>
                   <a href="#">Specialization</a>
                </div>
             </section>
             <section class="footer-process">
                <h1>Process</h1>
                <div class="footer-more-info-content">
-                  <a href="#">Family Based</a>
-                  <a href="#">Study and Exchange</a>
-                  <a href="#">Temporary Employment</a>
+                  <a href="/Pages/Process/family-based.php">Family Based</a>
+                  <a href="/Pages/Process/study-and-exchange.php">Study and Exchange</a>
+                  <a href="/Pages/Process/temporary-employment.php">Temporary Employment</a>
                </div>
             </section>
             <section class="footer-links">
@@ -225,7 +242,7 @@
             <section class="footer-socials">
                <h1>Our Social Links</h1>
                <div class="social-content">
-                  <a href="#" class="fa-brands fa-facebook"></a>
+                  <a href="https://www.facebook.com/WestMigration" class="fa-brands fa-facebook"></a>
                   <a href="#" class="fa-brands fa-instagram"></a>
                </div>
             </section>

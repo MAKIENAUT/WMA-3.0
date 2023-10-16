@@ -363,9 +363,12 @@ p.active i {
 
 .about-us a:hover,
 .footer-process a:hover,
-.footer-links a:hover,
-.footer-socials a:hover {
+.footer-links a:hover {
    text-decoration: underline;
+   color: var(--main-color);
+}
+
+.footer-socials a:hover {
    color: var(--main-color);
 }
 

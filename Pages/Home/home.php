@@ -23,7 +23,7 @@
    <nav class="navbar-parent">
       <div class="navbar-container">
          <div class="navbar-main-container">
-            <a class="navbar-logo" href="#">
+            <a class="navbar-logo" href="/Pages/Home/home.php">
                <img src="/Photos/wma-logo.png" alt="WMA Logo" />
             </a>
             <button id="navbarMobileIcon" class="navbar-mobile-icon fa fa-bars burger-icon" onclick="toggleNavbar()">
@@ -35,9 +35,10 @@
                <p id="navbarCategoryContainer" onclick="toggleCategory()">Process<i class="fa-solid fa-caret-down"></i>
                </p>
                <div id="navbarCategory" class="navbar-category">
-                  <a class="navbar-category-link" href="#">Family Based</a>
-                  <a class="navbar-category-link" href="../Categories/Study_and_Exchange/study_and_exchange.php">Study and Exchange</a>
-                  <a class="navbar-category-link" href="#">Temporary Employment</a>
+                  <a class="navbar-category-link" href="/Pages/Process/family-based.php">Family Based</a>
+                  <a class="navbar-category-link" href="/Pages/Process/study-and-exchange.php">Study and Exchange</a>
+                  <a class="navbar-category-link" href="/Pages/Process/temporary-employment.php">Temporary
+                     Employment</a>
                </div>
             </div>
             <div class="navbar-category-container" href="javascript:void(0)">
@@ -49,7 +50,7 @@
                   <a class="navbar-category-link" href="#">Temporary Employment (EB-3/H2A)</a>
                </div>
             </div>
-            <a class="navbar-link" href="#">About Us</a>
+            <a class="navbar-link" href="/Pages/About-us/about.php">About Us</a>
             <a class="navbar-link" href="#">Login/Sign up</a>
          </div>
       </div>
@@ -208,16 +209,16 @@
             <section class="about-us">
                <h1>About Us</h1>
                <div class="footer-more-info-content">
-                  <a href="#">About us</a>
+                  <a href="/Pages/About-us/about.php">About us</a>
                   <a href="#">Specialization</a>
                </div>
             </section>
             <section class="footer-process">
                <h1>Process</h1>
                <div class="footer-more-info-content">
-                  <a href="#">Family Based</a>
-                  <a href="#">Study and Exchange</a>
-                  <a href="#">Temporary Employment</a>
+                  <a href="/Pages/Process/family-based.php">Family Based</a>
+                  <a href="/Pages/Process/study-and-exchange.php">Study and Exchange</a>
+                  <a href="/Pages/Process/temporary-employment.php">Temporary Employment</a>
                </div>
             </section>
             <section class="footer-links">
@@ -231,7 +232,7 @@
             <section class="footer-socials">
                <h1>Our Social Links</h1>
                <div class="social-content">
-                  <a href="#" class="fa-brands fa-facebook"></a>
+                  <a href="https://www.facebook.com/WestMigration" class="fa-brands fa-facebook"></a>
                   <a href="#" class="fa-brands fa-instagram"></a>
                </div>
             </section>
