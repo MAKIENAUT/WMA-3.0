@@ -1,2 +1,7 @@
-/vendor/
-/node_modules/
+/Users/User_Login_Google/node_modules
+/Users/User_Login_Google/vendor
+/Users/User_Login_Google/composer.json
+/Users/User_Login_Google/composer.lock
+/Users/User_Login_Google/package-lock.json
+/Users/User_Login_Google/package.json
+/Administrator/Database/

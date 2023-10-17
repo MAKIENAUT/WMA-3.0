@@ -10,7 +10,7 @@ $clientSecret = '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';
 $redirectUri = 'http://localhost:3000/Users/User_Login_Google/welcome.php';
 
 // create Client Request to access Google API
-$client = new Google_Client();
+$client = new Google\Client();
 $client->setClientId($clientID);
 $client->setClientSecret($clientSecret);
 $client->setRedirectUri($redirectUri);
