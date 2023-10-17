@@ -48,7 +48,28 @@ $start = ($page - 1) * $cardsPerPage;
 
       <div class="admin_commands">
          <img src="../../Admin_Profile/Profile_Picture/<?php echo $_SESSION['email_address'] . ".jpg"; ?>" alt="">
-         
+         <div class="admin_data">
+            <h3>
+               <?php echo $username ?>
+            </h3>
+            <p>
+               <?php
+               $credential = ucwords(str_replace('_', ' ', $access_credential));
+               echo $credential;
+               ?>
+            </p>
+         </div>
+         <div class="admin_buttons">
+            <a href="../../Admin_Logout/admin_logout.php">
+               <i class="fa-solid fa-power-off"></i>
+            </a>
+            <a href="../../Admin_Register/admin_register.php">
+               <i class="fa-solid fa-user-plus"></i>
+            </a>
+            <a href="../../Admin_Profile/profile_settings.php">
+               <i class="fa-solid fa-gear"></i>
+            </a>
+         </div>
       </div>
 
       <div class="dash_pages">
@@ -72,7 +93,7 @@ $start = ($page - 1) * $cardsPerPage;
          </div>
          <div class="administrator_link dash_links">
             <a href="../../Admin_Dashboard/Dash_Administrators/dash_administrators.php">
-               <i class="fa-solid fa-user-clock"></i>
+               <i class="fa-solid fa-user-lock"></i>
                <p>Administrators</p>
             </a>
          </div>
@@ -141,7 +162,7 @@ $start = ($page - 1) * $cardsPerPage;
                      data-search="<?php echo strtolower($first_name . ' ' . $last_name . ' ' . $email_address . ' ' . $profession); ?>">
                      <?php
                      if ($login_method === "google_login") {
-                        require_once "../Dashboard_Scripts/wma_users_google.php";
+                        require_once "../Dashboard_Scripts/wma_users_tables.php";
 
                         foreach ($google_users as $google_user) {
                            $profile_picture = $google_user['picture'];
@@ -152,6 +173,7 @@ $start = ($page - 1) * $cardsPerPage;
                            <?php
 
                      } elseif ($login_method === "standard_login") {
+
                         ?>
                            <div class="applicant_picture"
                               style="background-image: url(../../../Users/Standard_User/Standard_Profile/Profile_Pictures/<?php echo $email_address ?>/profile_picture.jpg);">
@@ -188,21 +210,40 @@ $start = ($page - 1) * $cardsPerPage;
             </div>
 
             <div class="demographic_stats">
-               User Demographic Statistic
-            </div>
-         </div>
+               <h3>User Demographic</h3>
+               <div class="user_card_container">
+                  <?php
+                  require_once "../Dashboard_Scripts/wma_users_tables.php";
+                  foreach ($google_users as $user): ?>
+                     <div class="user_cards">
+                        <?php echo $user['email']; ?> -
+                        <?php echo $user['first_name']; ?>
+                     </div>
+                  <?php endforeach; ?>
 
-         <div class="main_right">
-            <div class="post_stats">
-               News/Post Statistic
+                  <?php foreach ($standard_users as $user): ?>
+                     <div class="user_cards">
+                        <?php echo $user['email']; ?> -
+                        <?php echo $user['first_name']; ?>
+                     </div>
+                  <?php endforeach; ?>
+               </div>
             </div>
-            <div class="admin_profile">
-               Administrator Profile
-            </div>
-            <div class="admin_stats">
-               Admin Account Status
-            </div>
+
          </div>
+      </div>
+
+      <div class="main_right">
+         <div class="post_stats">
+            News/Post Statistic
+         </div>
+         <div class="admin_profile">
+            Administrator Profile
+         </div>
+         <div class="admin_stats">
+            Admin Account Status
+         </div>
+      </div>
    </main>
 </body>
 

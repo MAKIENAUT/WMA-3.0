@@ -48,13 +48,48 @@ nav {
          }
    .admin_commands {
       width: 100%;
-      height: 10%;
+      height: 12%;
+      padding: 5px;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
    }
       .admin_commands img {
-         height: 100%;
+         width: 25%;
          aspect-ratio: 1/1;
          border-radius: 5px;
       }
+      .admin_data {
+         width: 60%;
+         padding: 5px;
+      }
+         .admin_data p {
+            width: 100%;
+         }
+      .admin_buttons {
+         width: 10%;
+         height: 100%;
+         display: flex;
+         align-items: center;
+         flex-direction: column;
+         justify-content: space-between;
+      }
+         .admin_buttons a {
+            width: 100%;
+            aspect-ratio: 1/1;
+            font-size: 0.9rem;
+            transition: all 0.25s;
+         }
+         .admin_buttons a i {
+            width: 100%;
+         }
+         .admin_buttons a i:hover {
+            transition: all 0.25s;
+            color: goldenrod;
+         }
    .dash_pages {
       width: 100%;
       height: 75%;

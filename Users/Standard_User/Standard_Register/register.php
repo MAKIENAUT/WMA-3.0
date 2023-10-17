@@ -147,6 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          <div class="g-recaptcha" data-sitekey="6LfaUYkoAAAAAK9Qg6i0SqqoW7mF0ioNFkCb1EPz"></div>
          <input type="submit" value="Register">
       </form>
+      <p>Already have an account? <a href="../Standard_Login/user_login.php">Login</a></p>
    </main>
 </body>
 

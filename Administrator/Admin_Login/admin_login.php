@@ -2,6 +2,11 @@
 session_start();
 require_once '../Database/wma_administrator.php';
 
+if (isset($user_id) && !empty($user_id)) {
+   header('Location: ../Admin_Dashboard/Dash_Overview/dash_overview.php');
+   exit(); // Make sure to exit after a header redirect
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $email = mysqli_real_escape_string($conn, $_POST['email_or_username']);
    $password = mysqli_real_escape_string($conn, $_POST['password']);
