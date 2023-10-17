@@ -36,6 +36,8 @@ $start = ($page - 1) * $cardsPerPage;
       integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
    <title>Overview</title>
+
+
 </head>
 
 <body>
@@ -210,26 +212,80 @@ $start = ($page - 1) * $cardsPerPage;
             </div>
 
             <div class="demographic_stats">
-               <h3>User Demographic</h3>
+               <div class="demographic_navigator">
+                  <h3>User Demographic</h3>
+                  <div class="demographic_toolkit">
+                     <button onclick="showGraph()">Toggle View</button>
+                     <div class="search_bar">
+                     <input type="text" id="userSearch" name="searchbar" placeholder="🔎 Search"
+                        onkeyup="searchUsers()">
+                  </div>
+                  </div>
+               </div>
                <div class="user_card_container">
                   <?php
                   require_once "../Dashboard_Scripts/wma_users_tables.php";
                   foreach ($google_users as $user): ?>
                      <div class="user_cards">
-                        <?php echo $user['email']; ?> -
-                        <?php echo $user['first_name']; ?>
+
+                        <img src="<?php echo $user['picture'] ?>" alt="">
+                        <p>
+                           <?php echo $user['email']; ?>
+                        </p>
+                        <p>
+                           <?php echo $user['full_name']; ?>
+                        </p>
+                        <p>Google Login</p>
                      </div>
                   <?php endforeach; ?>
 
                   <?php foreach ($standard_users as $user): ?>
                      <div class="user_cards">
-                        <?php echo $user['email']; ?> -
-                        <?php echo $user['first_name']; ?>
+                        <div class="demographic_picture"
+                           style="background-image: url(../../../Users/Standard_User/Standard_Profile/Profile_Pictures/<?php echo $user['email'] ?>/profile_picture.jpg);">
+                        </div>
+                        <p>
+                           <?php echo $user['email']; ?>
+                        </p>
+                        <p>
+                           <?php echo $user['first_name'] . " " . $user["last_name"]; ?>
+                        </p>
+                        <p>Standard User</p>
                      </div>
                   <?php endforeach; ?>
                </div>
-            </div>
+               <div id="chart_div" style="display: none;"></div>
+               <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+               <script type="text/javascript">
+                  google.charts.load('current', { 'packages': ['corechart'] });
+                  google.charts.setOnLoadCallback(drawChart);
 
+                  function drawChart() {
+                     // Assuming you have an array called userStats with the required data
+                     var data = google.visualization.arrayToDataTable([
+                        ['User Type', 'Count'],
+                        ['Google Login', <?php echo count($google_users); ?>],
+                        ['Standard User', <?php echo count($standard_users); ?>]
+                     ]);
+
+                     var options = {
+                        title: 'User Demographic Stats',
+                        pieHole: 0.4, // Makes it a donut chart
+                        backgroundColor: 'transparent', // Set background color to transparent
+                        legend: { textStyle: { color: 'white' } }, // Set legend text color to white
+                        titleTextStyle: { color: 'white' }, // Set title text color to white
+                        slices: {
+                           0: { color: 'teal' }, // Google Login
+                           1: { color: 'gold' }  // Standard User
+                        }
+                        
+                     };
+
+                     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                     chart.draw(data, options);
+                  }
+               </script>
+            </div>
          </div>
       </div>
 

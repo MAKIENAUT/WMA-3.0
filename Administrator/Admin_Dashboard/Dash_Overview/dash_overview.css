@@ -151,6 +151,35 @@ main {
          border-radius: 5px;
          border: 1px solid teal ;
       }
+         .demographic_navigator {
+            width: 100%;
+            height: 15%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+         }
+            .demographic_toolkit {
+               width: 60%;
+               gap: 10px;
+               display: flex;
+               align-items: center;
+               justify-content: space-between;
+            }
+            .demographic_toolkit button {
+               width: 150px;
+               height: 30px;
+               border-radius: 5px;
+               background-color: transparent;
+               border: 1px solid rgb(149, 149, 149, 0.8);
+            }
+            #chart_div {
+               width: 100%;
+               height: 250px;
+               
+               align-items: center;
+               justify-content: center;
+            }
          .user_card_container {
             width: 100%;
             height: 90%;
@@ -162,8 +191,8 @@ main {
             justify-content: flex-start;
          }
             .user_cards {
-               width: 20%;
-               height: 80%;
+               width: 18%;
+               height: 85%;
                border-radius: 5px;
                padding: 5px;
                border: 1px solid rgb(72, 72, 72);
@@ -173,6 +202,19 @@ main {
                flex-direction: column;
                justify-content: flex-start;
             }
+               .demographic_picture {
+                  width: 65%;
+                  border-radius: 5px;
+                  aspect-ratio: 1/1;
+                  background-size: cover;
+                  background-position: center;
+                  background-repeat: no-repeat;
+               }
+               .user_cards p {
+                  width: 100%;
+                  font-size: 0.8rem;
+                  word-wrap: break-word;
+               }
 
    .main_right {
       width: 30%;
