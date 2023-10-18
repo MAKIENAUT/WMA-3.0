@@ -62,7 +62,7 @@
       <header class="header-parent">
          <div class="header-container">
             <div class="header-content">
-               <h1>Process of H2A</h1>
+               <h1>Process of <span>H2A</span></h1>
             </div>
          </div>
       </header>

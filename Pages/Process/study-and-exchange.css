@@ -8,7 +8,7 @@ main {
   .header-parent {
      width: 100dvw;
      height: 40dvh;
-     height: 100%;
+ 
      background-image: url(/Photos/student_exchange.jpg);
      background-size: cover;
      background-repeat: no-repeat;
@@ -21,7 +21,7 @@ main {
   .header-container {
      width: 100%;
      height: 100%;
-     background-color: rgba(218, 165, 32, 0.75);
+     background-color: rgba(0, 70, 70, 0.75);
      display: flex;
      align-items: center;
      justify-content: center;
@@ -33,9 +33,13 @@ main {
   }
   
   .header-content h1 {
-     font-size: var(--hero-header);
+     font-size: 4rem;
      font-family: "Lora", serif;
      color: var(--white);
+  }
+
+  .header-content h1 span {
+      color: var(--main-color);
   }
   
   
@@ -46,7 +50,7 @@ main {
   
   .steps-container {
      width: 100%;
-     background-color: antiquewhite;
+     background-color: var(--white);
      display: flex;
      align-items: center;
      justify-content: center;
@@ -64,7 +68,7 @@ main {
   
   .steps-header h1 {
      font-size: var(--main-header);
-     color: var(--main-color-3);
+     color: var(--alt-color-2);
      font-family: "Lora", serif;
   }
   
