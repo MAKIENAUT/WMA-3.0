@@ -102,10 +102,9 @@
                   <p>It is important to note that the H-2A visa process can be complex, and it is highly recommended
                      that employers seek the assistance of an experienced immigration attorney to ensure compliance with
                      all legal requirements.</p>
-
-               </div>
-               <div class="link">
-                  <a href="#">Learn More</a>
+                  <a href="#" class="link">
+                     Learn More
+                  </a>
                </div>
             </div>
          </div>
