@@ -1,42 +1,3 @@
-<?php
-require_once "../../Administrator/Admin_Dashboard/Dashboard_Scripts/wma_users_tables.php";
-
-session_start();
-foreach ($google_users as $user):
-   ?>
-   <div class="user_cards">
-
-      <img src="<?php echo $user['picture'] ?>" alt="">
-      <p>
-         <?php echo $user['email']; ?>
-      </p>
-      <p>
-         <?php echo $user['full_name']; ?>
-      </p>
-      <p>Google Login</p>
-   </div>
-   <?php
-endforeach;
-
-foreach ($standard_users as $user):
-   ?>
-   <div class="user_cards">
-      <div class="demographic_picture"
-         style="background-image: url(../../../Users/Standard_User/Standard_Profile/Profile_Pictures/<?php echo $user['email'] ?>/profile_picture.jpg);">
-      </div>
-      <p>
-         <?php echo $user['email']; ?>
-      </p>
-      <p>
-         <?php echo $user['first_name'] . " " . $user["last_name"]; ?>
-      </p>
-      <p>Standard User</p>
-   </div>
-   <?php
-endforeach;
-?>
-
-
 <nav class="navbar-parent">
    <div class="navbar-container">
       <div class="navbar-main-container">
@@ -68,24 +29,7 @@ endforeach;
             </div>
          </div>
          <a class="navbar-link" href="/Pages/About-us/about.php">About Us</a>
-         <?php if (isset($_SESSION["id"]) && !empty($_SESSION["id"])): ?>
-            <img src="<?php echo $userinfo['picture']; ?>" alt="Profile Picture">
-         <?php elseif ($credentialType === 'standard_login'): ?>
-            <?php if (!empty($_SESSION["profile_picture"])): ?>
-               <?php $profile_pic = str_replace('../', '', $_SESSION["profile_picture"]); ?>
-               <img src="../../../Users/Standard_User/<?php echo $profile_pic; ?>"
-                  alt="../../../Users/Standard_User<?php echo $profile_pic; ?>">
-            <?php else: ?>
-               <!-- Default profile picture or placeholder image if profile picture is not set -->
-               <a class="navbar-link" href="#">Login/Sign up</a>
-
-            <?php endif; ?>
-         <?php endif; ?>
+         <a class="navbar-link" href="#">Login/Sign up</a>
       </div>
    </div>
 </nav>
-
-if (isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
-   header("location: ../../../Pages/Home/home.php");
-   exit;
-}
