@@ -1,39 +1,26 @@
 <?php
-require_once "../../Administrator/Admin_Dashboard/Dashboard_Scripts/wma_users_tables.php";
+require_once '../../Users/User_Login_Google/config.php';
 
-session_start();
-foreach ($google_users as $user):
-   ?>
-   <div class="user_cards">
+$credentialType = null; // Initialize $credentialType
+$result = null; // Initialize $result
 
-      <img src="<?php echo $user['picture'] ?>" alt="">
-      <p>
-         <?php echo $user['email']; ?>
-      </p>
-      <p>
-         <?php echo $user['full_name']; ?>
-      </p>
-      <p>Google Login</p>
-   </div>
-   <?php
-endforeach;
+if (isset($_SESSION['user_token'])) {
+   $credentialType = 'google_login';
+   $sql = $conn->prepare("SELECT * FROM wma_users_google WHERE token = ?");
+   $sql->bind_param("s", $_SESSION['user_token']);
+   $sql->execute();
+   $result = $sql->get_result();
+} elseif (isset($_SESSION['id'])) {
+   $credentialType = 'standard_login';
+   $sql = $conn->prepare("SELECT * FROM wma_users_standard WHERE id = ?");
+   $sql->bind_param("i", $_SESSION['id']);
+   $sql->execute();
+   $result = $sql->get_result();
+}
 
-foreach ($standard_users as $user):
-   ?>
-   <div class="user_cards">
-      <div class="demographic_picture"
-         style="background-image: url(../../../Users/Standard_User/Standard_Profile/Profile_Pictures/<?php echo $user['email'] ?>/profile_picture.jpg);">
-      </div>
-      <p>
-         <?php echo $user['email']; ?>
-      </p>
-      <p>
-         <?php echo $user['first_name'] . " " . $user["last_name"]; ?>
-      </p>
-      <p>Standard User</p>
-   </div>
-   <?php
-endforeach;
+if ($result !== null && $result->num_rows > 0) {
+   $userinfo = $result->fetch_assoc();
+}
 ?>
 
 
@@ -63,29 +50,49 @@ endforeach;
                   class="fa-solid fa-caret-down"></i></p>
             <div id="navbarCategory2" class="navbar-category">
                <a class="navbar-category-link" href="#">Family Based</a>
-               <a class="navbar-category-link" href="#">Study and Exchange (J-1)</a>
+               <a class="navbar-category-link" href="../../Pages/Categories/Study_and_Exchange/study_and_exchange.php">Study and Exchange (J-1)</a>
                <a class="navbar-category-link" href="#">Temporary Employment (EB-3/H2A)</a>
             </div>
          </div>
          <a class="navbar-link" href="/Pages/About-us/about.php">About Us</a>
-         <?php if (isset($_SESSION["id"]) && !empty($_SESSION["id"])): ?>
-            <img src="<?php echo $userinfo['picture']; ?>" alt="Profile Picture">
-         <?php elseif ($credentialType === 'standard_login'): ?>
-            <?php if (!empty($_SESSION["profile_picture"])): ?>
-               <?php $profile_pic = str_replace('../', '', $_SESSION["profile_picture"]); ?>
-               <img src="../../../Users/Standard_User/<?php echo $profile_pic; ?>"
-                  alt="../../../Users/Standard_User<?php echo $profile_pic; ?>">
-            <?php else: ?>
-               <!-- Default profile picture or placeholder image if profile picture is not set -->
-               <a class="navbar-link" href="#">Login/Sign up</a>
+         <?php
+         if (isset($_SESSION['user_token'])) {
+            $credentialType = 'google_login';
+            $sql = $conn->prepare("SELECT * FROM wma_users_google WHERE token = ?");
+            $sql->bind_param("s", $_SESSION['user_token']);
+            $sql->execute();
+            $result = $sql->get_result();
+            ?>
+            <a class="navbar-link" href="../../Users/User_Login_Google/logout.php">
+               <img src="<?php echo $userinfo['picture'] ?>" alt="">
+            </a>
+            <?php
+         } elseif (isset($_SESSION['id'])) {
+            $credentialType = 'standard_login';
+            $sql = $conn->prepare("SELECT * FROM wma_users_standard WHERE id = ?");
+            $sql->bind_param("i", $_SESSION['id']);
+            $sql->execute();
+            $result = $sql->get_result();
+            $pfp = $userinfo['profile_picture'];
+            ?>
+            <a href="../../Users/User_Login_Google/logout.php" 
+               class="navbar-link" 
+               style="  width: 35px; 
+                        aspect-ratio: 1/1; 
+                        background-position: center;
+                        background-size: cover;
+                        background-image: url(../../Users/Standard_User/<?php echo substr($pfp, 3) ?>);"
+            >
 
-            <?php endif; ?>
-         <?php endif; ?>
+            </a>
+            <?php echo $userinfo['first_name'] ?>
+            <?php
+         } else {
+            ?>
+            <a class="navbar-link" href="../../Users/Standard_User/Standard_Login/user_login.php">Login/Sign up</a>
+            <?php
+         }
+         ?>
       </div>
    </div>
 </nav>
-
-if (isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
-   header("location: ../../../Pages/Home/home.php");
-   exit;
-}
