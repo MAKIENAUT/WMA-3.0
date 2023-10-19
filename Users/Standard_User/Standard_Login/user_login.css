@@ -1,27 +1,39 @@
 body {
    width: 100dvw;
-   height: 100vh;
+   height: 100dvh;
+   background-image: url(/Photos/login-register.jpg);
+   background-size: cover;
+   background-position: center center;
+   background-repeat: no-repeat;
+}
+
+main {
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 77, 77, 0.75);
    padding-inline: var(--mobile-padding-inline);
    display: flex;
    align-items: center;
    justify-content: center;
 }
 
-main {
+.form {
    width: 100%;
    max-width: 480px;
    aspect-ratio: 3/4;
    padding: 30px;
    border-radius: 5px;
-   border: 3px solid var(--main-color-3);
+   border: 2px solid var(--main-color-3);
+   color: var(--alt-color-3);
+   background-color: var(--white);
    display: flex;
    flex-flow: column;
    align-items: center;
    justify-content: center;
-   gap: var(--gap-1rem);
+   gap: var(--gap-point5rem);
 }
 
-main h1 {
+.form h1 {
    font-size: var(--main-header);
    font-family: "Lora", serif;
    font-weight: 700;
@@ -42,12 +54,11 @@ form {
 .password_field {
    display: flex;
    flex-flow: column;
-   gap: var(--gap-point5rem);
 }
 
 .email_field label,
 .password_field label {
-   font-size: 1.125rem;
+   width: fit-content;
    display: flex;
    align-items: center;
    gap: var(--gap-point5rem);
@@ -62,13 +73,23 @@ form {
 .email_field input,
 .password_field input {
    padding: 5px;
-   font-size: 1.125rem;
-   border-radius: 5px;
-   border: 1px solid rgba(0, 77, 77, 0.3);
+   font-size: 1rem;
+   background-color: transparent;
+   border: 1px solid transparent;
+   border-bottom: 2px solid var(--alt-background-color-2);
+   transition: all 0.1s;
+}
+
+.email_field input:focus-visible,
+.password_field input:focus-visible {
+   background-color: transparent;
+   border: 1px solid transparent;
+   border-bottom: 2px solid var(--main-color-3);
+   transition: all 0.1s;
+   outline: transparent;
 }
 
 .login_option {
-   font-size: 1.125rem;
    display: flex;
    flex-flow: column;
    align-items: center;
@@ -78,12 +99,12 @@ form {
 
 .login_option input,
 .login_option a {
-   width: 80%;
+   width: 100%;
    padding: 5px;
-   font-size: 1.125rem;
+   font-size: 1rem;
    text-decoration: none;
    cursor: pointer;
-   color: var(--black);
+   color: var(--alt-color-3);
    background-color: transparent;
    border: 1px solid transparent;
    border-radius: 5px;
@@ -95,12 +116,15 @@ form {
 }
 
 .login_option input {
-   border: 1px solid rgba(218, 165, 32, 0.3);
+   border: 2px solid transparent;
+   color: var(--white);
+   background-color: var(--main-color-3);
 }
 
 .login_option input:hover {
-   color: var(--white);
-   background-color: var(--main-color-3);
+   border: 2px solid var(--main-color-3);
+   color: var(--alt-color-3);
+   background-color: var(--white);
 }
 
 .login_option a:hover {
@@ -119,18 +143,27 @@ form {
    justify-content: center;
 }
 
+.register_link a {
+   color: var(--alt-color-3);
+}
+
+.register_link a:hover,
+.register_link a:active {
+   color: var(--main-color-3);
+}
+
 @media screen and (min-width: 720px) {
-   body {
+   .form {
       padding-inline: var(--laptop-padding-inline);
    }
 }
 
 @media screen and (min-width: 1280px) {
-   body {
+   main {
       position: relative;
    }
 
-   main {
+   .form {
       position: absolute;
       right: 15%;
    }

@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $errors[] = "Invalid email address.";
       $valid = false;
-   } 
+   }
 
    $check_sql = "SELECT COUNT(*) FROM wma_users_standard WHERE email = ?";
    $check_stmt = $conn->prepare($check_sql);
@@ -86,68 +86,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
    <meta charset="UTF-8">
-   <link rel="stylesheet" href="register.css">
-   <link rel="icon" type="image/x-icon" href="../../../Photos/WMA.png">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="register.css">
    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+   <link rel="stylesheet" href="/Pages/Global/global.css" />
+   <link rel="icon" type="image/x-icon" href="/Photos/WMA.png">
    <title>Registration Page</title>
 </head>
 
 <body>
    <main>
-      <h1>Register</h1>
-      <p class="error_handler">
-         <?php
-         if (!empty($errors)) {
-            foreach ($errors as $error) {
-               echo $error . "<br>";
+      <div class="form">
+         <h1>Register</h1>
+         <div class="error_handler">
+            <?php
+            if (!empty($errors)) {
+               foreach ($errors as $error) {
+                  echo $error . "<br>";
+               }
             }
-         }
-         ?>
-      </p>
-      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-
-         <div class="name_fields">
-            <label>Personal Information <b>*</b></label>
-            <div class="name_inputs">
-               <input type="text" name="first_name" required placeholder="First Name">
-               <input type="text" name="last_name" required placeholder="Last Name">
+            ?>
+         </div>
+         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
+            enctype="multipart/form-data">
+            <div class="personal-info">
+               <div class="name_fields">
+                  <label>Personal Information <b>*</b></label>
+                  <div class="name_inputs">
+                     <input type="text" name="first_name" required placeholder="First Name">
+                     <input type="text" name="last_name" required placeholder="Last Name">
+                  </div>
+               </div>
+               <div class="miscellaneous_fields">
+                  <div class="miscellaneous_inputs">
+                     <input type="tel" name="phone_number" required placeholder="Phone Number">
+                     <input type="date" name="birth_date" required placeholder="Birth Date">
+                  </div>
+               </div>
+               <div class="email_field">
+                  <input type="email" name="email" required placeholder="Email Address"><br>
+               </div>
             </div>
-         </div>
-
-         <div class="miscellaneous_fields">
-            <div class="miscellaneous_inputs">
-               <input type="tel" name="phone_number" required placeholder="Phone Number">
-               <input type="date" name="birth_date" required placeholder="Birth Date">
+            <div class="password_fields">
+               <label>Password<b>*</b></label>
+               <div class="password_inputs">
+                  <input type="password" name="password" required placeholder="Password">
+                  <input type="password" name="confirm_password" required placeholder="Confirm Password">
+               </div>
             </div>
-         </div>
-
-         <div class="email_field">
-            <input type="email" name="email" required placeholder="Email Address"><br>
-         </div>
-
-         <div class="password_fields">
-            <label>Password<b>*</b></label>
-            <div class="password_inputs">
-               <input type="password" name="password" required placeholder="Password">
-               <input type="password" name="confirm_password" required placeholder="Confirm Password">
+            <div class="pfp_input">
+               <label for="profile">Profile Picture (.jpg only) <b>*</b></label>
+               <div class="pfp_field" id="pfp_field">
+                  <div class="subtitle">Click/drag & drop your Profile Picture here</div>
+                  <input type="file" id="profile_picture" class="file_input_field" name="profile_picture" accept=".jpg"
+                     required>
+                  <div class="file_name" id="pfp_name"></div>
+               </div>
             </div>
-         </div>
-
-         <div class="pfp_input">
-            <label for="profile">Profile Picture (.jpg only) <b>*</b></label>
-            <div class="pfp_field" id="pfp_field">
-               <div class="subtitle">Drag & drop your Profile Picture here</div>
-               <input type="file" id="profile_picture" class="file_input_field" name="profile_picture" accept=".jpg"
-                  required><br>
-               <div class="file_name" id="pfp_name"></div>
-            </div>
-         </div>
-         <script src="register.js"></script>
-         <div class="g-recaptcha" data-sitekey="6LfaUYkoAAAAAK9Qg6i0SqqoW7mF0ioNFkCb1EPz"></div>
-         <input type="submit" value="Register">
-      </form>
-      <p>Already have an account? <a href="../Standard_Login/user_login.php">Login</a></p>
+            <script src="register.js"></script>
+            <div class="g-recaptcha" data-sitekey="6LfaUYkoAAAAAK9Qg6i0SqqoW7mF0ioNFkCb1EPz"></div>
+            <input type="submit" value="Register">
+         </form>
+         <p>Already have an account? <a href="../Standard_Login/user_login.php">Login</a></p>
+      </div>
    </main>
 </body>
 

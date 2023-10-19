@@ -1,149 +1,109 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
-
-* {
-   color: white;
-   padding: 0;
-   margin: 0;
-
-   font-family: 'Poppins', sans-serif;
-}
-
 b {
    color: red;
 }
 
 body {
-   width: 100%;
-   height: 100vh;
-   box-sizing: border-box;
-   background-color: black;
-
-   position: relative;
+   width: 100dvw;
+   height: 100dvh;
+   background-image: url(/Photos/login-register.jpg);
+   background-size: cover;
+   background-position: center center;
+   background-repeat: no-repeat;
 }
 
 main {
-   top: 50%;
-   right: 15%;
-   bottom: 50%;
-   width: 420px;
-   margin: auto 0;
-   aspect-ratio: 3/4;
-   position: absolute;
-   border-radius: 5px;
-   box-sizing: border-box;
-   border: 1px solid gold;
-
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   justify-content: flex-start;
-}
-
-main h1 {
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 77, 77, 0.75);
+   padding: 25px;
+   padding-inline: var(--mobile-padding-inline);
    display: flex;
    align-items: center;
    justify-content: center;
+}
+
+.form {
+   width: 100%;
+   max-width: 480px;
+   padding: 30px;
+   border-radius: 5px;
+   border: 2px solid var(--main-color-3);
+   color: var(--alt-color-3);
+   background-color: var(--white);
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+   justify-content: center;
+   gap: var(--gap-point5rem);
+}
+
+.form h1 {
+   font-size: var(--main-header);
+   font-family: "Lora", serif;
+   font-weight: 700;
+}
+
+.error_handler:empty {
+   display: none;
 }
 
 .error_handler {
-   width: 100%;
-   font-size: 10px;
    font-weight: 300;
-   text-align: center;
    color: rgb(255, 74, 74);
-
-   display: flex;
-   align-items: center;
-   justify-content: center;
 }
 
 form {
-   width: 90%;
-   height: 85%;
-   padding: 10px;
-   box-sizing: border-box;
+   width: 100%;
+   display: flex;
+   flex-flow: column;
+   gap: var(--gap-1rem);
+}
 
-   gap: 10px;
+.personal-info {
+   display: flex;
+   flex-flow: column;
+   gap: var(--gap-point5rem);
+}
+
+.name_fields label,
+.password_fields label,
+.pfp_input label {
+   width: fit-content;
    display: flex;
    align-items: center;
-   flex-direction: column;
-   justify-content: start;
+   gap: var(--gap-point5rem);
 }
 
-.name_fields, 
-.password_fields,
-.miscellaneous_fields{
-   width: 100%;
-   box-sizing: border-box;
-
-   gap: 10px;
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   justify-content: center;
-}
-
-.name_fields label, .password_fields label {
-   width: 100%;
-   font-size: 15px;
-   box-sizing: border-box;
-   border-bottom: 1px solid rgb(220, 220, 220, 0.3);
-
-   gap: 10px;
-   display: flex;
-}
-
-.name_inputs, 
+.name_inputs,
 .password_inputs,
-.miscellaneous_inputs{
-   width: 100%;
-   gap: 10px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
+.miscellaneous_inputs {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: var(--gap-point5rem);
 }
 
-
-.number_field,
-.birthdate_field,
-.email_field {
-   width: 100%;
-
-   display: flex;
-   align-items: center;
-   justify-content: center;
-}
-
-.name_inputs input, 
+.name_inputs input,
 .password_inputs input,
-.miscellaneous_inputs input{
-   width: 50%;
-   height: 30px;
-   font-size: 12px;
-   text-indent: 10px;
-   border-radius: 5px;
-   box-sizing: border-box;
-   background-color: transparent;
-   border: 1px solid rgb(220, 220, 220, 0.3);
-}
-
-.number_field input,
-.birthdate_field input,
+.miscellaneous_inputs input,
 .email_field input {
    width: 100%;
-   height: 30px;
-   font-size: 12px;
-   text-indent: 10px;
-   border-radius: 5px;
-   box-sizing: border-box;
+   padding: 5px;
+   font-size: 1rem;
    background-color: transparent;
-   border: 1px solid rgb(220, 220, 220, 0.3);
+   border: 1px solid transparent;
+   border-bottom: 2px solid var(--alt-background-color-2);
+   transition: all 0.1s;
 }
 
-.pfp_input {
-   width: 70%;
-   cursor: pointer;
+.name_inputs input:focus-visible,
+.password_inputs input:focus-visible,
+.miscellaneous_inputs input:focus-visible,
+.email_field input:focus-visible {
+   background-color: transparent;
+   border: 1px solid transparent;
+   border-bottom: 2px solid var(--main-color-3);
+   transition: all 0.1s;
+   outline: transparent;
 }
 
 .file_input {
@@ -156,18 +116,11 @@ form {
 
 .pfp_field {
    position: relative;
-   width: 100%;
-   height: 75px;
    border: 2px dashed #ccc;
    text-align: center;
-   padding: 10px;
+   padding: 25px;
    cursor: pointer;
-   box-sizing: border-box;
    word-wrap: break-word;
-}
-
-.subtitle {
-   font-size: 12px;
 }
 
 .pfp_field.uploaded {
@@ -175,12 +128,16 @@ form {
 }
 
 .file_input_field {
+   width: 100%;
+   height: 100%;
    position: absolute;
    top: 0;
    left: 0;
-   right: 0;
-   bottom: 0;
    opacity: 0;
+}
+
+.file_name:empty {
+   display: none;
 }
 
 .file_name {
@@ -188,20 +145,45 @@ form {
    margin-top: -10px;
 }
 
+.g-recaptcha {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
 input[type=submit] {
-   width: 40%;
-   height: 30px;
-   font-size: 12px;
+   width: 100%;
+   padding: 5px;
+   font-size: 1rem;
+   text-decoration: none;
+   color: var(--white);
+   cursor: pointer;
+   border: 2px solid transparent;
    border-radius: 5px;
-   box-sizing: border-box;
+   background-color: var(--main-color-3);
    transition: all 0.25s;
-   background-color: transparent;
-   border: 1px solid rgb(220, 220, 220, 0.3);
 }
 
 input[type=submit]:hover {
-   transition: all 0.25s;
-   color: teal;
-   font-size: 13px;
-   border: 1px solid rgba(255, 255, 255, 0.7);
+   border: 2px solid var(--main-color-3);
+   color: var(--alt-color-3);
+   background-color: var(--white);
+}
+
+@media screen and (min-width: 720px) {
+   main {
+      padding-inline: var(--laptop-padding-inline);
+   }
+}
+
+@media screen and (min-width: 1280px) {
+   main {
+      position: relative;
+   }
+
+   .form {
+      position: absolute;
+      right: 15%;
+   }
 }
