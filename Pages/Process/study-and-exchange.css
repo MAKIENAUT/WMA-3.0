@@ -8,7 +8,6 @@ main {
 .header-parent {
    width: 100dvw;
    height: 40dvh;
-
    background-image: url(/Photos/student_exchange.jpg);
    background-size: cover;
    background-repeat: no-repeat;
@@ -33,13 +32,15 @@ main {
 }
 
 .header-content h1 {
-   font-size: 4rem;
+   font-size: var(--hero-header);
    font-family: "Lora", serif;
    color: var(--white);
 }
 
 .header-content h1 span {
    color: var(--main-color);
+   font-size: var(--hero-header);
+   font-family: "Lora", serif;
 }
 
 
@@ -50,7 +51,6 @@ main {
 
 .steps-container {
    width: 100%;
-   background-color: var(--white);
    display: flex;
    align-items: center;
    justify-content: center;
@@ -63,18 +63,11 @@ main {
    display: flex;
    flex-flow: column;
    gap: var(--gap-2rem);
-   text-align: justify;
 }
 
-.header-content h1 {
-   font-size: var(--hero-header);
-   font-family: "Lora", serif;
-   color: var(--white);
-}
-
-.header-content h1 span {
-   color: var(--main-color);
-   font-size: var(--hero-header);
+.steps-header h1 {
+   font-size: var(--main-header);
+   color: var(--alt-color-2);
    font-family: "Lora", serif;
 }
 
@@ -127,9 +120,12 @@ main {
    line-height: 1;
 }
 
+.steps-card p {
+   line-height: 1.6;
+}
 
 .steps-conclusion {
-   padding: 10px;
+   padding: 15px;
    background-color: var(--main-color-3);
    display: flex;
    flex-flow: column;
@@ -179,6 +175,10 @@ main {
    /*  PROCESS STEPS SECTION  */
    .steps-content {
       padding-inline: var(--tablet-padding-inline);
+   }
+
+   .steps-header h1 {
+      font-size: var(--hero-header);
    }
 
    .steps-description {

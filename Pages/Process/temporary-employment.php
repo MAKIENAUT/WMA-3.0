@@ -12,10 +12,10 @@
    <!-- FontAwesome -->
 
    <link rel="stylesheet" href="temporary-employment.css" />
-   <link rel="stylesheet" href="/Pages/Global//global.css" />
+   <link rel="stylesheet" href="/Pages/Global/global.css" />
    <link rel="icon" type="image/x-icon" href="/Photos/WMA.png">
    <script defer src="/Pages/Global/global.js"></script>
-   <title>WMA Home</title>
+   <title>Temporary Employment</title>
 </head>
 
 <body>

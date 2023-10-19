@@ -65,7 +65,8 @@
                         committed to helping you find the program that best suits your needs and supports you throughout
                         the
                         application process.</p>
-                     <a href="#" class="service-content-description-button">Learn more</a>
+                     <a href="/Pages/Process/study-and-exchange.php" class="service-content-description-button">Learn
+                        more</a>
                   </div>
                </article>
                <article class="service-content">
@@ -79,7 +80,7 @@
                         you through the process, from filing the petition to preparing for the interview. We understand
                         the emotional, and legal complexities involved and are here to support you every step of the
                         way.</p>
-                     <a href="#" class="service-content-description-button">Learn more</a>
+                     <a href="/Pages/Process/family-based.php" class="service-content-description-button">Learn more</a>
                   </div>
                </article>
                <article class="service-content">
@@ -92,7 +93,8 @@
                         looking to gain work experience, explore new industries, or earn extra income. Our team works
                         with employers across various industries to provide opportunities for our clients. We take the
                         time to understand your skills and career goals to match you with the right temporary job.</p>
-                     <a href="#" class="service-content-description-button">Learn more</a>
+                     <a href="/Pages/Process/temporary-employment.php" class="service-content-description-button">Learn
+                        more</a>
                   </div>
                </article>
             </div>
