@@ -35,6 +35,24 @@ main {
    align-items: center;
    justify-content: center;
    gap: var(--gap-point5rem);
+   position: relative;
+}
+
+.home-button:link,
+.home-button:visited {
+   color: var(--alt-color-3);
+   text-decoration: none;
+   position: absolute;
+   top: 0;
+   right: 0;
+   padding: 5px 10px;
+   transition: all 0.2s;
+}
+
+.home-button:hover,
+.home-button:active {
+   color: var(--main-color-3);
+   text-decoration: underline;
 }
 
 .form h1 {

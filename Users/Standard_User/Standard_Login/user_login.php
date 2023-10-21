@@ -87,19 +87,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="user_login.css">
-   <script defer src="user_login.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
       integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
       crossorigin="anonymous" referrerpolicy="no-referrer">
+   <link rel="stylesheet" href="user_login.css">
    <link rel="stylesheet" href="/Pages/Global/global.css" />
    <link rel="icon" type="image/x-icon" href="/Photos/WMA.png">
+   <script defer src="user_login.js"></script>
    <title>WMA Login</title>
 </head>
 
 <body>
    <main>
       <div class="form">
+         <a href="/Pages/Home/home.php" class="home-button"><i class="fa-solid fa-arrow-left"></i>&nbsp;home</a>
          <h1>Login</h1>
          <div class="error_display">
             <?php echo $email_err; ?>

@@ -72,8 +72,8 @@
          <section class="footer-links">
             <h1>More Info</h1>
             <div class="footer-more-info-content">
-               <a href="#">News</a>
-               <a href="#">Contact us</a>
+               <a href="/Pages/News/news.php">News</a>
+               <a href="/Pages/Contact-us/contact.php">Contact us</a>
                <a href="../../Administrator/Admin_Login/admin_login.php">Administrator</a>
             </div>
          </section>

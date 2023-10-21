@@ -37,15 +37,14 @@ if ($result !== null && $result->num_rows > 0) {
          </button>
       </div>
       <div id="navbarLinkContainer" class="navbar-link-container">
-         <a class="navbar-link" href="#">News</a>
+         <a class="navbar-link" href="/Pages/News/news.php">News</a>
          <div class="navbar-category-container" href="javascript:void(0)">
             <p id="navbarCategoryContainer" onclick="toggleCategory()">Process<i class="fa-solid fa-caret-down"></i>
             </p>
             <div id="navbarCategory" class="navbar-category">
                <a class="navbar-category-link" href="/Pages/Process/family-based.php">Family Based</a>
                <a class="navbar-category-link" href="/Pages/Process/study-and-exchange.php">Study and Exchange</a>
-               <a class="navbar-category-link" href="/Pages/Process/temporary-employment.php">Temporary
-                  Employment</a>
+               <a class="navbar-category-link" href="/Pages/Process/temporary-employment.php">Temporary Employment</a>
             </div>
          </div>
          <div class="navbar-category-container" href="javascript:void(0)">
