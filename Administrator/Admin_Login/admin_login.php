@@ -1,14 +1,32 @@
 <?php
-session_start();
+session_name('admin_session');
+session_start([
+   'cookie_lifetime' => 1800,
+   // Set session timeout to 30 minutes
+]);
+
 require_once '../Database/wma_administrator.php';
+
+function isUserActive()
+{
+   $timeout = 1800; // 30 minutes in seconds
+
+   if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) < $timeout) {
+      return true;
+   } else {
+      return false;
+   }
+}
 
 if (isset($user_id) && !empty($user_id)) {
    header('Location: ../Admin_Dashboard/Dash_Overview/dash_overview.php');
-   exit(); // Make sure to exit after a header redirect
+   exit();
 }
 
+$_SESSION['is_admin'] = true;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   $email = mysqli_real_escape_string($conn, $_POST['email_or_username']);
+   $email = mysqli_real_escape_string($conn, $_POST['email_address']);
    $password = mysqli_real_escape_string($conn, $_POST['password']);
 
    $query = "SELECT * FROM wma_admin WHERE email_address = '$email'";
@@ -18,11 +36,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $user = mysqli_fetch_assoc($result);
 
       if ($user && password_verify($password, $user['password'])) {
-         $_SESSION['id'] = $user['id'];
+         $_SESSION['admin_id'] = $user['id'];
          $_SESSION['email_address'] = $user['email_address'];
          $_SESSION['username'] = $user['username'];
          $_SESSION['access_credential'] = $user['access_credential'];
-
+         $_SESSION['last_activity'] = time(); // Store the timestamp of the last activity
+         
+         // Update the last login time in the database
+         $currentDateTime = date('Y-m-d H:i:s');
+         $updateQuery = "UPDATE wma_admin SET last_login = '$currentDateTime' WHERE id = " . $user['id'];
+         mysqli_query($conn, $updateQuery);
+         
          header("Location: ../Admin_Dashboard/Dash_Overview/dash_overview.php");
          exit();
       } else {
@@ -38,21 +62,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
    <meta charset="UTF-8">
+   <link rel="stylesheet" href="admin_login.css">
+   <link rel="icon" type="image/x-icon" href="/Photos/WMA.png">
+   <link rel="stylesheet" href="../../../Pages/Global/global.css" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Login Page</title>
+   <title>Admin Login</title>
 </head>
 
 <body>
-   <h2>Login</h2>
-   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <label for="email_or_username">Email Address:</label>
-      <input type="email" id="email_or_username" name="email_or_username" required><br><br>
+   <main>
+      <h2>Administrator Login</h2>
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+         <div class="email_field">
+            <label for="email_address"><b>* </b>Email Address:</label>
+            <input type="email" id="email_address" name="email_address" placeholder="Enter Email" required>
+         </div>
 
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required><br><br>
+         <div class="password_field">
+            <label for="password"><b>* </b>Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter Password" required>
+         </div>
 
-      <input type="submit" value="Login">
-   </form>
+         <input type="submit" value="Login">
+      </form>
+   </main>
 </body>
 
 </html>

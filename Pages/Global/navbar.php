@@ -1,4 +1,7 @@
 <?php
+
+session_name('user_session');
+session_start();
 require_once '../../Users/User_Login_Google/config.php';
 
 $credentialType = null; // Initialize $credentialType
@@ -50,7 +53,8 @@ if ($result !== null && $result->num_rows > 0) {
                   class="fa-solid fa-caret-down"></i></p>
             <div id="navbarCategory2" class="navbar-category">
                <a class="navbar-category-link" href="#">Family Based</a>
-               <a class="navbar-category-link" href="../../Pages/Categories/Study_and_Exchange/study_and_exchange.php">Study and Exchange (J-1)</a>
+               <a class="navbar-category-link"
+                  href="../../Pages/Categories/Study_and_Exchange/study_and_exchange.php">Study and Exchange (J-1)</a>
                <a class="navbar-category-link" href="#">Temporary Employment (EB-3/H2A)</a>
             </div>
          </div>
@@ -75,14 +79,20 @@ if ($result !== null && $result->num_rows > 0) {
             $result = $sql->get_result();
             $pfp = $userinfo['profile_picture'];
             ?>
-            <a href="../../Users/User_Login_Google/logout.php" 
-               class="navbar-link" 
-               style="  width: 35px; 
-                        aspect-ratio: 1/1; 
-                        background-position: center;
-                        background-size: cover;
-                        background-image: url(../../Users/Standard_User/<?php echo substr($pfp, 3) ?>);"
-            >
+            <a href="#" class="navbar-link" style="  width: 35px; 
+            aspect-ratio: 1/1; 
+            background-position: center;
+            background-size: cover;
+            background-image: url(../../Users/Standard_User/<?php echo substr($pfp, 3) ?>);" onclick="confirmLogout()">
+
+               <script>
+                  function confirmLogout() {
+                     var confirmLogout = confirm("Are you sure you want to logout?");
+                     if (confirmLogout) {
+                        window.location.href = '../../Users/User_Login_Google/logout.php';
+                     }
+                  }
+               </script>
 
             </a>
             <?php echo $userinfo['first_name'] ?>

@@ -1,4 +1,6 @@
 <?php
+session_name('user_session');
+
 
 require_once '../../User_Login_Google/config.php';
 

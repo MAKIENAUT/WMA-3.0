@@ -18,15 +18,17 @@ function applicant_search() {
 function showGraph() {
    var graphContainer = document.getElementById('chart_div');
    var cardContainer = document.querySelector('.user_card_container');
+   var showGraph_Button = document.querySelector('.show_graph');
 
-   if (graphContainer.style.display === 'none') {
-      graphContainer.style.display = 'flex';
-      cardContainer.style.display = 'none';
-   } else {
-      graphContainer.style.display = 'none';
-      cardContainer.style.display = 'flex';
-   }
+   var isGraphHidden = graphContainer.style.display === 'none';
+
+   graphContainer.style.display = isGraphHidden ? 'flex' : 'none';
+   cardContainer.style.display = isGraphHidden ? 'none' : 'flex';
+   showGraph_Button.style.color = isGraphHidden ? 'gold' : 'white';
+   showGraph_Button.innerHTML = isGraphHidden ? 'View Cards' : 'View Graph';
+   showGraph_Button.style.border = isGraphHidden ? '1px solid teal' : '1px solid rgba(149, 149, 149, 0.8)';
 }
+
 
 function searchUsers() {
    var input, filter, cards, card, email, fullName, i, txtValue;
