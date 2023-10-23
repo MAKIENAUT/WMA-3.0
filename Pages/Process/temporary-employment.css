@@ -2,6 +2,9 @@
 main {
    margin-top: 60px;
    color: var(--alt-color-3);
+   display: flex;
+   flex-flow: column;
+   gap: var(--gap-2rem);
 }
 
 /* PROCESS HEADER SECTION */

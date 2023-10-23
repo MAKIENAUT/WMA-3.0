@@ -116,7 +116,7 @@
                      plan ahead and start the application process early. Working with an experienced J1 program sponsor
                      and preparing thoroughly for the visa interview can help ensure a smooth and successful application
                      process.</p>
-                  <a href="#" class="link">
+                  <a href="https://www.facebook.com/messages/t/106622782240500" class="link">
                      Learn More
                   </a>
                </div>

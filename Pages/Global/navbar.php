@@ -2,7 +2,7 @@
 
 session_name('user_session');
 session_start();
-require_once '../../Users/User_Login_Google/config.php';
+// require_once '../../Users/User_Login_Google/config.php';
 
 $credentialType = null; // Initialize $credentialType
 $result = null; // Initialize $result
