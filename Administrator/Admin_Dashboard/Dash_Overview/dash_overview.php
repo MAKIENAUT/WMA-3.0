@@ -1,6 +1,5 @@
 <?php
 require_once "../Dashboard_Scripts/session_segregator.php";
-require_once "../../Database/wma_administrator.php";
 require_once "../Dashboard_Scripts/j1_visa.php";
 
 function isUserActive()
@@ -24,9 +23,20 @@ $email_address = $_SESSION['email_address'];
 $username = $_SESSION['username'];
 $access_credential = $_SESSION['access_credential'];
 
+// Check if user is active
+if (!isUserActive()) {
+   // If user is inactive, destroy the session
+   session_unset();
+   session_destroy();
+   header('Location: ../../Admin_Login/admin_login.php');
+   exit();
+}
+
 // Update the last activity timestamp
 $_SESSION['last_activity'] = time();
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +55,7 @@ $_SESSION['last_activity'] = time();
 
 </head>
 
-<body>
+<body onload="updateTimer()">
    <!-- NAVBAR -->
    <?php require_once "../Dash_Global/dash_navbar.php"; ?>
 
@@ -80,11 +90,14 @@ $_SESSION['last_activity'] = time();
 
                      <img src="<?php echo $user['picture'] ?>" alt="">
                      <p>
-                        <?php echo $user['email']; ?>
+                        <b>
+                           <?php echo $user['full_name']; ?>
+                        </b>
                      </p>
                      <p>
-                        <?php echo $user['full_name']; ?>
+                        <?php echo $user['email']; ?>
                      </p>
+
                      <p>Google Account</p>
                   </div>
                <?php endforeach; ?>
@@ -95,11 +108,14 @@ $_SESSION['last_activity'] = time();
                         style="background-image: url(../../../Users/Standard_User/Standard_Profile/Profile_Pictures/<?php echo $user['email'] ?>/profile_picture.jpg);">
                      </div>
                      <p>
-                        <?php echo $user['email']; ?>
+                        <b>
+                           <?php echo $user['first_name'] . " " . $user["last_name"]; ?>
+                        </b>
                      </p>
                      <p>
-                        <?php echo $user['first_name'] . " " . $user["last_name"]; ?>
+                        <?php echo $user['email']; ?>
                      </p>
+
                      <p>Standard Account</p>
                   </div>
                <?php endforeach; ?>
@@ -133,20 +149,55 @@ $_SESSION['last_activity'] = time();
 
                   var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
                   chart.draw(data, options);
-   }
+               }
             </script>
          </div>
       </div>
 
       <div class="main_right">
          <div class="admin_profile">
-            <h3>Your Profile</h3>
-            <div class="admin_profile_body">
-               <div class="admin_pfp">
-                  <img src="../../Admin_Profile/Profile_Picture/<?php echo $_SESSION['email_address'] . ".jpg"; ?>"
-                     alt="">
-               </div>
+            <h3>Your Profile <span id="timer">hi</span>
+               <script>
+                  let timerElement = document.getElementById('timer');
+                  let timerInterval;
+                  let timerDuration = 30 * 60; // 2 minutes in seconds
 
+                  function updateTimer() {
+                     let minutes = Math.floor(timerDuration / 60);
+                     let seconds = timerDuration % 60;
+                     timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                  }
+
+                  function startTimer() {
+                     timerInterval = setInterval(function () {
+                        timerDuration--;
+                        if (timerDuration <= 0) {
+                           clearInterval(timerInterval);
+                           timerElement.textContent = 'Time\'s up!';
+                           window.location.href = '../Admin_Logout/admin_logout.php';
+                        } else {
+                           updateTimer();
+                        }
+                     }, 1000);
+                  }
+
+                  function restartTimer() {
+                     clearInterval(timerInterval);
+                     timerDuration = 30 * 60;
+                     startTimer();
+                  }
+
+                  startTimer();
+
+                  document.addEventListener('mousemove', restartTimer);
+               </script>
+            </h3>
+
+            <div class="admin_profile_body">
+               <div class="admin_pfp"
+                  style="background-image:url(../../Admin_Profile/Profile_Picture/<?php echo $_SESSION['email_address'] . ".jpg"; ?>);"
+                  alt="">
+               </div>
                <div class="admin_info">
                   <h3>
                      <?php echo $_SESSION['username']; ?>&nbsp; ✨
@@ -167,9 +218,8 @@ $_SESSION['last_activity'] = time();
          <div class="post_stats">
             News/Post Statistic
          </div>
-
          <div class="admin_stats">
-            <h3>Administrator Users</h3>
+            <?php require_once "../Dash_Global/admin_users.php"; ?>
          </div>
       </div>
    </main>

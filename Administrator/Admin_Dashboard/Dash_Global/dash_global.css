@@ -57,10 +57,13 @@ nav {
       align-items: center;
       justify-content: space-between;
    }
-      .admin_commands img {
+      .nav_pfp {
          width: 25%;
          aspect-ratio: 1/1;
          border-radius: 5px;
+         background-size: cover;
+         background-position: center;
+         background-repeat: no-repeat;
       }
       .admin_data {
          width: 60%;

@@ -15,7 +15,8 @@ $is_news_page = strpos($current_page, 'dash_news.php') !== false;
    </div>
 
    <div class="admin_commands">
-      <img src="../../Admin_Profile/Profile_Picture/<?php echo $_SESSION['email_address'] . ".jpg"; ?>" alt="">
+      <div class="nav_pfp" style="background-image:url(../../Admin_Profile/Profile_Picture/<?php echo $_SESSION['email_address'] . ".jpg"; ?>);" alt="">
+      </div>
       <div class="admin_data">
          <h3>
             <?php echo $username ?>

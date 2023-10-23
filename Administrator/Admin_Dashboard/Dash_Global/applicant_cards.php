@@ -44,9 +44,11 @@
       }
 
       ?>
-      <div class="applicant_card" data-search="<?= strtolower("$first_name $last_name $email_address $profession") ?>"
-         data-firstname="<?= $first_name ?>" data-lastname="<?= $last_name ?>" data-email="<?= $email_address ?>"
-         data-profession="<?= $profession ?>">
+      <div class="applicant_card" data-id="<?= $id ?>" data-country="<?= $country ?>" data-lastname="<?= $last_name ?>"
+         data-email="<?= $email_address ?>" data-firstname="<?= $first_name ?>" data-profession="<?= $profession ?>"
+         data-phone_number="<?= $phone_number ?>" data-full_address="<?= $full_address ?>"
+         data-date_submitted="<?= $date_submitted ?>" data-profilepicture="<?= $profile_picture ?>"
+         data-search="<?= strtolower("$first_name $last_name $email_address $profession") ?>">
          <div class="applicant_picture" style="background-image: url(<?= $profile_picture ?>);">
             <div class="applicant_nameplate">
                <p class="applicant_fullname"><b>
@@ -73,60 +75,13 @@
    ?>
 </div>
 
-<style>
-   /* Add this CSS code to your HTML file */
-   .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.7);
-      /* Semi-transparent black background */
-   }
-
-   .modal-content {
-      background-color: #fefefe;
-      margin: 15% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-   }
-
-   .modal-content p {
-      color: black;
-   }
-   .modal-content p b {
-      color: black;
-   }
-   .modal-content p a{
-      color: black;
-   }
-
-   .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-   }
-
-   .close:hover,
-   .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-   }
-</style>
-<!-- Add a modal to your HTML -->
 <div id="myModal" class="modal">
    <div class="modal-content">
-      <span class="close">&times;</span>
-      <div id="modalContent"></div>
+      <span class="close"><i class="fa-solid fa-xmark"></i></span>
+      <div id="modalContent" class="applicant_picture"></div>
    </div>
 </div>
+
 
 <!-- Add this JavaScript code to your HTML file -->
 <script>
@@ -142,34 +97,47 @@
    // Loop through the cards and add a click event listener to each
    for (var i = 0; i < cards.length; i++) {
       cards[i].addEventListener('click', function () {
-         var firstName = this.dataset.firstname;
-         var lastName = this.dataset.lastname;
+
+         var id = this.dataset.id;
          var email = this.dataset.email;
+         var country = this.dataset.country;
+         var lastName = this.dataset.lastname;
+         var firstName = this.dataset.firstname;
          var profession = this.dataset.profession;
+         var fullAddress = this.dataset.full_address;
+         var phoneNumber = this.dataset.phone_number;
+         var dateSubmitted = this.dataset.date_submitted;
+         var profilePicture = this.dataset.profilepicture; // Add this line
 
          var content = `
-         <p><b>Name:</b> ${lastName}, ${firstName}</p>
-         <p><b>Email:</b> <a href="mailto:${email}">${email}</a></p>
-         <p><b>Profession:</b> ${profession}</p>
-      `;
+            <div class="applicant_picture" style="background-image: url(${profilePicture});">
+               <p id="modal_id">${id}</p>
+               <div class="applicant_nameplate">
+                  <p style="color: white;"><b style="color: white;">Name:</b> ${lastName}, ${firstName}</p>
+                  <p style="color: white;"><b style="color: white;">Date Submitted: </b> ${dateSubmitted}</p>
+                  <p style="color: white;"><b style="color: white;">Phone No.: </b> ${phoneNumber}</p>
+               </div>
+            </div>
+            <p><b>Email:</b> <a href="mailto:${email}">${email}</a></p>
+            <p><b>Profession:</b> ${profession}</p>
+            <p><b>Address: </b>${country}, ${fullAddress}</p>
+         `;
 
          modalContent.innerHTML = content;
-         modal.style.display = "block";
+         modal.style.display = "flex";
       });
    }
 
    // Get the <span> element that closes the modal
    var span = document.getElementsByClassName("close")[0];
-
-   // When the user clicks on <span> (x), close the modal
-   span.onclick = function () {
-      modal.style.display = "none";
-   }
-
    // When the user clicks anywhere outside of the modal, close it
    window.onclick = function (event) {
       if (event.target == modal) {
          modal.style.display = "none";
       }
+   }
+   // When the user clicks on <span> (x), close the modal
+   span.onclick = function () {
+      modal.style.display = "none";
    }
 </script>
