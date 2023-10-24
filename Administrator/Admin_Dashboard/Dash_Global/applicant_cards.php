@@ -1,3 +1,7 @@
+<?php
+
+require_once "../Dashboard_Scripts/login_credential.php";
+?>
 <div class="applicant_navigator">
    <h3>Applicants</h3>
    <div class="toolkit">

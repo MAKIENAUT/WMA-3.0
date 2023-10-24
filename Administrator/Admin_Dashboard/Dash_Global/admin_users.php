@@ -1,4 +1,6 @@
 <?php
+
+require_once "../Dashboard_Scripts/login_credential.php";
 require_once '../../Database/wma_administrator.php';
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);

@@ -1,4 +1,8 @@
 <?php
+
+require_once "../Dashboard_Scripts/login_credential.php";
+
+
 $current_page = $_SERVER['REQUEST_URI'];
 $is_overview_page = strpos($current_page, 'dash_overview.php') !== false;
 $is_applicants_page = strpos($current_page, 'dash_applicants.php') !== false;
@@ -15,7 +19,9 @@ $is_news_page = strpos($current_page, 'dash_news.php') !== false;
    </div>
 
    <div class="admin_commands">
-      <div class="nav_pfp" style="background-image:url(../../Admin_Profile/Profile_Picture/<?php echo $_SESSION['email_address'] . ".jpg"; ?>);" alt="">
+      <div class="nav_pfp"
+         style="background-image:url(../../Admin_Profile/Profile_Picture/<?php echo $_SESSION['email_address'] . ".jpg"; ?>);"
+         alt="">
       </div>
       <div class="admin_data">
          <h3>
