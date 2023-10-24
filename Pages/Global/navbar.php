@@ -1,8 +1,6 @@
 <?php
-
-session_name('user_session');
 session_start();
-// require_once '../../Users/User_Login_Google/config.php';
+require_once '../../Users/User_Login_Google/config.php';
 
 $credentialType = null; // Initialize $credentialType
 $result = null; // Initialize $result
@@ -60,30 +58,14 @@ if ($result !== null && $result->num_rows > 0) {
          <a class="navbar-link" href="/Pages/About-us/about.php">About Us</a>
          <?php
          if (isset($_SESSION['user_token'])) {
-            $credentialType = 'google_login';
-            $sql = $conn->prepare("SELECT * FROM wma_users_google WHERE token = ?");
-            $sql->bind_param("s", $_SESSION['user_token']);
-            $sql->execute();
-            $result = $sql->get_result();
+            // Use $userinfo['picture'] directly, as it's already fetched above
+            $google_pfp = $userinfo['picture'];
             ?>
-            <a class="navbar-link" href="../../Users/User_Login_Google/logout.php">
-               <img src="<?php echo $userinfo['picture'] ?>" alt="">
-            </a>
-            <?php
-         } elseif (isset($_SESSION['id'])) {
-            $credentialType = 'standard_login';
-            $sql = $conn->prepare("SELECT * FROM wma_users_standard WHERE id = ?");
-            $sql->bind_param("i", $_SESSION['id']);
-            $sql->execute();
-            $result = $sql->get_result();
-            $pfp = $userinfo['profile_picture'];
-            ?>
-            <a href="#" class="navbar-link" style="  width: 35px; 
+            <a href="#" class="navbar-link" style="width: 35px; 
             aspect-ratio: 1/1; 
             background-position: center;
             background-size: cover;
-            background-image: url(../../Users/Standard_User/<?php echo substr($pfp, 3) ?>);" onclick="confirmLogout()">
-
+            background-image: url(<?php echo $google_pfp ?>);" onclick="confirmLogout()">
                <script>
                   function confirmLogout() {
                      var confirmLogout = confirm("Are you sure you want to logout?");
@@ -92,9 +74,27 @@ if ($result !== null && $result->num_rows > 0) {
                      }
                   }
                </script>
-
             </a>
-            <?php echo $userinfo['first_name'] ?>
+            <?php echo $userinfo['first_name']; ?>
+            <?php
+         } elseif (isset($_SESSION['id'])) {
+            $pfp = $userinfo['profile_picture'];
+            ?>
+            <a href="#" class="navbar-link" style="width: 35px; 
+            aspect-ratio: 1/1; 
+            background-position: center;
+            background-size: cover;
+            background-image: url(../../Users/Standard_User/<?php echo substr($pfp, 3) ?>);" onclick="confirmLogout()">
+               <script>
+                  function confirmLogout() {
+                     var confirmLogout = confirm("Are you sure you want to logout?");
+                     if (confirmLogout) {
+                        window.location.href = '../../Users/User_Login_Google/logout.php';
+                     }
+                  }
+               </script>
+            </a>
+            <?php echo $userinfo['first_name']; ?>
             <?php
          } else {
             ?>
@@ -102,6 +102,7 @@ if ($result !== null && $result->num_rows > 0) {
             <?php
          }
          ?>
+         
       </div>
    </div>
 </nav>

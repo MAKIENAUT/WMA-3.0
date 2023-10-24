@@ -2,8 +2,6 @@
 
 require_once 'vendor/autoload.php';
 
-session_start();
-
 // init configuration
 $clientID = '174256079121-cems81j7m9jv631qtacktje1ticjrg2t.apps.googleusercontent.com';
 $clientSecret = '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';

@@ -37,10 +37,10 @@ if (isset($_GET['code'])) {
          die();
       }
    }
-   session_name('user_session');
+   session_start();
    // save user data into session
    $_SESSION['user_token'] = $token;
-   
+
 
    // Redirect to home page
    header("Location: ../../Pages/Home/home.php");

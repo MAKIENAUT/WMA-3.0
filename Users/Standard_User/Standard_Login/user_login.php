@@ -1,5 +1,5 @@
 <?php
-session_name('user_session');
+session_start();
 
 
 require_once '../../User_Login_Google/config.php';
