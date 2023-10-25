@@ -1,7 +1,12 @@
 <?php
 
 session_start();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
+require_once '../../../PHPMailer/src/PHPMailer.php';
+require_once '../../../PHPMailer/src/SMTP.php';
+require_once '../../../PHPMailer/src/Exception.php';
 require_once '../../../Users/User_Login_Google/config.php';
 
 $errors = "";
@@ -228,52 +233,73 @@ if (isset($_SESSION['user_token'])) {
 if ($result->num_rows > 0) {
    $userinfo = $result->fetch_assoc();
 } else {
-   $errors .= "User not found in the database. \n";
+   $errors .= "User not found in the database.\n";
    die();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-   // Sanitize and validate input
    $first_name = htmlspecialchars($_POST['first_name'], ENT_QUOTES, 'UTF-8');
    $last_name = htmlspecialchars($_POST['last_name'], ENT_QUOTES, 'UTF-8');
    $full_address = htmlspecialchars($_POST['full_address'], ENT_QUOTES, 'UTF-8');
-   $country = $_POST['country']; // The selected country
+   $country = $_POST['country'];
    $phone_number = htmlspecialchars($_POST['phone_number'], ENT_QUOTES, 'UTF-8');
    $email_address = filter_var($_POST['email_address'], FILTER_SANITIZE_EMAIL);
    $profession = htmlspecialchars($_POST['profession'], ENT_QUOTES, 'UTF-8');
    $login_method = $credentialType;
 
-   // Use the value of the "Other Profession" input field when "Others" is selected
    if ($profession === 'Others' && isset($_POST['profession'])) {
-      $otherProfession = $_POST['profession'];
-      // Update the profession field with the value of otherProfession
+      $otherProfession = htmlspecialchars($_POST['profession'], ENT_QUOTES, 'UTF-8');
       $profession = $otherProfession;
    } else {
-      // Set a default value for profession when "Others" is not selected
       $otherProfession = '';
    }
 
-   // Check if the email address already exists in the database
-   $emailCheckSql = "SELECT * FROM wma_forms.j1_visa WHERE email_address = '$email_address'";
-   $emailCheckResult = mysqli_query($conn, $emailCheckSql);
+   $emailCheckSql = $conn->prepare("SELECT * FROM wma_forms.j1_visa WHERE email_address = ?");
+   $emailCheckSql->bind_param("s", $email_address);
+   $emailCheckSql->execute();
+   $emailCheckResult = $emailCheckSql->get_result();
 
-   if (mysqli_num_rows($emailCheckResult) > 0) {
-      $errors .= "Error: Email address already exists in the database. \n";
+   if ($emailCheckResult->num_rows > 0) {
+      $errors .= "Error: Email address already exists in the database.\n";
    } else {
-      // Create a variable with the value 'first_name' . '_' . 'last_name'
       $file_input_value = $email_address;
 
-      // Insert data into the j1_visa table in the wma_forms database
-      $insert_sql = "INSERT INTO wma_forms.j1_visa (first_name, last_name, full_address, country, phone_number, email_address, profession, file, login_method)
-                    VALUES ('$first_name', '$last_name', '$full_address', '$country', '$phone_number', '$email_address', '$profession', '$file_input_value', '$login_method')";
+      $insert_sql = $conn->prepare("INSERT INTO wma_forms.j1_visa (first_name, last_name, full_address, country, phone_number, email_address, profession, file, login_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $insert_sql->bind_param("sssssssss", $first_name, $last_name, $full_address, $country, $phone_number, $email_address, $profession, $file_input_value, $login_method);
 
-      if (mysqli_query($conn, $insert_sql)) {
-         $errors .= "Data inserted successfully. \n";
+      if ($insert_sql->execute()) {
+         $errors .= "Data inserted successfully.\n";
+         $mail = new PHPMailer();
+
+         try {
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'admin@westmigrationagency.us'; // Your Gmail address
+            $mail->Password = 'Bridgeprogram2023!'; // Your Gmail password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            //Recipients
+            $mail->setFrom($_POST['email_address']); // Set the "From" address
+            $mail->addAddress('admin@westmigrationagency.us'); // Add the recipient
+
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = 'New Form Submission';
+            $mail->Body = 'Name: ' . $_POST['first_name'] . ', ' . $_POST['last_name'];
+
+            $mail->send();
+            $errors .= 'Email sent successfully!\n';
+         } catch (Exception $e) {
+            $errors .= 'Error sending email: ' . $mail->ErrorInfo . '\n';
+         }
+
       } else {
-         $errors .= "Error: " . mysqli_error($conn) . "\n";
+         $errors .= "Error: " . $conn->error . "\n";
       }
 
-      // Create a directory for the user if it doesn't exist
       $userDirectory = "../../../Administrator/Applicant_Files/{$email_address}";
       if (!file_exists($userDirectory)) {
          mkdir($userDirectory, 0777, true);
@@ -281,7 +307,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       // Upload and move the resume file to the user's directory
       $resumeFileName = $_FILES['resume']['name'];
+      $resumeFileExtension = pathinfo($resumeFileName, PATHINFO_EXTENSION);
+      $resumeFileName = $last_name . "_Resume.pdf"; // Construct the new file name
+
       $resumeFilePath = $userDirectory . '/' . $resumeFileName;
+
       if (move_uploaded_file($_FILES['resume']['tmp_name'], $resumeFilePath)) {
          $errors .= "Resume uploaded successfully. \n";
       } else {
@@ -290,7 +320,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       // Upload and move the passport file to the user's directory
       $passportFileName = $_FILES['passport']['name'];
+      $passportFileExtension = pathinfo($passportFileName, PATHINFO_EXTENSION);
+      $passportFileName = $last_name . "_Passport.pdf"; // Construct the new file name
+
       $passportFilePath = $userDirectory . '/' . $passportFileName;
+
       if (move_uploaded_file($_FILES['passport']['tmp_name'], $passportFilePath)) {
          $errors .= "Passport uploaded successfully. \n";
       } else {
@@ -300,6 +334,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -322,30 +357,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
    <!-- NAV SECTION -->
-   <?php
-   $credentialType = null; // Initialize $credentialType
-   $result = null; // Initialize $result
-   
-   if (isset($_SESSION['user_token'])) {
-      $credentialType = 'google_login';
-      $sql = $conn->prepare("SELECT * FROM wma_users_google WHERE token = ?");
-      $sql->bind_param("s", $_SESSION['user_token']);
-      $sql->execute();
-      $result = $sql->get_result();
-   } elseif (isset($_SESSION['id'])) {
-      $credentialType = 'standard_login';
-      $sql = $conn->prepare("SELECT * FROM wma_users_standard WHERE id = ?");
-      $sql->bind_param("i", $_SESSION['id']);
-      $sql->execute();
-      $result = $sql->get_result();
-   }
-
-   if ($result !== null && $result->num_rows > 0) {
-      $userinfo = $result->fetch_assoc();
-   }
-   ?>
-
-
    <nav class="navbar-parent">
       <div class="navbar-container">
          <div class="navbar-main-container">
@@ -385,10 +396,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                $google_pfp = $userinfo['picture'];
                ?>
                <a href="#" class="navbar-link" style="width: 35px; 
-            aspect-ratio: 1/1; 
-            background-position: center;
-            background-size: cover;
-            background-image: url(<?php echo $google_pfp ?>);" onclick="confirmLogout()">
+                  aspect-ratio: 1/1; 
+                  background-position: center;
+                  background-size: cover;
+                  background-image: url(<?php echo $google_pfp ?>);" onclick="confirmLogout()">
                   <script>
                      function confirmLogout() {
                         var confirmLogout = confirm("Are you sure you want to logout?");
@@ -404,10 +415,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                $pfp = $userinfo['profile_picture'];
                ?>
                <a href="#" class="navbar-link" style="width: 35px; 
-            aspect-ratio: 1/1; 
-            background-position: center;
-            background-size: cover;
-            background-image: url(../../../Users/Standard_User/<?php echo substr($pfp, 3) ?>);" onclick="confirmLogout()">
+                  aspect-ratio: 1/1; 
+                  background-position: center;
+                  background-size: cover;
+                  background-image: url(../../../Users/Standard_User/<?php echo substr($pfp, 3) ?>);"
+                  onclick="confirmLogout()">
                   <script>
                      function confirmLogout() {
                         var confirmLogout = confirm("Are you sure you want to logout?");
@@ -487,8 +499,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         placeholder="# Street, City, State/Province" required>
                   </div>
                </div>
-
-
 
                <div class="profession_fields">
                   <label for="profession">Profession <b>*</b></label>

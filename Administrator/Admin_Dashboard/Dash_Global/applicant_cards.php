@@ -2,6 +2,8 @@
 
 require_once "../Dashboard_Scripts/login_credential.php";
 ?>
+
+<link rel="stylesheet" href="applicant_cards.css">
 <div class="applicant_navigator">
    <h3>Applicants</h3>
    <div class="toolkit">
@@ -82,10 +84,10 @@ require_once "../Dashboard_Scripts/login_credential.php";
 <div id="myModal" class="modal">
    <div class="modal-content">
       <span class="close"><i class="fa-solid fa-xmark"></i></span>
-      <div id="modalContent" class="applicant_picture"></div>
+      <div id="modalContent" class="applicant_picture">
+      </div>
    </div>
 </div>
-
 
 <!-- Add this JavaScript code to your HTML file -->
 <script>
@@ -116,6 +118,17 @@ require_once "../Dashboard_Scripts/login_credential.php";
          var content = `
             <div class="applicant_picture" style="background-image: url(${profilePicture});">
                <p id="modal_id">${id}</p>
+               <div class="applicant_actions">
+                  <a href="../Dash_Applicants/file_manager.php?email=${email}" class="file_manager">
+                     <i class="fa-regular fa-folder-open"></i>
+                  </a>
+                  <a href="" class="applicant_checklist">
+                     <i class="fa-solid fa-list-check"></i>
+                  </a>
+                  <a href="" class="applicant_delete">
+                     <i class="fa-solid fa-trash"></i>
+                  </a>
+               </div>
                <div class="applicant_nameplate">
                   <p style="color: white;"><b style="color: white;">Name:</b> ${lastName}, ${firstName}</p>
                   <p style="color: white;"><b style="color: white;">Date Submitted: </b> ${dateSubmitted}</p>

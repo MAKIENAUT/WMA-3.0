@@ -131,6 +131,51 @@ main {
                      align-items: center;
                      justify-content: center;
                   }
+                  .applicant_actions {
+                     top: 35%;
+                     width: 100%;
+                     height: 50px;
+                     position: absolute;
+
+                     display: none;
+                     align-items: center;
+                     justify-content: space-around;
+                  }
+                     .file_manager,
+                     .applicant_checklist,
+                     .applicant_delete {
+                        height: 100%;
+                        font-size: 20px;
+                        aspect-ratio: 1/1;
+                        border-radius: 5px;
+                        transition: all 0.25s;
+                        text-decoration: none;
+                        background-color: rgb(0, 0, 0, 0.5);
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                     }
+                     .file_manager i{
+                        color: teal;
+                     }
+                     .applicant_checklist i{
+                        color: gold;
+                     }
+                     .applicant_delete i{
+                        color: red;
+                     }
+                        .file_manager:hover,
+                        .applicant_checklist:hover,
+                        .applicant_delete:hover {
+                           transition: all 0.25s;
+                           background-color: rgb(0, 0, 0, 0.7);
+                        }
+
+                     .applicant_picture:hover .applicant_actions{
+                        transition: all 0.25s;
+                        display: flex;
+                     }
                   .applicant_nameplate {
                      bottom: 0px;
                      width: 100%;
