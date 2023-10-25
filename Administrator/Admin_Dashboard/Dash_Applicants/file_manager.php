@@ -4,8 +4,8 @@ require_once "../../Database/wma_administrator.php";
 require_once '../../Database/wma_forms.php';
 
 if (!isset($_SESSION['admin_id']) && empty($_SESSION['admin_id'])) {
-    header('Location: ../../Admin_Login/admin_login.php');
-    exit(); // Make sure to exit after a header redirect
+   header('Location: ../../Admin_Login/admin_login.php');
+   exit();
 }
 
 $user_id = $_SESSION['admin_id'];
@@ -13,10 +13,83 @@ $email_address = $_SESSION['email_address'];
 $username = $_SESSION['username'];
 $access_credential = $_SESSION['access_credential'];
 
-// Check if the form was submitted
+if (isset($_GET['email'])) {
+   $email = $_GET['email'];
+   $query = "SELECT * FROM j1_visa WHERE email_address = '$email'";
+   $result = $conn->query($query);
+
+   $applicants = [];
+
+   if ($result) {
+      while ($row = $result->fetch_assoc()) {
+         $applicants[] = $row;
+      }
+
+      $result->free();
+   } else {
+      echo "Error: " . $conn->error;
+   }
+
+   $conn->close();
+} else {
+   echo "<h1>Email not provided</h1>";
+}
+
+if (!empty($applicants)) {
+   foreach ($applicants as $applicant) {
+      $id = $applicant['id'];
+      $firstName = $applicant['first_name'];
+      $lastName = $applicant['last_name'];
+      $emailAddress = $applicant['email_address'];
+   }
+} else {
+   echo "<h1>No data found for the provided email</h1>";
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Handle form submission here
-    // Make sure to process the uploaded files and update the database accordingly
+   if (isset($_POST['email'])) {
+      $applicantEmail = $_POST['email'];
+      $targetDirectory = "../../Applicant_Files/$applicantEmail/";
+
+      if (!is_dir($targetDirectory)) {
+         mkdir($targetDirectory, 0777, true);
+      }
+
+      foreach ($_FILES as $fileInput => $file) {
+         $fileName = $file['name'];
+         $fileTmpName = $file['tmp_name'];
+         $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+         $fieldInputName = strtolower(basename($fileInput));
+
+         // Get last name of the applicant
+         $lastName = $applicant['last_name'];
+
+         // Define an array of accepted file types
+         $acceptedTypes = ['resume', 'passport', 'background_check', 'employment_letter', 'colleague_reference', 'supervisor_reference', 'cultural_activity_letter', 'diploma', 'foreign_education_evaluation', 'teaching_certificate', 'language_proficiency', 'offer_letter'];
+
+         if (in_array($fieldInputName, $acceptedTypes)) {
+            $fieldInputName = ucwords($fieldInputName, "_"); // Capitalize after underscore
+            $fileNewName = $lastName . "_" . $fieldInputName . ".pdf"; // Adjusted line
+            $targetFile = $targetDirectory . $fileNewName;
+
+            if ($fileType == "pdf") {
+               if (!file_exists($targetFile)) {
+                  if (move_uploaded_file($fileTmpName, $targetFile)) {
+                     // File uploaded successfully
+                     // You can also update the database with the new file name
+                  } else {
+                     echo "Error uploading $fileName.";
+                  }
+               }
+            } else {
+               echo "Invalid file type for $fileName. Please upload a PDF.";
+            }
+         } else {
+            echo "Invalid field name $fieldInputName.";
+         }
+      }
+   }
 }
 ?>
 
@@ -70,98 +143,66 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          </div>
 
          <div class="applicant_database">
-            <?php
-            if (isset($_GET['email'])) {
-               $email = $_GET['email'];
-               $query = "SELECT * FROM j1_visa WHERE email_address = '$email'";
-               $result = $conn->query($query);
 
-               $applicants = [];
+            <div class='applicant_card'>
+               <p>ID:
+                  <?php echo $applicant['id']; ?>
+               </p>
+               <p>First Name:
+                  <?php echo $applicant['first_name']; ?>
+               </p>
+               <p>Last Name:
+                  <?php echo $applicant['last_name']; ?>
+               </p>
+               <p>Email Address:
+                  <?php echo $applicant['email_address']; ?>
+               </p>
 
-               if ($result) {
-                  while ($row = $result->fetch_assoc()) {
-                     $applicants[] = $row;
-                  }
+            </div>
 
-                  $result->free();
-               } else {
-                  echo "Error: " . $conn->error;
-               }
-
-               $conn->close();
-            } else {
-               echo "<h1>Email not provided</h1>";
-            }
-            ?>
-
-            <?php
-            if (!empty($applicants)) {
-               foreach ($applicants as $applicant) {
-                  ?>
-                  <div class='applicant_card'>
-                     <p>ID:
-                        <?php echo $applicant['id']; ?>
-                     </p>
-                     <p>First Name:
-                        <?php echo $applicant['first_name']; ?>
-                     </p>
-                     <p>Last Name:
-                        <?php echo $applicant['last_name']; ?>
-                     </p>
-                     <p>Email Address:
-                        <?php echo $applicant['email_address']; ?>
-                     </p>
-
-                  </div>
-                  <?php
-               }
-            } else {
-               echo "<h1>No data found for the provided email</h1>";
-            }
-            ?>
 
             <div class='applicant_card'>
                <h2>Upload Documents</h2>
                <form method="post" enctype="multipart/form-data">
-                  <label for="resume">Resume (.pdf):</label>
-                  <input type="file" id="resume" name="resume" accept=".pdf" required><br>
+                  <?php
+                  $email = $applicant['email_address'];
+                  $targetDirectory = "../../Applicant_Files/$email/";
 
-                  <label for="passport">Passport (.pdf):</label>
-                  <input type="file" id="passport" name="passport" accept=".pdf" required><br>
+                  // Check if directory exists
+                  if (is_dir($targetDirectory)) {
+                     $existingFiles = scandir($targetDirectory);
 
-                  <label for="background_check">Background Check Report (.pdf):</label>
-                  <input type="file" id="background_check" name="background_check" accept=".pdf" required><br>
+                     // List of expected field names
+                     $fieldNames = [
+                        'Resume',
+                        'Passport',
+                        'Background_Check',
+                        'Employment_Letter',
+                        'Colleague_Reference',
+                        'Supervisor_Reference',
+                        'Cultural_Activity_Letter',
+                        'Diploma',
+                        'Foreign_Education_Evaluation',
+                        'Teaching_Certificate',
+                        'Language_Proficiency',
+                        'Offer_Letter'
+                     ];
 
-                  <label for="employment_letter">Employment Letter of Reference (.pdf):</label>
-                  <input type="file" id="employment_letter" name="employment_letter" accept=".pdf" required><br>
+                     foreach ($fieldNames as $fieldName) {
+                        $fileExists = in_array($applicant['last_name'] . "_" . $fieldName . ".pdf", $existingFiles);
+                        $inputType = $fileExists ? 'hidden' : 'file';
+                        $inputName = $fileExists ? 'existing_file' : $fieldName;
+                        $labelText = $fileExists ? "$fieldName (File Exists)" : "$fieldName (.pdf)";
 
-                  <label for="colleague_reference">Letter of Reference from a Colleague (.pdf):</label>
-                  <input type="file" id="colleague_reference" name="colleague_reference" accept=".pdf" required><br>
+                        echo "<label for='$fieldName'>$labelText:</label>";
+                        echo "<input type='$inputType' id='$fieldName' name='$inputName' accept='.pdf' required><br>";
+                     }
+                  } else {
+                     echo "<p>Directory $targetDirectory does not exist.</p>";
+                  }
+                  ?>
 
-                  <label for="supervisor_reference">Letter of Reference from a Supervisor (.pdf):</label>
-                  <input type="file" id="supervisor_reference" name="supervisor_reference" accept=".pdf" required><br>
-
-                  <label for="cultural_activity_letter">Current School Cultural Activity Letter (.pdf):</label>
-                  <input type="file" id="cultural_activity_letter" name="cultural_activity_letter" accept=".pdf"
-                     required><br>
-
-                  <label for="diploma">Diploma (.pdf):</label>
-                  <input type="file" id="diploma" name="diploma" accept=".pdf" required><br>
-
-                  <label for="foreign_education_evaluation">Foreign Education Evaluation (.pdf):</label>
-                  <input type="file" id="foreign_education_evaluation" name="foreign_education_evaluation" accept=".pdf"
-                     required><br>
-
-                  <label for="teaching_certificate">Copy of Teaching Certificate (.pdf):</label>
-                  <input type="file" id="teaching_certificate" name="teaching_certificate" accept=".pdf" required><br>
-
-                  <label for="language_proficiency">Proof of Language Proficiency (.pdf):</label>
-                  <input type="file" id="language_proficiency" name="language_proficiency" accept=".pdf" required><br>
-
-                  <label for="offer_letter">Teacher School Offer Letter (.pdf):</label>
-                  <input type="file" id="offer_letter" name="offer_letter" accept=".pdf" required><br>
-
-                  <input type="hidden" name="email" value="<?php echo $applicant['email_address']; ?>">
+                  <input type="hidden" name="email" value="<?php echo $email; ?>">
                   <input type="submit" value="Upload">
                </form>
             </div>
