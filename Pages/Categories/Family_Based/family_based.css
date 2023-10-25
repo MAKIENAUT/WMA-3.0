@@ -1,0 +1,39 @@
+main {
+   width: 100dvw;
+   height: 100dvh;
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+   justify-content: center;
+   background-color: rgba(0, 77, 77, 1);
+}
+
+main div {
+   padding-inline: var(--mobile-padding-inline);
+   display: flex;
+   flex-flow: column;
+   gap: var(--gap-1rem);
+}
+
+main h1 {
+   font-size: var(--hero-header);
+   font-family: 'Lora', serif;
+   font-weight: 700;
+   color: var(--white);
+}
+
+main a {
+   color: var(--white);
+}
+
+@media screen and (min-width: 720px) {
+   main div {
+      padding-inline: var(--tablet-padding-inline);
+   }
+}
+
+@media screen and (min-width: 980px) {
+   main div {
+      padding-inline: var(--laptop-padding-inline);
+   }
+}

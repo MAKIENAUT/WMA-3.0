@@ -17,6 +17,12 @@ main {
    color: var(--white);
 }
 
+.main_left img {
+   width: 100%;
+   max-width: 100px;
+   aspect-ratio: 1/1;
+}
+
 .main_right {
    padding-inline: var(--mobile-padding-inline);
 }
@@ -218,15 +224,19 @@ form {
 input[type=submit] {
    padding: 15px;
    border-radius: 5px;
-   background-color: transparent;
-   border: 1px solid var(--alt-background-color-2);
+   background-color: var(--main-color-3);
+   color: var(--white);
+   border: 2px solid transparent;
    cursor: pointer;
    font-weight: 600;
+   transition: var(--gen-transition);
 }
 
 input[type=submit]:hover,
 input[type=submit]:active {
-   background-color: rgb(210, 210, 210);
+   border: 2px solid var(--main-color-3);
+   color: var(--alt-color-3);
+   background-color: var(--white);
 }
 
 @media screen and (min-width: 720px) {
@@ -261,14 +271,22 @@ input[type=submit]:active {
 @media screen and (min-width: 980px) {
    main {
       margin-top: 60px;
-      flex-flow: row;
       gap: 0;
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 65%;
    }
 
    .main_left {
+      height: 100dvh;
       padding-top: 25px;
-      padding-bottom: 0;
       padding-inline: var(--laptop-padding-inline) 37.5px;
+      position: sticky;
+      top: 60px;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
    }
 
    .main_right {

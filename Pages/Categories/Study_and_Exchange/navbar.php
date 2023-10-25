@@ -1,7 +1,4 @@
 <?php
-session_start();
-require_once '../../Users/User_Login_Google/config.php';
-
 $credentialType = null; // Initialize $credentialType
 $result = null; // Initialize $result
 
@@ -75,7 +72,7 @@ if ($result !== null && $result->num_rows > 0) {
                function confirmLogout() {
                   var confirmLogout = confirm("Are you sure you want to logout?");
                   if (confirmLogout) {
-                     window.location.href = '../../Users/User_Login_Google/logout.php';
+                     window.location.href = '../../../Users/User_Login_Google/logout.php';
                   }
                }
             </script>
@@ -94,7 +91,7 @@ if ($result !== null && $result->num_rows > 0) {
                function confirmLogout() {
                   var confirmLogout = confirm("Are you sure you want to logout?");
                   if (confirmLogout) {
-                     window.location.href = '../../Users/User_Login_Google/logout.php';
+                     window.location.href = '../../../Users/User_Login_Google/logout.php';
                   }
                }
             </script>
