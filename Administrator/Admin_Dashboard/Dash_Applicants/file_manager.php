@@ -1,5 +1,6 @@
 <?php
 require_once "../Dashboard_Scripts/session_segregator.php";
+require_once "../Dashboard_Scripts/wma_users_tables.php";
 require_once "../../Database/wma_administrator.php";
 require_once '../../Database/wma_forms.php';
 
@@ -79,14 +80,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                      // File uploaded successfully
                      // You can also update the database with the new file name
                   } else {
-                     echo "Error uploading $fileName.";
+                     echo "<script>console.log('Error uploading $fileName.');</script>";
                   }
                }
             } else {
-               echo "Invalid file type for $fileName. Please upload a PDF.";
+               echo "<script>console.log('Invalid file type for $fileName. Please upload a PDF.');</script>";
             }
          } else {
-            echo "Invalid field name $fieldInputName.";
+            echo "<script>console.log('Invalid field name $fieldInputName.');</script>";
          }
       }
    }
@@ -98,6 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
    <meta charset="UTF-8">
+   <link rel="stylesheet" href="file_manager.css">
    <link rel="stylesheet" href="../Dash_Overview/dash_overview.css">
    <link rel="stylesheet" href="../Dash_Global/dash_global.css">
    <link rel="stylesheet" href="../../../Pages/Global/global.css" />
@@ -122,10 +124,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          justify-content: space-evenly;
          height: 100%;
       }
-
-      .applicant_card {
-         height: 75%;
-      }
    </style>
 </head>
 
@@ -142,9 +140,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </h1>
          </div>
 
-         <div class="applicant_database">
-
+         <div class="file_manager_panel">
             <div class='applicant_card'>
+
+               <?php
+               if ($applicant['login_method'] === 'google_login') {
+                  foreach ($google_users as $user): ?>
+                     <div class="applicant_pfp" style="background-image: url(<?php echo $user['picture'] ?>);">
+
+                     </div>
+                  <?php endforeach;
+               } elseif ($applicant['login_method'] === 'standard_login') {
+                  foreach ($standard_users as $user): ?>
+                     <div class="applicant_pfp"
+                        style="background-image: url(../../../Users/Standard_User/Standard_Profile/Profile_Pictures/<?php echo $user['email'] ?>/profile_picture.jpg);">
+
+                     </div>
+                  <?php endforeach;
+               }
+               ?>
+
                <p>ID:
                   <?php echo $applicant['id']; ?>
                </p>
@@ -154,25 +169,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                <p>Last Name:
                   <?php echo $applicant['last_name']; ?>
                </p>
+               <p>Full Address:
+                  <?php echo $applicant['full_address']; ?>
+               </p>
+               <p>Country:
+                  <?php echo $applicant['country']; ?>
+               </p>
+               <p>Phone Number:
+                  <?php echo $applicant['phone_number']; ?>
+               </p>
                <p>Email Address:
                   <?php echo $applicant['email_address']; ?>
                </p>
-
+               <p>Profession:
+                  <?php echo $applicant['profession']; ?>
+               </p>
+               <p>Date Submitted:
+                  <?php echo $applicant['date_submitted']; ?>
+               </p>
+               <p>File:
+                  <?php echo $applicant['file']; ?>
+               </p>
+               <p>Login Method:
+               </p>
             </div>
 
-
-            <div class='applicant_card'>
+            <div class='file_management'>
                <h2>Upload Documents</h2>
                <form method="post" enctype="multipart/form-data">
                   <?php
                   $email = $applicant['email_address'];
                   $targetDirectory = "../../Applicant_Files/$email/";
 
-                  // Check if directory exists
                   if (is_dir($targetDirectory)) {
                      $existingFiles = scandir($targetDirectory);
 
-                     // List of expected field names
                      $fieldNames = [
                         'Resume',
                         'Passport',
@@ -190,23 +221,90 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                      foreach ($fieldNames as $fieldName) {
                         $fileExists = in_array($applicant['last_name'] . "_" . $fieldName . ".pdf", $existingFiles);
-                        $inputType = $fileExists ? 'hidden' : 'file';
-                        $inputName = $fileExists ? 'existing_file' : $fieldName;
-                        $labelText = $fileExists ? "$fieldName (File Exists)" : "$fieldName (.pdf)";
+                        $labelText = $fileExists ? $applicant['last_name'] . "_" . $fieldName . ".pdf" : "$fieldName (.pdf)";
+                        ?>
 
-                        echo "<label for='$fieldName'>$labelText:</label>";
-                        echo "<input type='$inputType' id='$fieldName' name='$inputName' accept='.pdf' required><br>";
+                        <?php if ($fileExists): ?>
+                           <div class="existing_file">
+                              <i class='fa fa-file-pdf' id="file_icon"></i>
+                              <span>
+                                 <?= $labelText ?>
+                              </span>
+                              <div class="file_actions">
+                                 <a href='<?= "$targetDirectory/$applicant[last_name]_$fieldName.pdf" ?>' class='download_link'
+                                    download><i class='fa fa-download'></i>
+                                 </a>
+                                 <a href='#' class='delete_link' onclick='confirmDelete("<?= urlencode($applicant['last_name'] . "_" . $fieldName . ".pdf") ?>", "<?= urlencode($email) ?>")'><i class='fa fa-trash'></i></a>
+
+                                 <script>
+                                    function confirmDelete(fileName, email) {
+                                       var confirmDelete = confirm("Are you sure you want to delete " + fileName + "?");
+
+                                       if (confirmDelete) {
+                                          window.location.href = 'delete_file.php?file=' + fileName + '&email=' + email;
+                                       }
+                                    }
+                                 </script>
+                              </div>
+                           </div>
+                        <?php else: ?>
+                           <div class="file-drop-zone" id="fileDropZone<?= $fieldName ?>">
+                              <label class="file-label" for='<?= $fieldName ?>'>
+                                 <span>
+                                    <?= $labelText ?>:
+                                 </span>
+                                 <span class="drop-message">Drag & Drop files here or click to upload</span>
+                              </label>
+                              <input type='file' id='<?= $fieldName ?>' name='<?= $fieldName ?>' accept='.pdf'
+                                 style="display:none;">
+                           </div>
+                        <?php endif; ?>
+
+                        <script>
+                           document.addEventListener('DOMContentLoaded', function () {
+                              var fileDropZone<?= $fieldName ?> = document.getElementById('fileDropZone<?= $fieldName ?>');
+                              var fileInput<?= $fieldName ?> = document.getElementById('<?= $fieldName ?>');
+
+                              fileDropZone<?= $fieldName ?>.addEventListener('dragover', function (e) {
+                                 e.preventDefault();
+                                 fileDropZone<?= $fieldName ?>.classList.add('active');
+                              });
+
+                              fileDropZone<?= $fieldName ?>.addEventListener('dragleave', function () {
+                                 fileDropZone<?= $fieldName ?>.classList.remove('active');
+                              });
+
+                              fileDropZone<?= $fieldName ?>.addEventListener('drop', function (e) {
+                                 e.preventDefault();
+                                 var files = e.dataTransfer.files;
+                                 fileInput<?= $fieldName ?>.files = files;
+                                 fileDropZone<?= $fieldName ?>.classList.remove('active');
+                              });
+
+                              fileDropZone<?= $fieldName ?>.addEventListener('click', function () {
+                                 fileInput<?= $fieldName ?>.click();
+                              });
+
+                              fileInput<?= $fieldName ?>.addEventListener('change', function () {
+                                 var fileName = this.files[0].name;
+
+                                 fileDropZone<?= $fieldName ?>.classList.add('file-uploaded');
+                                 fileDropZone<?= $fieldName ?>.querySelector('.drop-message').textContent = fileName;
+                              });
+                           });
+                        </script>
+
+                        <?php
                      }
                   } else {
                      echo "<p>Directory $targetDirectory does not exist.</p>";
                   }
                   ?>
 
-                  <input type="hidden" name="email" value="<?php echo $email; ?>">
-                  <input type="submit" value="Upload">
+                  <input type="hidden" name="email" value="<?= $email ?>">
+                  <div class="submit_button"><input type="submit" value="Upload"></div>
                </form>
             </div>
-
          </div>
       </div>
    </main>

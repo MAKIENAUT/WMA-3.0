@@ -2,13 +2,14 @@
 
 require_once "../Dashboard_Scripts/login_credential.php";
 
-
 $current_page = $_SERVER['REQUEST_URI'];
 $is_overview_page = strpos($current_page, 'dash_overview.php') !== false;
 $is_applicants_page = strpos($current_page, 'dash_applicants.php') !== false;
 $is_demographic_page = strpos($current_page, 'dash_demographic.php') !== false;
 $is_administrators_page = strpos($current_page, 'dash_administrators.php') !== false;
 $is_news_page = strpos($current_page, 'dash_news.php') !== false;
+$is_file_manager_page = strpos($current_page, 'file_manager.php') !== false; // Added this line
+
 ?>
 
 <nav>
@@ -54,11 +55,14 @@ $is_news_page = strpos($current_page, 'dash_news.php') !== false;
             <p <?php echo $is_overview_page ? 'style="color: goldenrod;"' : ''; ?>>Overview</p>
          </a>
       </div>
-      <div class="applicants_link dash_links <?php echo $is_applicants_page ? 'dynamic_style' : ''; ?>" <?php echo $is_applicants_page ? 'style="background-color: rgba(255, 255, 255, 0.1);"' : ''; ?>>
+      <div
+         class="applicants_link dash_links <?php echo ($is_applicants_page || $is_file_manager_page) ? 'dynamic_style' : ''; ?>"
+         <?php echo ($is_applicants_page || $is_file_manager_page) ? 'style="background-color: rgba(255, 255, 255, 0.1);"' : ''; ?>>
          <a href="../../Admin_Dashboard/Dash_Applicants/dash_applicants.php">
             <i class="fa-solid fa-users-rectangle"
-               style="<?php echo $is_applicants_page ? 'color: goldenrod;' : ''; ?>"></i>
-            <p <?php echo $is_applicants_page ? 'style="color: goldenrod;"' : ''; ?>>Applicants</p>
+               style="<?php echo ($is_applicants_page || $is_file_manager_page) ? 'color: goldenrod;' : ''; ?>"></i>
+            <p <?php echo ($is_applicants_page || $is_file_manager_page) ? 'style="color: goldenrod;"' : ''; ?>>
+               Applicants</p>
          </a>
       </div>
       <div class="demographic_link dash_links <?php echo $is_demographic_page ? 'dynamic_style' : ''; ?>" <?php echo $is_demographic_page ? 'style="background-color: rgba(255, 255, 255, 0.1);"' : ''; ?>>

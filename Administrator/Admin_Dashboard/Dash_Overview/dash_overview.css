@@ -6,467 +6,524 @@ main {
    gap: 10px;
    display: flex;
 }
-   .main_left {
-      width: 70%;
 
-      gap: 10px;
-      display: flex;
-      flex-direction: column;
-   }
-      .main_title {
-         height: 5%;
-         width: 40%;
-         padding-left: 10px;
+.main_left {
+   width: 70%;
 
-         display: flex;
-         align-items: center;
-      }
-         .main_title h1 {
-            height: 100%;
-            display: flex;
-            align-items: center;
-         }
+   gap: 10px;
+   display: flex;
+   flex-direction: column;
+}
 
-      .applicant_database {
-         width: 100%;
-         height: 55%;
-         padding: 10px;
-         border-radius: 5px;
-         border: 1px solid goldenrod;
-         position: relative;
-         
-         gap: 10px;
-         display: flex;
-         align-items: center;
-         flex-direction: column;
-         justify-content: center;
-      }
-         .applicant_navigator {
-            width: 100%;
-            height: 10%;
+.main_title {
+   height: 5%;
+   width: 40%;
+   padding-left: 10px;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-         }
-            .toolkit {
-               width: 60%;
-               gap: 10px;
-               display: flex;
-               align-items: center;
-               justify-content: space-between;
-            }
-               .pagination {
-                  width: 50%;
-                  font-size: 0.8rem;
-               }
-                  .pagination a {
-                     padding: 0px 3px;
-                     transition: all 0.25s;
-                     text-decoration: none;
-                  }
-                  .pagination a.active {
-                     color: gold;
-                  }
-                  .pagination a:hover {
-                     color: goldenrod;
-                     transition: all 0.25s;
-                     text-decoration: underline;
-                  }
-               .search_bar {
-                  width: 50%;
-               }
-                  .search_bar input {
-                     width: 100%;
-                     height: 30px;
-                     border-radius: 5px;
-                     text-indent: 10px;
-                     background-color: transparent;
-                     border: 1px solid rgb(149, 149, 149, 0.8);
-                  }     
-         .applicant_card_container {
-            width: 100%;
-            height: 90%;
-            flex-wrap: wrap;
-            overflow-y: scroll;
+   display: flex;
+   align-items: center;
+}
 
-            gap: 10px;
-            display: flex;
-            justify-content: flex-start;
-         }
-            .applicant_card {
-               width: 24%;
-               height: 85%;
-               border-radius: 5px;
-               padding: 5px;
-               border: 1px solid rgb(72, 72, 72);
+.main_title h1 {
+   height: 100%;
+   display: flex;
+   align-items: center;
+}
 
-               display: flex;
-               align-items: center;
-               flex-direction: column;
-               justify-content: flex-start;
-            }
-            
-               .applicant_picture {
-                  width: 100%;
-                  aspect-ratio: 1/1;
-                  border-radius: 5px;
-                  position: relative;
+.applicant_database {
+   width: 100%;
+   height: 55%;
+   padding: 10px;
+   border-radius: 5px;
+   border: 1px solid goldenrod;
+   position: relative;
 
-                  background-size: cover;
-                  background-position: center;
-                  background-repeat: no-repeat;
-               }
-                  #modal_id {
-                     top: 5px;
-                     left: 5px;
-                     width: 25px;
-                     height: 25px;
-                     color: white;
-                     position: absolute;
-                     border-radius: 5px;
-                     background-color: rgb(0, 0, 0, 0.5);
+   gap: 10px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: center;
+}
 
-                     display: flex;
-                     align-items: center;
-                     justify-content: center;
-                  }
-                  .applicant_actions {
-                     top: 35%;
-                     width: 100%;
-                     height: 50px;
-                     position: absolute;
+.applicant_navigator {
+   width: 100%;
+   height: 10%;
 
-                     display: none;
-                     align-items: center;
-                     justify-content: space-around;
-                  }
-                     .file_manager,
-                     .applicant_checklist,
-                     .applicant_delete {
-                        height: 100%;
-                        font-size: 20px;
-                        aspect-ratio: 1/1;
-                        border-radius: 5px;
-                        transition: all 0.25s;
-                        text-decoration: none;
-                        background-color: rgb(0, 0, 0, 0.5);
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
 
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                     }
-                     .file_manager i{
-                        color: teal;
-                     }
-                     .applicant_checklist i{
-                        color: gold;
-                     }
-                     .applicant_delete i{
-                        color: red;
-                     }
-                        .file_manager:hover,
-                        .applicant_checklist:hover,
-                        .applicant_delete:hover {
-                           transition: all 0.25s;
-                           background-color: rgb(0, 0, 0, 0.7);
-                        }
+.toolkit {
+   width: 60%;
+   gap: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
 
-                     .applicant_picture:hover .applicant_actions{
-                        transition: all 0.25s;
-                        display: flex;
-                     }
-                  .applicant_nameplate {
-                     bottom: 0px;
-                     width: 100%;
-                     padding: 5px;
-                     position: absolute;
-                     background-color: rgb(0, 0, 0, 0.5);
-                  }
-                     .applicant_nameplate p {
-                        color: white;
-                     }
-                     .applicant_fullname{
-                        font-size: 1rem;
-                     }
-                     .submit_date {
-                        font-size: 0.8rem;
-                     }
-                  .other_details,
-                  .email_address {
-                     width: 100%;
-                     font-size: 0.8rem;
-                  }
+.pagination {
+   width: 50%;
+   font-size: 0.8rem;
+}
 
-                  .other_details {
-                     height: 10%;
+.pagination a {
+   padding: 0px 3px;
+   transition: all 0.25s;
+   text-decoration: none;
+}
 
-                     display: flex;
-                     align-items: center;
-                     justify-content: space-between;
-                  }
-                  .email_address {
-                     height: 15%;
-                     word-wrap: break-word;
-                     text-decoration: underline;
-                  }
-                  /* Add this CSS code to your HTML file */
-         .modal {
-            top: 50%;
-            left: 50%;
-            z-index: 1;
-            width: 300px;
-            aspect-ratio: 3/4;
-            position: absolute;
-            border-radius: 5px;
-            border: 1px solid gold;
-            transform: translate(-50%, -50%);
+.pagination a.active {
+   color: gold;
+}
 
-            
-            display: none;
-            align-items: center;
-            justify-content: center;
-         }
-            .modal-content {
-               width: 100%;
-               height: 100%;
-               padding: 10px;
-               border-radius: 5px;
-               background-color: rgba(0, 0, 0, 0.7);
-               position: relative;
-            }
+.pagination a:hover {
+   color: goldenrod;
+   transition: all 0.25s;
+   text-decoration: underline;
+}
 
-               .modal-content p {
-                  color: white;
-                  font-size: 0.9rem;
-               }
-               .modal-content p b {
-                  color: teal;
-               }
-               .modal-content p a{
-                  color: white;
-               }
+.search_bar {
+   width: 50%;
+}
 
-         .close {
-            top: -15px;
-            right: -10px;
-            width: 25px;
-            height: 25px;
-            font-weight: bold;
-            position: absolute;
-            border-radius: 50%;
+.search_bar input {
+   width: 100%;
+   height: 30px;
+   border-radius: 5px;
+   text-indent: 10px;
+   background-color: transparent;
+   border: 1px solid rgb(149, 149, 149, 0.8);
+}
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-         }
-            .close i {
-               font-size: 2rem;
-               aspect-ratio: 1/1;
-               transition: all 0.25s;
-               color: rgb(255, 0, 0, 0.6);
-               text-shadow: 0 0 20px white;
-            }
-               .close i:hover,
-               .close i:focus {
-                  color: red;
-                  cursor: pointer;
-                  text-decoration: none;
-                  transition: all 0.25s;
-                  color: rgb(255, 0, 0, 1);
-                  text-shadow: 0 0 20px rgb(252, 106, 106);
-               }
+.applicant_card_container {
+   width: 100%;
+   height: 90%;
+   flex-wrap: wrap;
+   overflow-y: scroll;
 
-      .demographic_stats {
-         width: 100%;
-         height: 40%;
-         padding: 10px;
-         overflow: hidden;
-         border-radius: 5px;
-         border: 1px solid teal ;
-      }
-         .demographic_navigator {
-            width: 100%;
-            height: 15%;
+   gap: 10px;
+   display: flex;
+   justify-content: flex-start;
+}
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-         }
-            .demographic_toolkit {
-               width: 60%;
-               gap: 10px;
-               display: flex;
-               align-items: center;
-               justify-content: space-between;
-            }
-            .demographic_toolkit button {
-               width: 150px;
-               height: 30px;
-               border-radius: 5px;
-               background-color: transparent;
-               border: 1px solid rgb(149, 149, 149, 0.8);
-            }
-            #chart_div {
-               width: 100%;
-               height: 250px;
-               
-               align-items: center;
-               justify-content: center;
-            }
-         .user_card_container {
-            width: 100%;
-            height: 90%;
-            flex-wrap: wrap;
-            overflow-y: scroll;
+.applicant_card {
+   width: 24%;
+   height: 85%;
+   border-radius: 5px;
+   padding: 5px;
+   border: 1px solid rgb(72, 72, 72);
 
-            gap: 10px;
-            display: flex;
-            justify-content: flex-start;
-         }
-            .user_cards {
-               width: 18%;
-               height: 85%;
-               border-radius: 5px;
-               padding: 5px;
-               border: 1px solid rgb(72, 72, 72);
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: flex-start;
+}
 
-               display: flex;
-               align-items: center;
-               flex-direction: column;
-               justify-content: flex-start;
-            }
-               .demographic_picture {
-                  width: 65%;
-                  border-radius: 5px;
-                  aspect-ratio: 1/1;
-                  background-size: cover;
-                  background-position: center;
-                  background-repeat: no-repeat;
-               }
-               .user_cards p {
-                  width: 100%;
-                  font-size: 0.8rem;
-                  word-wrap: break-word;
-               }
+.applicant_picture {
+   width: 100%;
+   aspect-ratio: 1/1;
+   border-radius: 5px;
+   position: relative;
 
-   .main_right {
-      width: 30%;
-      height: 100%;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
 
-      gap: 10px;
-      display: flex;
-      flex-direction: column;
-   }
-      .post_stats {
-         width: 100%;
-         height: 40%;
-         padding: 10px;
-         border-radius: 5px;
-         border: 1px solid red;
-      }
-      .admin_profile {
-         width: 100%;
-         height: 25%;
-         padding: 10px;
-         border-radius: 5px;
-         border: 1px solid lightgreen;
-      }
-         .admin_profile h3 {
-            width: 100%;
-            height: 30px;
-         }
-            .admin_profile h3 span {
-               font-size: 1rem;
-               font-weight: 400;
-            }
-         .admin_profile_body {
-            width: 100%;
-            height: 80%;
-            display: flex;
+#modal_id {
+   top: 5px;
+   left: 5px;
+   width: 25px;
+   height: 25px;
+   color: white;
+   position: absolute;
+   border-radius: 5px;
+   background-color: rgb(0, 0, 0, 0.5);
 
-            gap: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-         }
-            .admin_pfp {
-               width: 30%;
-               aspect-ratio: 1/1;
-               border-radius: 5px;
-               background-size: cover;
-               background-position: center;
-               background-repeat: no-repeat;
-            }
-               .admin_pfp img {
-                  width: 100%;
-                  height: 100%;
-                  border-radius: 10px;
-                  box-shadow: 0px 0px 10px rgb(255, 255, 255, 0.3);
-               }
-            .admin_info {
-               width: 70%;
-               word-wrap: break-word;
-            }
-               .admin_info p {
-                  font-size: 0.8rem;
-               }
-               .admin_info p b {
-                  color: green;
-               }
-      .admin_stats {
-         width: 100%;
-         height: 35%;
-         padding: 10px;
-         border-radius: 5px;
-         border: 1px solid lightblue;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
 
-         display: flex;
-         align-items: center;
-         flex-direction: column;
-         justify-content: space-between;
-      }
-         .admin_stats h3 {
-            width: 100%;
-            height: 25px;
-         }
-         .admin_cards_container {
-            width: 100%;
-            height: 85%;
-            flex-wrap: wrap;
-            overflow-y: scroll;
-            
-            gap: 10px;
-            display: flex;
-            justify-content: flex-start;
-         }
-            .admin_cards {
-               width: 100px;
-               height: 140px;
-               border-radius: 5px;
-               padding: 5px;
-               border: 1px solid rgb(72, 72, 72);
+.applicant_actions {
+   top: 35%;
+   width: 100%;
+   height: 50px;
+   position: absolute;
 
-               gap: 0px;
-               display: flex;
-               align-items: center;
-               flex-direction: column;
-               justify-content: space-between;
-            }
-               .admin_card_pfp {
-                  width: 100%;
-                  aspect-ratio: 1/1;
-                  border-radius: 5px;
-                  background-size: cover;
-                  background-position: center;
-                  background-repeat: no-repeat;
-               }
-               .admin_username {
-                  font-size: 0.8rem;
-               }
-               .admin_email,
-               .last_login,
-               .last_logout {
-                  display: none;
-               }
-               
+   display: none;
+   align-items: center;
+   justify-content: space-around;
+}
+
+.file_manager,
+.applicant_checklist,
+.applicant_delete {
+   height: 100%;
+   font-size: 20px;
+   aspect-ratio: 1/1;
+   border-radius: 5px;
+   transition: all 0.25s;
+   text-decoration: none;
+   background-color: rgb(0, 0, 0, 0.5);
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.file_manager i {
+   color: teal;
+}
+
+.applicant_checklist i {
+   color: gold;
+}
+
+.applicant_delete i {
+   color: red;
+}
+
+.file_manager:hover,
+.applicant_checklist:hover,
+.applicant_delete:hover {
+   transition: all 0.25s;
+   background-color: rgb(0, 0, 0, 0.7);
+}
+
+.applicant_picture:hover .applicant_actions {
+   transition: all 0.25s;
+   display: flex;
+}
+
+.applicant_nameplate {
+   bottom: 0px;
+   width: 100%;
+   padding: 5px;
+   position: absolute;
+   background-color: rgb(0, 0, 0, 0.5);
+}
+
+.applicant_nameplate p {
+   color: white;
+}
+
+.applicant_fullname {
+   font-size: 1rem;
+}
+
+.submit_date {
+   font-size: 0.8rem;
+}
+
+.other_details,
+.email_address {
+   width: 100%;
+   font-size: 0.8rem;
+}
+
+.other_details {
+   height: 10%;
+
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.email_address {
+   height: 15%;
+   word-wrap: break-word;
+   text-decoration: underline;
+}
+
+/* Add this CSS code to your HTML file */
+.modal {
+   top: 50%;
+   left: 50%;
+   z-index: 1;
+   width: 300px;
+   aspect-ratio: 3/4;
+   position: absolute;
+   border-radius: 5px;
+   border: 1px solid gold;
+   transform: translate(-50%, -50%);
+
+
+   display: none;
+   align-items: center;
+   justify-content: center;
+}
+
+.modal-content {
+   width: 100%;
+   height: 100%;
+   padding: 10px;
+   border-radius: 5px;
+   background-color: rgba(0, 0, 0, 0.7);
+   position: relative;
+}
+
+.modal-content p {
+   color: white;
+   font-size: 0.9rem;
+}
+
+.modal-content p b {
+   color: teal;
+}
+
+.modal-content p a {
+   color: white;
+}
+
+.close {
+   top: -15px;
+   right: -10px;
+   width: 25px;
+   height: 25px;
+   font-weight: bold;
+   position: absolute;
+   border-radius: 50%;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.close i {
+   font-size: 2rem;
+   aspect-ratio: 1/1;
+   transition: all 0.25s;
+   color: rgb(255, 0, 0, 0.6);
+   text-shadow: 0 0 20px white;
+}
+
+.close i:hover,
+.close i:focus {
+   color: red;
+   cursor: pointer;
+   text-decoration: none;
+   transition: all 0.25s;
+   color: rgb(255, 0, 0, 1);
+   text-shadow: 0 0 20px rgb(252, 106, 106);
+}
+
+.demographic_stats {
+   width: 100%;
+   height: 40%;
+   padding: 10px;
+   overflow: hidden;
+   border-radius: 5px;
+   border: 1px solid teal;
+}
+
+.demographic_navigator {
+   width: 100%;
+   height: 15%;
+
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.demographic_toolkit {
+   width: 60%;
+   gap: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.demographic_toolkit button {
+   width: 150px;
+   height: 30px;
+   border-radius: 5px;
+   background-color: transparent;
+   border: 1px solid rgb(149, 149, 149, 0.8);
+}
+
+#chart_div {
+   width: 100%;
+   height: 250px;
+
+   align-items: center;
+   justify-content: center;
+}
+
+.user_card_container {
+   width: 100%;
+   height: 90%;
+   flex-wrap: wrap;
+   overflow-y: scroll;
+
+   gap: 10px;
+   display: flex;
+   justify-content: flex-start;
+}
+
+.user_cards {
+   width: 18%;
+   height: 85%;
+   border-radius: 5px;
+   padding: 5px;
+   border: 1px solid rgb(72, 72, 72);
+
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: flex-start;
+}
+
+.demographic_picture {
+   width: 65%;
+   border-radius: 5px;
+   aspect-ratio: 1/1;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.user_cards p {
+   width: 100%;
+   font-size: 0.8rem;
+   word-wrap: break-word;
+}
+
+.main_right {
+   width: 30%;
+   height: 100%;
+
+   gap: 10px;
+   display: flex;
+   flex-direction: column;
+}
+
+.post_stats {
+   width: 100%;
+   height: 40%;
+   padding: 10px;
+   border-radius: 5px;
+   border: 1px solid red;
+}
+
+.admin_profile {
+   width: 100%;
+   height: 25%;
+   padding: 10px;
+   border-radius: 5px;
+   border: 1px solid lightgreen;
+}
+
+.admin_profile h3 {
+   width: 100%;
+   height: 30px;
+}
+
+.admin_profile h3 span {
+   font-size: 1rem;
+   font-weight: 400;
+}
+
+.admin_profile_body {
+   width: 100%;
+   height: 80%;
+   display: flex;
+
+   gap: 15px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.admin_pfp {
+   width: 30%;
+   aspect-ratio: 1/1;
+   border-radius: 5px;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.admin_pfp img {
+   width: 100%;
+   height: 100%;
+   border-radius: 10px;
+   box-shadow: 0px 0px 10px rgb(255, 255, 255, 0.3);
+}
+
+.admin_info {
+   width: 70%;
+   word-wrap: break-word;
+}
+
+.admin_info p {
+   font-size: 0.8rem;
+}
+
+.admin_info p b {
+   color: green;
+}
+
+.admin_stats {
+   width: 100%;
+   height: 35%;
+   padding: 10px;
+   border-radius: 5px;
+   border: 1px solid lightblue;
+
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.admin_stats h3 {
+   width: 100%;
+   height: 25px;
+}
+
+.admin_cards_container {
+   width: 100%;
+   height: 85%;
+   flex-wrap: wrap;
+   overflow-y: scroll;
+
+   gap: 10px;
+   display: flex;
+   justify-content: flex-start;
+}
+
+.admin_cards {
+   width: 100px;
+   height: 140px;
+   border-radius: 5px;
+   padding: 5px;
+   border: 1px solid rgb(72, 72, 72);
+
+   gap: 0px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.admin_card_pfp {
+   width: 100%;
+   aspect-ratio: 1/1;
+   border-radius: 5px;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.admin_username {
+   font-size: 0.8rem;
+}
+
+.admin_email,
+.last_login,
+.last_logout {
+   display: none;
+}
+

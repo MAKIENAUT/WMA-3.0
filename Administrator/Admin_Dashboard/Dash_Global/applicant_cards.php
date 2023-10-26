@@ -100,6 +100,14 @@ require_once "../Dashboard_Scripts/login_credential.php";
    // Get all elements with class "applicant_card"
    var cards = document.getElementsByClassName("applicant_card");
 
+   // Function to confirm delete
+   function confirmDelete(email) {
+      var confirmDelete = confirm("Are you sure you want to delete this applicant?");
+      if (confirmDelete) {
+         window.location.href = '../Dash_Global/applicant_delete.php?email=' + encodeURIComponent(email);
+      }
+   }
+
    // Loop through the cards and add a click event listener to each
    for (var i = 0; i < cards.length; i++) {
       cards[i].addEventListener('click', function () {
@@ -125,7 +133,7 @@ require_once "../Dashboard_Scripts/login_credential.php";
                   <a href="" class="applicant_checklist">
                      <i class="fa-solid fa-list-check"></i>
                   </a>
-                  <a href="" class="applicant_delete">
+                  <a href="#" class="applicant_delete" onclick="confirmDelete('${email}')">
                      <i class="fa-solid fa-trash"></i>
                   </a>
                </div>
