@@ -85,7 +85,7 @@
                </article>
                <article class="service-content">
                   <div class="service-content-header">
-                     <img src="/Photos/h2a.jpg" alt="Study and exchange image">
+                     <img src="/Photos/employee.jpg" alt="Study and exchange image">
                   </div>
                   <div class="service-content-description">
                      <h1>Temporary Employment</h1>

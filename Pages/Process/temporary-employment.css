@@ -20,6 +20,14 @@ main {
    justify-content: center;
 }
 
+.header-parent.eb3 {
+   background-image: url(/Photos/eb3.jpg);
+}
+
+.header-parent.h1b {
+   background-image: url(/Photos/h1b.jpg);
+}
+
 .header-container {
    width: 100%;
    height: 100%;

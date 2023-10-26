@@ -120,7 +120,7 @@
 
       <div class="eb3">
          <!-- EB3 HEADER SECTION -->
-         <header class="header-parent">
+         <header class="header-parent eb3">
             <div class="header-container">
                <div class="header-content">
                   <h1>Process of <span>EB3</span></h1>
@@ -231,7 +231,7 @@
 
       <div class="h1b">
          <!-- PROCESS HEADER SECTION -->
-         <header class="header-parent">
+         <header class="header-parent h1b">
             <div class="header-container">
                <div class="header-content">
                   <h1>Process of <span>H1B</span></h1>
