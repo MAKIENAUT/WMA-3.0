@@ -130,9 +130,6 @@ require_once "../Dashboard_Scripts/login_credential.php";
                   <a href="../Dash_Applicants/file_manager.php?email=${email}" class="file_manager">
                      <i class="fa-regular fa-folder-open"></i>
                   </a>
-                  <a href="" class="applicant_checklist">
-                     <i class="fa-solid fa-list-check"></i>
-                  </a>
                   <a href="#" class="applicant_delete" onclick="confirmDelete('${email}')">
                      <i class="fa-solid fa-trash"></i>
                   </a>

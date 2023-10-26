@@ -166,7 +166,7 @@ main {
    border-radius: 5px;
    transition: all 0.25s;
    text-decoration: none;
-   background-color: rgb(0, 0, 0, 0.5);
+   background-color: rgba(0, 0, 0, 0.5);
 
    display: flex;
    align-items: center;
@@ -174,10 +174,6 @@ main {
 }
 
 .file_manager i {
-   color: teal;
-}
-
-.applicant_checklist i {
    color: gold;
 }
 

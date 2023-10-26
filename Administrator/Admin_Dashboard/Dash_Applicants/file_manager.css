@@ -29,6 +29,7 @@
 .applicant_pfp {
    width: 75%;
    aspect-ratio: 1/1;
+   border-radius: 5px;
    background-position: center;
    background-size: cover;
    background-repeat: no-repeat;
@@ -70,9 +71,9 @@
    border: 2px dashed rgba(255, 0, 0, 0.6);
 }
 .file-drop-zone:hover{
-
    transition: all 0.25s;
    border: 2px dashed rgba(255, 0, 0, 1);
+   background-color: rgba(0, 0, 0, 0.4);
 }
 .existing_file {
    width: 24%;
@@ -81,12 +82,16 @@
    text-wrap: wrap;
    text-align: center;
    border-radius: 10px;
-   border: 1px solid gold;
+   border: 1px solid white;
 
    display: flex;
    align-items: center;
    flex-direction: column;
    justify-content: space-around;
+}
+.existing_file:hover {
+   transition: all 0.25s;
+   background-color: rgba(0, 0, 0, 0.4);
 }
 .existing_file:hover #file_icon {
    transition: all 0.25s;
@@ -108,7 +113,7 @@
    transition: all 0.25s;
 }
 .download_link:hover i {
-   color: teal;
+   color: gold;
    transition: all 0.25s;
 }
 .delete_link:hover i {
