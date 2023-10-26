@@ -22,10 +22,12 @@ main {
 
 .header-parent.eb3 {
    background-image: url(/Photos/eb3.jpg);
+   background-position: center;
 }
 
 .header-parent.h1b {
    background-image: url(/Photos/h1b.jpg);
+   background-position: center;
 }
 
 .header-container {
@@ -203,6 +205,15 @@ main {
    /* PROCESS HEADER SECTION */
    .header-parent {
       height: 60dvh;
+   }
+
+   .header-parent.eb3 {
+      background-position: center -100px;
+   }
+
+   .header-parent.h1b {
+      background-image: url(/Photos/h1b.jpg);
+      background-position: center -50px;
    }
 
    .header-content {
