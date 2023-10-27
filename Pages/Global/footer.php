@@ -15,7 +15,7 @@
             </div>
             <div class="misc-photos">
                <a href="https://westmigrationconsultancy.com/"><img src="/Photos/wmc-logo.png" alt="WMC logo"></a>
-               <a href="https://westmigrationconsultancy.com/"><img src="/Photos/USCIS.svg" alt="USCIS logo"></a>
+               <a href="https://www.uscis.gov/"><img src="/Photos/USCIS.svg" alt="USCIS logo"></a>
             </div>
          </section>
          <section class="footer-info">

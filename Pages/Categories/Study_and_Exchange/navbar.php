@@ -83,7 +83,7 @@ if ($result !== null && $result->num_rows > 0) {
             ?>
             <a href="#" class="navbar-link profile-holder">
                <div class="profile"
-                  style="background-image: url(../../Users/Standard_User/<?php echo substr($pfp, 3) ?>);"></div>
+                  style="background-image: url(../../../Users/Standard_User/<?php echo substr($pfp, 3) ?>);"></div>
                <?php echo $userinfo['first_name']; ?>
                <div onclick="confirmLogout()" class="logout"><i class="fa-solid fa-power-off"></i></div>
             </a>

@@ -19,8 +19,11 @@ main {
 
 .main_left img {
    width: 100%;
-   max-width: 100px;
+   max-width: 150px;
    aspect-ratio: 1/1;
+   object-fit: cover;
+   object-position: center;
+   border-radius: 5px;
 }
 
 .main_right {
