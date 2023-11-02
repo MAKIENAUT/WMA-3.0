@@ -15,6 +15,7 @@
    <link rel="stylesheet" href="/Pages/Global/global.css" />
    <link rel="icon" type="image/x-icon" href="/Photos/WMA.png">
    <script defer src="/Pages/Global/global.js"></script>
+   <script src="temp-emp.js"></script>
    <title>Temporary Employment</title>
 </head>
 
@@ -24,21 +25,38 @@
 
    <!-- MAIN SECTION -->
    <main>
-      <div class="h2a">
+      <!-- MAIN HEADER SECTION -->
+      <header class="header-parent">
+         <div class="header-container">
+            <div class="header-content">
+               <h1>Process of <span>Temporary Employment</span></h1>
+            </div>
+         </div>
+      </header>
+
+      <div class="temp-emp-button-parent">
+         <section class="temp-emp-button-container">
+            <button id="h2a-button" class="temp-emp-button h2a-button" onclick="showTempEmp(0, this)">H2A</button>
+            <button id="eb3-button" class="temp-emp-button eb3-button" onclick="showTempEmp(1, this)">EB3</button>
+            <button id="h1b-button" class="temp-emp-button h1b-button" onclick="showTempEmp(2, this)">H1B</button>
+         </section>
+      </div>
+
+      <div id="tempEmp" class="h2a">
          <!-- H2 HEADER SECTION -->
-         <header class="header-parent">
+         <!-- <header class="header-parent">
             <div class="header-container">
                <div class="header-content">
                   <h1>Process of <span>H2A</span></h1>
                </div>
             </div>
-         </header>
+         </header> -->
          <!-- H2 STEPS SECTION -->
          <article class="steps-parent">
             <div class="steps-container">
                <div class="steps-content">
                   <div class="steps-header">
-                     <p>How to Apply?</p>
+                     <p>How to Apply for h2a?</p>
                      <h1>FOLLOW THESE STEPS!</h1>
                      <p>The H-2A visa is a temporary work visa for foreign agricultural workers who will perform
                         seasonal
@@ -118,21 +136,21 @@
          </article>
       </div>
 
-      <div class="eb3">
+      <div id="tempEmp" class="eb3">
          <!-- EB3 HEADER SECTION -->
-         <header class="header-parent eb3">
+         <!-- <header class="header-parent eb3">
             <div class="header-container">
                <div class="header-content">
                   <h1>Process of <span>EB3</span></h1>
                </div>
             </div>
-         </header>
+         </header> -->
          <!-- EB3 STEPS SECTION -->
          <article class="steps-parent">
             <div class="steps-container">
                <div class="steps-content">
                   <div class="steps-header">
-                     <p>How to Apply?</p>
+                     <p>How to Apply for eb3?</p>
                      <h1>FOLLOW THESE STEPS!</h1>
                      <p>Here is a general process for obtaining temporary employment
                         in the United States, such as through the EB3 visa category:</p>
@@ -229,21 +247,21 @@
          </article>
       </div>
 
-      <div class="h1b">
+      <div id="tempEmp" class="h1b">
          <!-- PROCESS HEADER SECTION -->
-         <header class="header-parent h1b">
+         <!-- <header class="header-parent h1b">
             <div class="header-container">
                <div class="header-content">
                   <h1>Process of <span>H1B</span></h1>
                </div>
             </div>
-         </header>
+         </header> -->
          <!-- PROCESS STEPS SECTION -->
          <article class="steps-parent">
             <div class="steps-container">
                <div class="steps-content">
                   <div class="steps-header">
-                     <p>How to Apply?</p>
+                     <p>How to Apply h1b?</p>
                      <h1>FOLLOW THESE STEPS!</h1>
                      <p>Please upload the following documents to your account
                         (“Documents” tab). You do not need to mail them. Please
