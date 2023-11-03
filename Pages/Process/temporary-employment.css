@@ -4,7 +4,7 @@ main {
    color: var(--alt-color-3);
    display: flex;
    flex-flow: column;
-   gap: var(--gap-2rem);
+   gap: var(--gap-1rem);
 }
 
 /* PROCESS HEADER SECTION */
@@ -56,6 +56,37 @@ main {
    font-family: "Lora", serif;
 }
 
+/* BUTTONS SECTION */
+.temp-emp-button-container {
+   padding-inline: var(--mobile-padding-inline);
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: var(--gap-1rem);
+}
+
+.temp-emp-button {
+   padding: 10px;
+   color: var(--alt-color-2);
+   font-weight: 600;
+   border-radius: 5px;
+   border: 2px solid var(--alt-color-2);
+   background-color: var(--white);
+   text-decoration: none;
+   transition: var(--gen-transition);
+   cursor: pointer;
+}
+
+.temp-emp-button:not(.button-active):hover,
+.temp-emp-button:not(.button-active):active {
+   background-color: var(--alt-background-color);
+   border: 2px solid var(--alt-color-2);
+}
+
+.button-active {
+   background-color: var(--alt-color-2);
+   border: 2px solid transparent;
+   color: var(--white);
+}
 
 /* PROCESS STEPS SECTION */
 .steps-parent {
@@ -71,7 +102,7 @@ main {
 
 .steps-content {
    width: 100%;
-   padding: 50px;
+   padding: 25px;
    padding-inline: var(--mobile-padding-inline);
    display: flex;
    flex-flow: column;
@@ -185,6 +216,11 @@ main {
       font-size: var(--tablet-hero-header);
    }
 
+   /* BUTTONS SECTION */
+   .temp-emp-button-container {
+      padding-inline: var(--tablet-padding-inline);
+   }
+
    /*  PROCESS STEPS SECTION  */
    .steps-content {
       padding-inline: var(--tablet-padding-inline);
@@ -227,6 +263,19 @@ main {
 
    .header-content h1 span {
       font-size: var(--laptop-hero-header);
+   }
+
+   /* BUTTONS SECTION */
+   .temp-emp-button-parent {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   .temp-emp-button-container {
+      padding-inline: var(--laptop-padding-inline);
+      width: 100%;
+      max-width: 1280px;
    }
 
    /*  PROCESS STEPS SECTION  */
