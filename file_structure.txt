@@ -1,0 +1,57 @@
+Administrator
+|
+|-- Admin Commands
+|     |-- admin_commands.css
+|     |-- admin_login.php
+|     |-- admin_logout.php
+|     |-- admin_register.php
+|     |-- admin_settings.php  
+|
+|-- Admin Components
+|     |-- admin_users.php
+|     |-- applicant_records.php
+|     |-- content_and_posts.php
+|     |-- login_variables.php
+|     |-- users.php
+|
+|-- Admin Dashboard
+|     |-- Overview
+|     |     |-- overview.css
+|     |     |-- overview.js
+|     |     |-- overview.php
+|     |-- Applicants
+|     |     |-- applicants.css
+|     |     |-- applicants.js
+|     |     |-- applicants.php
+|     |-- Demographics
+|     |     |-- demographics.css
+|     |     |-- demographics.js
+|     |     |-- demographics.php
+|     |-- Administrators
+|     |     |-- administrators.css
+|     |     |-- administrators.js
+|     |     |-- administrators.php
+|     |-- News and Content
+|     |     |-- news_and_content.css
+|     |     |-- news_and_content.js
+|     |     |-- news_and_content.php
+|
+|-- Admin Database
+|     |-- wma_administrators.php
+|     |-- wma_applicants.php
+|     |-- wma_content.php
+|     |-- wma_users.php
+|
+|-- Admin Global
+|     |-- global.css
+|     |-- navbar.php
+|     |-- page_initiators.php
+|     |-- activity_countdown.js
+|
+|-- Admin_Profile
+|     |-- Profile_Picture
+|     |     |-- email@address.com.jpg
+|
+|-- Applicant Files
+|     |-- email@address.com
+|     |     |-- LastName_FileName.pdf

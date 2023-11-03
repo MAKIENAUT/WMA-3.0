@@ -74,7 +74,7 @@
             <div class="footer-more-info-content">
                <a href="/Pages/News/news.php">News</a>
                <a href="/Pages/Contact-us/contact.php">Contact us</a>
-               <a href="../../Administrator/Admin_Login/admin_login.php">Administrator</a>
+               <a href="../../Administrator/Admin_Commands/admin_login.php">Administrator</a>
             </div>
          </section>
          <section class="footer-socials">
