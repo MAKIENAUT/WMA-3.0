@@ -49,7 +49,7 @@ $is_file_manager_page = strpos($current_page, 'file_manager.php') !== false; // 
          <a href="../../Admin_Commands/admin_register.php">
             <i class="fa-solid fa-user-plus"></i>
          </a>
-         <a href="../../Admin_Profile/profile_settings.php">
+         <a href="../../Admin_Commands/admin_settings.php">
             <i class="fa-solid fa-gear"></i>
          </a>
       </div>

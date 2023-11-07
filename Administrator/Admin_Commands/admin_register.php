@@ -1,6 +1,6 @@
 <?php
 
-require_once '../Admin_Global/page_initiators.php';
+require_once 'page_initiators.php';
 require_once '../Admin_Database/wma_administrators.php';
 
 // Get user's access_credential
