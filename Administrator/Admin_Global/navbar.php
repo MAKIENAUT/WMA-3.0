@@ -5,7 +5,8 @@ $is_overview_page = strpos($current_page, 'overview.php') !== false;
 $is_applicants_page = strpos($current_page, 'applicants.php') !== false;
 $is_demographic_page = strpos($current_page, 'demographics.php') !== false;
 $is_administrators_page = strpos($current_page, 'administrators.php') !== false;
-$is_news_page = strpos($current_page, 'dash_news.php') !== false;
+$is_news_page = strpos($current_page, 'content_creator.php') !== false;
+$is_news_page = strpos($current_page, 'news_and_content.php') !== false;
 $is_file_manager_page = strpos($current_page, 'file_manager.php') !== false; // Added this line
 
 ?>

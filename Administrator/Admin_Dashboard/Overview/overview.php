@@ -1,5 +1,6 @@
 <?php
 require_once("../../Admin_Global/page_initiators.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,10 +15,12 @@ require_once("../../Admin_Global/page_initiators.php");
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
+      
+   <link rel="icon" type="image/x-icon" href="../../../Photos/WMA.png">
    <title>Overview</title>
 </head>
 
-<body onload="updateTimer()">
+<body>
    <!-- NAVBAR -->
    <?php require_once "../../Admin_Global/navbar.php"; ?>
 
@@ -39,41 +42,8 @@ require_once("../../Admin_Global/page_initiators.php");
       </div>
       <div class="main_right">
          <div class="admin_profile">
-            <h3>Your Profile <span id="timer">hi</span>
-               <!-- <script>
-                  let timerElement = document.getElementById('timer');
-                  let timerInterval;
-                  let timerDuration = 30 * 60; // 2 minutes in seconds
-
-                  function updateTimer() {
-                     let minutes = Math.floor(timerDuration / 60);
-                     let seconds = timerDuration % 60;
-                     timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                  }
-
-                  function startTimer() {
-                     timerInterval = setInterval(function () {
-                        timerDuration--;
-                        if (timerDuration <= 0) {
-                           clearInterval(timerInterval);
-                           timerElement.textContent = 'Time\'s up!';
-                           window.location.href = '../../Admin_Commands/admin_logout.php';
-                        } else {
-                           updateTimer();
-                        }
-                     }, 1000);
-                  }
-
-                  function restartTimer() {
-                     clearInterval(timerInterval);
-                     timerDuration = 30 * 60;
-                     startTimer();
-                  }
-
-                  startTimer();
-
-                  document.addEventListener('mousemove', restartTimer);
-               </script> -->
+            <h3>Your Profile <span id="timer" onmouseover="restartTimer()"></span>
+               <script src="timer.js"></script>
             </h3>
 
             <div class="admin_profile_body">
@@ -99,7 +69,17 @@ require_once("../../Admin_Global/page_initiators.php");
          </div>
 
          <div class="post_stats">
-            News/Post Statistic
+            <div class="post_stat_header">
+               <h3>News/Post Statistic</h3>
+               <button id="chart_toggle" onclick="toggleChartType()">
+                  <i class="fa-solid fa-chart-simple"></i>
+               </button>
+            </div>
+
+            <?php
+            require_once "../../Admin_Components/content_statistics.php";
+            ?>
+
          </div>
          <div class="admin_stats">
             <?php require_once "../../Admin_Components/administrators_display.php"; ?>

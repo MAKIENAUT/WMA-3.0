@@ -1,13 +1,6 @@
 <?php
 
 session_start();
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require_once '../../../PHPMailer/src/PHPMailer.php';
-require_once '../../../PHPMailer/src/SMTP.php';
-require_once '../../../PHPMailer/src/Exception.php';
-require_once '../../../Users/User_Login_Google/config.php';
 
 $errors = "";
 
@@ -267,39 +260,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $insert_sql = $conn->prepare("INSERT INTO wma_forms.j1_visa (first_name, last_name, full_address, country, phone_number, email_address, profession, file, login_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
       $insert_sql->bind_param("sssssssss", $first_name, $last_name, $full_address, $country, $phone_number, $email_address, $profession, $file_input_value, $login_method);
 
+
       if ($insert_sql->execute()) {
          $errors .= "Data inserted successfully.\n";
-         $mail = new PHPMailer();
-
-         try {
-            //Server settings
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'admin@westmigrationagency.us'; // Your Gmail address
-            $mail->Password = 'Bridgeprogram2023!'; // Your Gmail password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
-
-            //Recipients
-            $mail->setFrom($_POST['email_address']); // Set the "From" address
-            $mail->addAddress('admin@westmigrationagency.us'); // Add the recipient
-
-            //Content
-            $mail->isHTML(true);
-            $mail->Subject = 'New Form Submission';
-            $mail->Body = 'Name: ' . $_POST['first_name'] . ', ' . $_POST['last_name'];
-
-            $mail->send();
-            $errors .= 'Email sent successfully!\n';
-         } catch (Exception $e) {
-            $errors .= 'Error sending email: ' . $mail->ErrorInfo . '\n';
-         }
-
       } else {
          $errors .= "Error: " . $conn->error . "\n";
       }
-
+   
       $userDirectory = "../../../Administrator/Applicant_Files/{$email_address}";
       if (!file_exists($userDirectory)) {
          mkdir($userDirectory, 0777, true);

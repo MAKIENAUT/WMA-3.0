@@ -11,7 +11,7 @@ if (isset($_POST['action']) && isset($_POST['content_id'])) {
       $content_table = 'wma_standard_content';
       $binding_parameters = 'ii';
    } elseif (isset($_SESSION['user_token']) && !empty($_SESSION['user_token'])) {
-      $user_token = $_SESSION['user_token'];
+      $user_id = $_SESSION['user_token'];
       $content_table_foreign = 'user_token';
       $content_id = $_POST['content_id'];
       $content_table = 'wma_google_content';

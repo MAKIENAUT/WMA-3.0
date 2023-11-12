@@ -400,7 +400,50 @@ main {
    height: 40%;
    padding: 10px;
    border-radius: 5px;
+   flex-wrap: wrap;
+   overflow-y: scroll;
    border: 1px solid red;
+}
+
+.post_stat_header {
+   width: 100%;
+   height: 15%;
+   position: relative;
+
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.post_stat_header button {
+   z-index: 1;
+   padding: 0;
+   right: 30px;
+   height: 30px;
+   position: fixed;
+   aspect-ratio: 1/1;
+   border-radius: 5px;
+   transition: all 0.25s;
+   border: 1px solid gold;
+   background-color: transparent;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.post_stat_header button i {
+   color: teal;
+   font-size: 1rem;
+}
+
+.post_stat_header button:hover {
+   opacity: 0.7;
+   transition: all 0.25s;
+}
+
+.graph_container {
+   gap: 0;
 }
 
 .admin_profile {
@@ -523,3 +566,12 @@ main {
    display: none;
 }
 
+.graph_container {
+   width: 100%;
+
+   gap: 10px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: flex-start;
+}
