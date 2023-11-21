@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                if (isset($_SESSION['user_token'])) {
                   header("Location: welcome.php");
                } else { ?>
-                  <a href="<?php echo $client->createAuthUrl() ?>">
+                  <a href="<?php echo $client->createAuthUrl();  ?>">
                      <img src="../../../Photos/Google_Logo.svg" alt="">
                      Sign Up with Google
                   </a>

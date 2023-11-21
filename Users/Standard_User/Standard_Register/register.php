@@ -10,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $birth_date = $_POST["birth_date"];
    $email = $_POST["email"];
    $password = $_POST["password"];
+   $user_type = $_POST["user_type"];
    $confirm_password = $_POST["confirm_password"];
 
    $valid = true;
@@ -61,11 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          }
       }
 
-      $insert_sql = "INSERT INTO wma_users_standard (first_name, last_name, phone_number, birth_date, email, password, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      $insert_sql = "INSERT INTO wma_users_standard (first_name, last_name, phone_number, birth_date, email, password, user_type, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
       $stmt = $conn->prepare($insert_sql);
 
-      $stmt->bind_param("sssssss", $first_name, $last_name, $phone_number, $birth_date, $email, $hashed_password, $target_file);
+      $stmt->bind_param("ssssssss", $first_name, $last_name, $phone_number, $birth_date, $email, $hashed_password, $user_type, $target_file);
 
       if ($stmt->execute()) {
          header("location: ../../Standard_User/Standard_Login/user_login.php");
@@ -87,9 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-      crossorigin="anonymous" referrerpolicy="no-referrer">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer">
    <link rel="stylesheet" href="register.css">
    <link rel="stylesheet" href="/Pages/Global/global.css" />
    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -111,8 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             ?>
          </div>
-         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
-            enctype="multipart/form-data">
+         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
             <div class="personal-info">
                <div class="name_fields">
                   <label>Personal Information <b>*</b></label>
@@ -138,15 +136,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <input type="password" name="confirm_password" required placeholder="Confirm Password">
                </div>
             </div>
+            <div class="category_selector">
+               <label>User Type <b>*</b></label>
+               <div class="category_buttons">
+                  <div class="applicant_button">
+                     <input required type="radio" name="user_type" value="applicant">
+                     <label for="user_type">Applicant</label>
+                  </div>
+                  <div class="employer_button">
+                     <input required type="radio" name="user_type" value="employer">
+                     <label for="user_type">Employer</label>
+                  </div>
+               </div>
+            </div>
             <div class="pfp_input">
                <label for="profile">Profile Picture (.jpg only) <b>*</b></label>
                <div class="pfp_field" id="pfp_field">
                   <div class="subtitle">Click/drag & drop your Profile Picture here</div>
-                  <input type="file" id="profile_picture" class="file_input_field" name="profile_picture" accept=".jpg"
-                     required>
+                  <input type="file" id="profile_picture" class="file_input_field" name="profile_picture" accept=".jpg" required>
                   <div class="file_name" id="pfp_name"></div>
                </div>
             </div>
+
             <script src="register.js"></script>
             <div class="g-recaptcha" data-sitekey="6LfaUYkoAAAAAK9Qg6i0SqqoW7mF0ioNFkCb1EPz"></div>
             <input type="submit" value="Register">

@@ -24,5 +24,12 @@ function collapseExcerpt(contentId) {
    fullExcerptContainer.style.display = 'none';
 }
 
+function confirmDelete(contentId) {
+   // Display a confirmation dialog
+   var isConfirmed = confirm("Are you sure you want to delete this content?");
 
-// CHARTS
+   // If the user confirms, navigate to content_delete.php with the contentId
+   if (isConfirmed) {
+      window.location.href = 'content_delete.php?contentId=' + contentId;
+   }
+}

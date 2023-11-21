@@ -41,7 +41,6 @@ if (isset($_GET['code'])) {
    // save user data into session
    $_SESSION['user_token'] = $token;
 
-
    // Redirect to home page
    header("Location: ../../Pages/Home/home.php");
    die(); // Ensure script stops executing after redirect

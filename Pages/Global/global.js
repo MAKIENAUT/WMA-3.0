@@ -2,8 +2,10 @@ const navLinkContainer = document.getElementById('navbarLinkContainer');
 const navMobileIcon = document.getElementById('navbarMobileIcon');
 const navCategoryContainer = document.getElementById('navbarCategoryContainer');
 const navCategoryContainer2 = document.getElementById('navbarCategoryContainer2');
+const navCategoryContainer3 = document.getElementById('navbarCategoryContainer3');
 const navCategory = document.getElementById("navbarCategory");
 const navCategory2 = document.getElementById("navbarCategory2");
+const navCategory3 = document.getElementById("navbarCategory3");
 
 function toggleNavbar() {
    navLinkContainer.classList.toggle('active');
@@ -28,6 +30,11 @@ function toggleCategory2() {
    navCategoryContainer2.classList.toggle('active');
 }
 
+function toggleCategory3() {
+   navCategory3.classList.toggle('active');
+   navCategoryContainer3.classList.toggle('active');
+}
+
 document.addEventListener('click', function (event) {
    if (
       !navCategoryContainer.contains(event.target) &&
@@ -45,6 +52,16 @@ document.addEventListener('click', function (event) {
    ) {
       navCategoryContainer2.classList.remove('active');
       navCategory2.classList.remove('active');
+   }
+});
+
+document.addEventListener('click', function (event) {
+   if (
+      !navCategoryContainer3.contains(event.target) &&
+      !navCategory3.contains(event.target)
+   ) {
+      navCategoryContainer3.classList.remove('active');
+      navCategory3.classList.remove('active');
    }
 });
 

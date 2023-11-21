@@ -1,164 +1,314 @@
-* {
-   color: black;
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+	outline: none;
 }
 
 main {
-   margin-top: 60px;
-   width: 100%;
-   height: calc(100vh - 60px);
-   display: flex;
-   align-items: center;
-   justify-content: center;
+	margin-top: 60px;
+	width: 100%;
+	height: calc(100vh - 60px);
+	padding: 15px 10px;
+	background-color: #272727;
+
+	gap: 5px;
+	display: flex;
+	align-items: start;
+	justify-content: center;
 }
 
-.content_container {
-   gap: 40px;
-   width: 100%;
-   padding: 15px;
-   height: 100%;
-   overflow: scroll;
-   box-sizing: border-box;
+.sidebar {
+	width: 25%;
+	height: 100%;
+	padding: 10px 20px 25px 10px;
+	border-right: 1px solid rgb(6, 154, 154);
 
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   justify-content: start;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: start;
+}
+
+.search_bar {
+	width: 100%;
+	padding: 15px 0;
+	border-bottom: 1px solid rgb(255, 255, 255, 0.3)
+}
+
+.search_bar input {
+	width: 100%;
+	height: 40px;
+	color: white;
+	font-size: 1rem;
+	text-indent: 15px;
+	border: none;
+	border-radius: 5px;
+	background-color: transparent;
+	border: 1px solid rgb(255, 255, 255, 0.3)
+}
+
+.content_view {
+	width: 100%;
+	padding: 20px 0;
+	border-bottom: 1px solid rgb(255, 255, 255, 0.3)
+}
+
+.selector_buttons {
+	width: 100%;
+
+	display: flex;
+	justify-content: space-between;
+}
+
+.selector_buttons label {
+	width: 110px;
+	height: 40px;
+	color: white;
+	font-size: 1.2rem;
+	position: relative;
+	border-radius: 5px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+input[type=radio] {
+	position: absolute;
+	visibility: hidden;
+}
+
+label p {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	border-radius: inherit;
+	text-shadow: 0px 0px 15px #ffffff;
+	border: 1px solid rgb(255, 255, 255, 0.5);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+input[type=radio]:checked+p {
+	border: 0;
+	color: gold;
+	background-color: rgba(4, 136, 136, 0.5);
+}
+
+.featured_posts {
+	width: 100%;
+	height: 80%;
+	padding: 15px;
+	overflow: scroll;
+	border-bottom: 1px solid rgb(255, 255, 255, 0.5);
+
+	gap: 10px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: start;
+}
+
+.featured_title {
+	width: 100%;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.featured_posts .post_card {
+	width: 80%;
+	color: white;
+	padding: 20px 10px;
+	height: fit-content;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+
+	gap: 3px;
+	display: none;
+	align-items: center;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.featured_posts .title_box h3 {
+	font-size: 0.85rem;
+}
+
+.featured_posts .interaction_info {
+	display: none;
+}
+
+.featured_posts .excerpt,
+.featured_posts .like-count,
+.featured_posts .title_box p,
+.featured_posts .full_excerpt,
+.featured_posts .like-button i,
+.featured_posts .fa-paper-plane {
+	font-size: 0.7rem;
+}
+
+
+
+.content_container {
+	gap: 30px;
+	width: 75%;
+	padding: 15px;
+	height: 100%;
+	overflow: scroll;
+	box-sizing: border-box;
+	border-left: 1px solid gold;
+
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: start;
 }
 
 .post_card {
-   width: 30%;
-   height: fit-content;
-   padding: 20px 10px;
-   border-bottom: 1px solid rgba(45, 45, 45, 0.6);
+	width: 40%;
+	color: white;
+	border-radius: 5px;
+	padding: 20px 10px;
+	height: fit-content;
+	border: 1px solid rgba(255, 255, 255, 0.6);
 
-   gap: 10px;
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   justify-content: flex-start;
+	gap: 10px;
+	display: none;
+	align-items: center;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.post_card.active {
+	display: flex;
 }
 
 .post_card_image {
-   width: 100%;
-   padding: 10px;
-   aspect-ratio: 1/1;
-   border-radius: 5px;
-   background-size: cover;
-   background-position: center;
-   background-repeat: no-repeat;
+	width: 100%;
+	padding: 10px;
+	aspect-ratio: 1/1;
+	border-radius: 5px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .headline_section {
-   width: 100%;
-   gap: 10px;
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
+	width: 100%;
+	gap: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .title_box {
-   width: 80%;
+	width: 80%;
 }
 
 .title_box p {
-   font-size: 0.7rem;
+	font-size: 0.7rem;
 }
 
 .interaction_info {
-   width: 20%;
-   position: relative;
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
+	width: 20%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .interaction_info i {
-   font-size: 1.2rem;
-   font-weight: 400;
+	font-size: 1.2rem;
+	font-weight: 400;
+	color: white;
+	
 }
 
 .social-icons {
-   top: -100px;
-   right: -50px;
-   width: 40px;
-   height: 160px;
-   position: absolute;
+	top: -100px;
+	right: -50px;
+	width: 40px;
+	height: 160px;
+	position: absolute;
 
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   justify-content: space-evenly;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 
 .social-icons a {
-   text-decoration: none;
+	text-decoration: none;
 }
 
 .social-icons a i {
-   width: 20px;
-   font-size: 20px;
-   font-weight: 400;
-   aspect-ratio: 1/1;
-   border-radius: 5px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
+	width: 20px;
+	font-size: 20px;
+	font-weight: 400;
+	aspect-ratio: 1/1;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .fa-facebook-f {
-   color: rgb(0, 140, 255);
+	color: rgb(0, 140, 255);
 }
 
 .fa-twitter {
-   color: rgb(32, 177, 225);
+	color: rgb(32, 177, 225);
 }
 
 .fa-whatsapp {
-   color: green;
+	color: green;
 }
 
 .fa-facebook-messenger {
-   color: rgb(0, 140, 255);
+	color: rgb(0, 140, 255);
 }
 
 .fa-instagram {
-   color: white;
-   background: linear-gradient(to right, #8a3ab9, #dd2a7b, #ff5757);
+	color: white;
+	background: linear-gradient(to right, #8a3ab9, #dd2a7b, #ff5757);
 }
 
 .like-button,
 .share-button {
-   border: none;
-   cursor: pointer;
-   font-size: 1.2rem;
-   font-weight: 400;
-   transition: all 0.25s;
-   background-color: transparent;
-   text-decoration: none;
+	border: none;
+	cursor: pointer;
+	font-size: 1.2rem;
+	font-weight: 400;
+	transition: all 0.25s;
+	background-color: transparent;
+	text-decoration: none;
 }
 
 .like-button:hover,
 .share-button:hover {
-   opacity: 0.5;
-   transition: all 0.25s;
+	opacity: 0.5;
+	transition: all 0.25s;
 }
 
 .like-count {
-   font-weight: 400;
+	color: white;
+	font-weight: 400;
 }
 
 .excerpt,
 .full_excerpt {
-   width: 100%;
-   font-size: 1rem;
+	width: 100%;
+	font-size: 1rem;
 }
 
 .excerpt a,
 .full_excerpt a {
-   cursor: pointer;
-   text-decoration: underline;
+	cursor: pointer;
+	text-decoration: underline;
 }
-
 
 /* @media screen and (min-width: 720px) {
    main div {

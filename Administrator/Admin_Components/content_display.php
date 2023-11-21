@@ -15,21 +15,34 @@ require_once "../../Admin_Database/wma_users.php";
                         GROUP BY c.id";
    $content_result = $conn->query($content_sql);
 
+   function getLikeCount($conn, $content_id)
+   {
+      $slc = $conn->query("SELECT COUNT(*) FROM wma_standard_content WHERE content_id = $content_id")->fetch_assoc()["COUNT(*)"];
+      $glc = $conn->query("SELECT COUNT(*) FROM wma_google_content WHERE content_id = $content_id")->fetch_assoc()["COUNT(*)"];
+      return $slc + $glc;
+   }
+
    while ($row = $content_result->fetch_assoc()) {
       $title = $row['title'];
       $content_id = $row['id'];
       $content = $row['content'];
       $excerpt = $row['excerpt'];
       $category = $row['category'];
+      $share_count = $row['share_count'];
       $post_status = $row['post_status'];
       $date_published = $row['date_published'];
-      $slc = $conn->query("SELECT COUNT(*) FROM wma_standard_content WHERE content_id = $content_id")->fetch_assoc()["COUNT(*)"];
-      $glc = $conn->query("SELECT COUNT(*) FROM wma_google_content WHERE content_id = $content_id")->fetch_assoc()["COUNT(*)"];
-      $total_like_count = $slc + $glc;
+      $total_like_count = getLikeCount($conn, $content_id);
       ?>
       <div class="post_card" id="post_card_<?php echo $content_id; ?>">
          <div class="post_card_image"
             style="background-image: url(../../../Photos/News_and_Content/<?php echo $content_id; ?>.jpg);">
+
+            <a href="../News_And_Content/content_edit.php?content_id=<?= $content_id ?>" class="content_edit">
+               <i class="fa-regular fa-pen-to-square"></i>
+            </a>
+            <!-- <a href="#" class="content_delete" onclick="confirmDelete('<?= $content_id ?>')">
+               <i class="fa-solid fa-trash"></i> -->
+            </a>
          </div>
 
          <div class="headline_section">
@@ -48,8 +61,10 @@ require_once "../../Admin_Database/wma_users.php";
                   </span>
                </i>
 
-               <i class="fa-regular fa-paper-plane">
-                  <span>0</span>
+               <i class="fa-regular fa-paper-plane share-button" onclick="toggleSocialIcons(<?php echo $content_id; ?>)">
+                  <span id="totalShareCount_<?php echo $content_id; ?>">
+                     <?php echo $share_count; ?>
+                  </span>
                </i>
             </div>
          </div>

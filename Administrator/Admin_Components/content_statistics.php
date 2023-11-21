@@ -22,12 +22,14 @@ $private_status = 0;
 // Initialize array for post likes
 $postLikesColumn = [];
 $postLikesDonut = [];
+$shareCountDonut = [];
 
 while ($row = $content_result->fetch_assoc()) {
    $title = $row['title'];
    $content_id = $row['id'];
    $category = $row['category'];
    $post_status = $row['post_status'];
+   $share_count = $row['share_count'];
 
    // Counting likes using SQL queries is not optimal. Consider optimizing this part.
 
@@ -48,14 +50,16 @@ while ($row = $content_result->fetch_assoc()) {
    $glc = $conn->query("SELECT COUNT(*) FROM wma_users.wma_google_content WHERE content_id = $content_id")->fetch_assoc()["COUNT(*)"];
    $total_like_count = $slc + $glc;
 
+   $shareCountDonut[$title] = $share_count;
    $postLikesColumn[$title] = $total_like_count;
    $postLikesDonut[$content_id] = $total_like_count;
-   
+
 }
 ?>
 
 <div class="graph_container">
    <div id="likesChart" style="width: 100%; height: 30%;"></div>
+   <div id="shareChart" style="width: 100%; height: 30%;"></div>
    <div id="statusChart" style="width: 100%; height: 30%;"></div>
    <div id="categoryChart" style="width: 100%; height: 30%;"></div>
 </div>
@@ -64,6 +68,7 @@ while ($row = $content_result->fetch_assoc()) {
    google.charts.load('current', { 'packages': ['corechart'] });
    google.charts.setOnLoadCallback(drawCategoryChart);
    google.charts.setOnLoadCallback(drawStatusChart);
+   google.charts.setOnLoadCallback(drawShareChart);
    google.charts.setOnLoadCallback(drawLikesColumnChart); // Initial chart type is column
 
    // Variable to track the current chart type
@@ -103,18 +108,33 @@ while ($row = $content_result->fetch_assoc()) {
       }
    }
 
+   function drawShareChart() {
+      var shareData = new google.visualization.DataTable();
+      shareData.addColumn('string', 'Post Title');
+      shareData.addColumn('number', 'Share Count');
+
+      <?php foreach ($shareCountDonut as $postTitle => $shareCount): ?>
+         shareData.addRow(['<?php echo $postTitle; ?>', <?php echo $shareCount; ?>]);
+      <?php endforeach; ?>
+
+      var options = getLikesChartOptions('Share Count per Post');
+
+      var shareChart = new google.visualization.PieChart(document.getElementById('shareChart'));
+      shareChart.draw(shareData, options);
+   }
+
    // Function to toggle chart type
    function toggleChartType() {
       if (currentChartType === 'column') {
          currentChartType = 'donut';
          drawLikesDonutChart();
          console.log(1);
-         document.getElementById('chart_toggle').innerHTML = '<i class="fa-solid fa-chart-pie"></i>';
+         document.getElementById('chart_toggle').innerHTML = '<i class="fa-solid fa-chart-simple"></i>';
       } else {
          currentChartType = 'column';
          drawLikesColumnChart();
          console.log(2);
-         document.getElementById('chart_toggle').innerHTML = '<i class="fa-solid fa-chart-simple"></i>';
+         document.getElementById('chart_toggle').innerHTML = '<i class="fa-solid fa-chart-pie"></i>';
       }
    }
 
@@ -140,8 +160,8 @@ while ($row = $content_result->fetch_assoc()) {
       likesData.addColumn('string', 'Post ID');
       likesData.addColumn('number', 'Like Count');
 
-      <?php foreach ($postLikesDonut as $content_id => $likeCount): ?>
-         likesData.addRow(['<?php echo $content_id; ?>', <?php echo $likeCount; ?>]);
+      <?php foreach ($postLikesDonut as $postTitle => $likeCount): ?>
+         likesData.addRow(['<?php echo $postTitle; ?>', <?php echo $likeCount; ?>]);
       <?php endforeach; ?>
 
       var options = getLikesChartOptions('Likes per Post');
@@ -182,7 +202,7 @@ while ($row = $content_result->fetch_assoc()) {
             // Add more colors if needed for additional slices
          },
          hAxis: {
-            title: 'Post Id',
+            title: 'Post Title',
             titleTextStyle: { color: 'white' },
             textStyle: { color: 'white' }
          },

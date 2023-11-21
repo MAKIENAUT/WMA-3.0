@@ -42,9 +42,11 @@ require_once("../../Admin_Global/page_initiators.php");
 
       <div class="main_right">
          <div class="post_stat_header">
-            <h2><i class="fa-solid fa-gauge"></i> &nbsp; Content Statistics</h2>
+            <h2>
+               <i class="fa-solid fa-gauge"></i> &nbsp; Content Statistics
+            </h2>
             <button id="chart_toggle" onclick="toggleChartType()">
-               <i class="fa-solid fa-chart-simple"></i>
+               <i class="fa-solid fa-chart-pie"></i>
             </button>
          </div>
 

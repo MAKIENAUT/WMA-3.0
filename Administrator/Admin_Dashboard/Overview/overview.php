@@ -15,7 +15,7 @@ require_once("../../Admin_Global/page_initiators.php");
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
-      
+
    <link rel="icon" type="image/x-icon" href="../../../Photos/WMA.png">
    <title>Overview</title>
 </head>
@@ -72,7 +72,7 @@ require_once("../../Admin_Global/page_initiators.php");
             <div class="post_stat_header">
                <h3>News/Post Statistic</h3>
                <button id="chart_toggle" onclick="toggleChartType()">
-                  <i class="fa-solid fa-chart-simple"></i>
+                  <i class="fa-solid fa-chart-pie"></i>
                </button>
             </div>
 
