@@ -142,12 +142,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                      </div>
                   <?php endforeach;
                } elseif ($login_method === 'standard_login') {
-                  foreach ($standard_users as $user): ?>
-                     <div class="applicant_pfp"
-                        style="background-image: url(../../../Users/Standard_User/Standard_Profile/Profile_Pictures/<?php echo $user['email'] ?>/profile_picture.jpg);">
+                  ?>
+                  <div class="applicant_pfp"
+                     style="background-image: url(../../../Users/Standard_User/Standard_Profile/Profile_Pictures/<?php echo $email ?>/profile_picture.jpg);">
 
-                     </div>
-                  <?php endforeach;
+                  </div>
+                  <?php
                }
                ?>
 
@@ -225,7 +225,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                  <a href='<?= "$targetDirectory/$applicant[last_name]_$fieldName.pdf" ?>' class='download_link'
                                     download><i class='fa fa-download'></i>
                                  </a>
-                                 <a href='#' class='delete_link' onclick='confirmDelete("<?= urlencode($applicant['last_name'] . "_" . $fieldName . ".pdf") ?>", "<?= urlencode($email) ?>")'><i class='fa fa-trash'></i></a>
+                                 <a href='#' class='delete_link'
+                                    onclick='confirmDelete("<?= urlencode($applicant['last_name'] . "_" . $fieldName . ".pdf") ?>", "<?= urlencode($email) ?>")'><i
+                                       class='fa fa-trash'></i></a>
 
                                  <script>
                                     function confirmDelete(fileName, email) {

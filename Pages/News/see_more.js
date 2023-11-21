@@ -1,3 +1,16 @@
+function filter_content(category) {
+   const postCards = document.querySelectorAll('.post_card');
+
+   postCards.forEach(card => {
+      const cardCategory = card.getAttribute('data-category');
+      if (category === 'all' || category === cardCategory) {
+         card.classList.add('active');
+      } else {
+         card.classList.remove('active');
+      }
+   });
+}
+
 const navLinkContainer = document.getElementById('navbarLinkContainer');
 const navMobileIcon = document.getElementById('navbarMobileIcon');
 
@@ -38,7 +51,7 @@ function incrementShareCount(contentId) {
 
          // Update total share count span
          var totalShareCountSpan = $('#totalShareCount_' + contentId);
-         totalShareCountSpan.text('Total Share Count: ' + updatedShareCount);
+         totalShareCountSpan.text(updatedShareCount);
 
          // Reset the position of the paper plane button
          $('#socialIcons_' + contentId).hide();

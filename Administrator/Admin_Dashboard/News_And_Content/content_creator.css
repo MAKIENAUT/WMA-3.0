@@ -134,19 +134,21 @@ form {
    resize: none;
    text-indent: 10px;
    border-radius: 5px;
+   padding: 0px 10px;
    background-color: transparent;
    border: 1px solid rgb(255, 255, 255, 0.3);
 }
 
 .radio_fields {
    width: 100%;
+   gap: 10px;
    display: flex;
-   justify-content: space-evenly;
+   justify-content: space-between;
 }
 
 .postStatus_field, 
 .category_field {
-   width: 40%;
+   width: 50%;
    height: 60px;
    padding: 5px;
    border-radius: 5px;

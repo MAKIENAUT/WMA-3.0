@@ -149,6 +149,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                            <input type="radio" name="post_status" value="private">
                            <label for="post_status">Private</label>
                         </div>
+
+                        <div class="private_field">
+                           <input type="radio" name="post_status" value="featured">
+                           <label for="post_status">Featured</label>
+                        </div>
                      </div>
                   </div>
                   <div class="category_field">
@@ -173,3 +178,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
    </main>
 </body>
+</html>

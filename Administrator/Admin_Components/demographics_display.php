@@ -65,7 +65,7 @@
       ]);
 
       var options = {
-         title: 'User Demographic Stats',
+         title: 'User Login Stats',
          pieHole: 0.4, // Makes it a donut chart
          backgroundColor: 'transparent', // Set background color to transparent
          legend: { textStyle: { color: 'white' } }, // Set legend text color to white
