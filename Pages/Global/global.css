@@ -301,7 +301,6 @@ p.active i {
 
 .misc-photos {
    width: 100%;
-   height: max-content;
    display: grid;
    grid-template-columns: repeat(2, 1fr);
    align-items: center;
@@ -310,13 +309,14 @@ p.active i {
 }
 
 .misc-photos a {
-   width: 100%;
-   height: fit-content;
+   width: inherit;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .misc-photos a img {
-   width: 100%;
-   height: fit-content;
+   width: inherit;
    transition: var(--gen-transition);
 }
 
