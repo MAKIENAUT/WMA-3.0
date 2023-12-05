@@ -22,7 +22,7 @@
    <!-- MAIN SECTION -->
    <main>
       <div>
-         <h1>Just wait up. We're making things better for you</h1>
+         <h1>Stay Tuned: Fresh Insights in Progress!</h1>
          <a href="/Pages/Home/home.php">Go back home</a>
       </div>
    </main>

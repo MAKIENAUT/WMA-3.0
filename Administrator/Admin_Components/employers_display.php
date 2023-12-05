@@ -4,7 +4,7 @@ require_once "../../Admin_Global/fetch_applicants.php";
 ?>
 
 <div class="applicant_navigator">
-   <h3>Applicants</h3>
+   <h3>Employers </h3>
    <div class="toolkit">
       <div class="pagination">
          Page:
@@ -12,7 +12,7 @@ require_once "../../Admin_Global/fetch_applicants.php";
          $page = $_GET['page'] ?? 1;
          $cardsPerPage = 20;
          $start = ($page - 1) * $cardsPerPage;
-         $totalCards = count($applicants);
+         $totalCards = count($employers);
          $totalPages = ceil($totalCards / $cardsPerPage);
 
          if ($page > 1)
@@ -36,11 +36,11 @@ require_once "../../Admin_Global/fetch_applicants.php";
 
 <div class="applicant_card_container">
    <?php
-   if (empty($applicants)) {
-      echo "<p>No Applicants found.</p>";
+   if (empty($employers)) {
+      echo "<p>No employers found.</p>";
    } else {
-      foreach (array_slice($applicants, $start, $cardsPerPage) as $applicant) {
-         extract($applicant);
+      foreach (array_slice($employers, $start, $cardsPerPage) as $employer) {
+         extract($employer);
          if ($login_method === "google_login") {
             require_once '../../Admin_Database/wma_users.php';
 
@@ -60,6 +60,7 @@ require_once "../../Admin_Global/fetch_applicants.php";
             }
 
             foreach ($google_users as $google_user) {
+               $user_type = ucfirst($google_user['user_type']);
                $profile_picture = $google_user['picture'];
             }
          } else {
@@ -67,22 +68,23 @@ require_once "../../Admin_Global/fetch_applicants.php";
          }
 
    ?>
-         <div class="applicant_card" data-id="<?= $id ?>" data-country="<?= $country ?>" data-lastname="<?= $last_name ?>" data-email="<?= $emaiel_address ?>" data-firstname="<?= $first_name ?>" data-profession="<?= $profession ?>" data-phone_number="<?= $phone_number ?>" data-full_address="<?= $full_address ?>" data-date_submitted="<?= $date_submitted ?>" data-profilepicture="<?= $profile_picture ?>" data-search="<?= strtolower("$first_name $last_name $email_address $profession") ?>">
+         <div class="employer_card" data-id="<?= $id ?>" data-city="<?= $city ?>" data-state="<?= $state ?>" data-country="<?= $country ?>" data-lastname="<?= $last_name ?>" data-user_type="<?= $user_type ?>" data-email="<?= $email_address ?>" data-firstname="<?= $first_name ?>" data-created_at="<?= $created_at ?>" data-time_frame="<?= $time_frame ?>" data-school="<?= $school_district ?>" data-full_address="<?= $full_address ?>" data-phone_number="<?= $phone_number ?>" data-teacher_category="<?= $teacher_category ?>" data-teacher_estimate="<?= $teacher_estimate ?>" data-reference_source="<?= $reference_source ?>" data-profilepicture="<?= $profile_picture ?>" data-search="<?= strtolower("$first_name $last_name $email_address $school_district") ?>">
             <div class="applicant_picture" style="background-image: url(<?= $profile_picture ?>);">
                <div class="applicant_nameplate">
                   <p class="applicant_fullname"><b>
                         <?= $last_name ?>
                      </b>,
-                     <?= $first_name ?>
+                     <?= $first_name ?>,
+                     <?= $middle_name ?>
                   </p>
                   <p class="submit_date">
-                     <?= $date_submitted ?>
+                     <?= $created_at ?>
                   </p>
                </div>
             </div>
             <div class="other_details">
                <p>
-                  <?= $profession ?>
+                  <?= $user_type ?>
                </p>
             </div>
             <p class="email_address"><a href="">
@@ -125,20 +127,26 @@ require_once "../../Admin_Global/fetch_applicants.php";
    // Loop through the cards and add a click event listener to each
    for (var i = 0; i < cards.length; i++) {
       cards[i].addEventListener('click', function() {
-
-         var id = this.dataset.id;
-         var email = this.dataset.email;
-         var country = this.dataset.country;
-         var lastName = this.dataset.lastname;
-         var firstName = this.dataset.firstname;
-         var profession = this.dataset.profession;
-         var fullAddress = this.dataset.full_address;
-         var phoneNumber = this.dataset.phone_number;
-         var dateSubmitted = this.dataset.date_submitted;
-         var profilePicture = this.dataset.profilepicture; // Add this line
+         var id = this.dataset.id
+         var city = this.dataset.city
+         var email = this.dataset.email
+         var state = this.dataset.state
+         var school = this.dataset.school
+         var country = this.dataset.country
+         var lastname = this.dataset.lastname
+         var user_type = this.dataset.user_type
+         var firstname = this.dataset.firstname
+         var created_at = this.dataset.created_at
+         var time_frame = this.dataset.time_frame
+         var full_address = this.dataset.full_address
+         var phone_number = this.dataset.phone_number
+         var teacher_category = this.dataset.teacher_category
+         var teacher_estimate = this.dataset.teacher_estimate
+         var reference_source = this.dataset.reference_source
+         var profilepicture = this.dataset.profilepicture
 
          var content = `
-            <div class="applicant_picture" style="background-image: url(${profilePicture});">
+            <div class="applicant_picture" style="background-image: url(${profilepicture});">
                <p id="modal_id">${id}</p>
                <div class="applicant_actions">
                   <a href="../Applicants/file_manager.php?email=${email}" class="file_manager">
@@ -149,20 +157,21 @@ require_once "../../Admin_Global/fetch_applicants.php";
                   </a>
                </div>
                <div class="applicant_nameplate">
-                  <p style="color: white;"><b style="color: white;">Name:</b> ${lastName}, ${firstName}</p>
-                  <p style="color: white;"><b style="color: white;">Date Submitted: </b> ${dateSubmitted}</p>
-                  <p style="color: white;"><b style="color: white;">Phone No.: </b> ${phoneNumber}</p>
+                  <p style="color: white;"><b style="color: white;">Name:</b> ${lastname}, ${firstname}</p>
+                  <p style="color: white;"><b style="color: white;">Date Submitted: </b> ${created_at}</p>
+                  <p style="color: white;"><b style="color: white;">Phone No.: </b> ${phone_number}</p>
                </div>
             </div>
+            <p><b>Reference:</b> ${reference_source}</p>
             <p><b>Email:</b> <a href="mailto:${email}">${email}</a></p>
-            <p><b>Profession:</b> ${profession}</p>
-            <p><b>Address: </b>${country}, ${fullAddress}</p>
+            <p><b>Address: </b>${country}, ${full_address}</p>
          `;
 
          modalContent.innerHTML = content;
          modal.style.display = "flex";
       });
    }
+
 
    // Get the <span> element that closes the modal
    var span = document.getElementsByClassName("close")[0];

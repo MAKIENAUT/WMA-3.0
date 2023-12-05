@@ -1,19 +1,33 @@
 <?php
-require_once '../../Admin_Database/wma_applicants.php';
+require_once '../../Admin_Database/wma.php';
 
-$query = "SELECT * FROM j1_visa";
-$result = $conn->query($query);
+$applicant_query = "SELECT * FROM j1_visa";
+$applicant_result = $conn->query($applicant_query);
 
 $applicants = [];
 
-if ($result) {
-   while ($row = $result->fetch_assoc()) {
+if ($applicant_result) {
+   while ($row = $applicant_result->fetch_assoc()) {
       $applicants[] = $row;
    }
 
-   $result->free();
+   $applicant_result->free();
 } else {
    echo "Error: " . $conn->error;
 }
 
+$employers_query = "SELECT * FROM school_partners_form";
+$employers_result = $conn->query($employers_query);
+
+$employers = [];
+
+if ($employers_result) {
+   while ($row = $employers_result->fetch_assoc()) {
+      $employers[] = $row;
+   }
+
+   $employers_result->free();
+} else {
+   echo "Error: " . $conn->error;
+}
 ?>

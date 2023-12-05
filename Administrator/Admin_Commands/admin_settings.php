@@ -1,6 +1,6 @@
 <?php
 require_once "page_initiators.php";
-require_once '../Admin_Database/wma_administrators.php';
+require_once '../Admin_Database/wma.php';
 
 if (isset($admin_id)) {
    $user_id = $admin_id;

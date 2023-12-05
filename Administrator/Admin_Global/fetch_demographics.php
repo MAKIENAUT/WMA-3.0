@@ -1,5 +1,5 @@
 <?php
-require_once '../../Admin_Database/wma_users.php';
+require_once '../../Admin_Database/wma.php';
 
 $query_google = "SELECT * FROM wma_users_google";
 $result_google = $conn->query($query_google);
