@@ -13,7 +13,3 @@ document.addEventListener('click', function (event) {
       navLinkContainer.classList.remove('active');
    }
 });
-
-// document.addEventListener('click', function (e) {
-//    console.log(e.target);
-// })

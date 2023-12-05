@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once "../../Administrator/Admin_Database/wma_content.php";
-require_once "../../Administrator/Admin_Database/wma_users.php";
+require_once "../../Administrator/Admin_Database/wma.php";
 
 if (isset($_POST['action']) && isset($_POST['content_id'])) {
    if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {

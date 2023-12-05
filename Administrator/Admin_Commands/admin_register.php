@@ -1,7 +1,7 @@
 <?php
 
 require_once 'page_initiators.php';
-require_once '../Admin_Database/wma_administrators.php';
+require_once '../Admin_Database/wma.php';
 
 // Get user's access_credential
 $user_id = $_SESSION['admin_id'];

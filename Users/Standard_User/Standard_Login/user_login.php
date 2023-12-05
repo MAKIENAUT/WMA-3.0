@@ -12,7 +12,7 @@ if (isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
 }
 
 // Include the database connection file
-require_once '../../../Administrator/Admin_Database/wma_users.php';
+require_once '../../../Administrator/Admin_Database/wma.php';
 
 // Initialize variables for email and password
 $email = $password = "";

@@ -64,7 +64,3 @@ document.addEventListener('click', function (event) {
       navCategory3.classList.remove('active');
    }
 });
-
-// document.addEventListener('click', function (e) {
-//    console.log(e.target);
-// })

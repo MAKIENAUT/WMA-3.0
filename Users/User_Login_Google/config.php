@@ -19,7 +19,7 @@ $client->addScope("profile");
 $hostname = "localhost";
 $username = "root";
 $password = "";
-$database = "wma_users";
+$database = "wma";
 
 $conn = mysqli_connect($hostname, $username, $password, $database);
 

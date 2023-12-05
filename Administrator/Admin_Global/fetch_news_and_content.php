@@ -1,7 +1,7 @@
 <?php
-require_once '../../Admin_Database/wma_content.php';
+require_once '../../Admin_Database/wma.php';
 
-$query = "SELECT * FROM content";
+$query = "SELECT * FROM wma_content";
 $result = $conn->query($query);
 
 $posts = [];
@@ -12,7 +12,6 @@ if ($result) {
    }
 
    $result->free();
-   $conn->close();
 } else {
    echo "Error: " . $conn->error;
 }

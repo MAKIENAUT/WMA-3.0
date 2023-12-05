@@ -1,15 +1,14 @@
 <?php
-require_once "../../Administrator/Admin_Database/wma_content.php";
-require_once "../../Administrator/Admin_Database/wma_users.php";
+require_once "../../Administrator/Admin_Database/wma.php";
 require_once "functions.php";
 
 
 $content_sql = "SELECT c.*,
                         COUNT(DISTINCT us.content_id) as standard_like_count,
                         COUNT(DISTINCT ug.content_id) as google_like_count
-                        FROM wma_content.content c
-                        LEFT JOIN wma_users.wma_standard_content us ON c.id = us.content_id
-                        LEFT JOIN wma_users.wma_google_content ug ON c.id = ug.content_id
+                        FROM wma_content c
+                        LEFT JOIN wma_standard_content us ON c.id = us.content_id
+                        LEFT JOIN wma_google_content ug ON c.id = ug.content_id
                         GROUP BY c.id";
 $content_result = $conn->query($content_sql);
 
@@ -38,7 +37,7 @@ while ($row = $content_result->fetch_assoc()) {
    $date_published = $row['date_published'];
    $total_like_count = getLikeCount($conn, $content_id);
    $content_url = 'https://www.westmigrationagency.com/Pages/News/news.php#' . $content_id;
-   $check_like_result = $conn->query("SELECT * FROM wma_users.$content_table WHERE $content_table_foreign = $user_id AND content_id = $content_id");
+   $check_like_result = $conn->query("SELECT * FROM $content_table WHERE $content_table_foreign = $user_id AND content_id = $content_id");
    $like_status = ($check_like_result->num_rows > 0) ? 'unlike' : 'like';
    ?>
    <div class="post_card" id="<?= $content_id ?>" data-id="<?= $title ?>" data-content="<?= $content ?>"
@@ -76,7 +75,7 @@ while ($row = $content_result->fetch_assoc()) {
                </span>
             </i>
 
-            <div class="social-icons" id="socialIcons_<?php echo $content_id; ?>" style="display: none;">
+            <div class="social-icons" id="socialIcons_<?php echo $content_id; ?>" style="display: flex;">
                <?php $socialLinks = [
                   "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($content_url) => "fab fa-facebook-f",
                   "https://twitter.com/intent/tweet?url=" . urlencode($content_url) . "&text=" . urlencode($title) => "fab fa-twitter",

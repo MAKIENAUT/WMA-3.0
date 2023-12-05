@@ -1,6 +1,6 @@
 <?php
 
-require_once '../Admin_Database/wma_administrators.php';
+require_once '../Admin_Database/wma.php';
 
 session_name('admin_session');
 session_start();

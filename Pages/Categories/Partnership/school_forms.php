@@ -1,6 +1,5 @@
 <?php
-require_once "../../../Administrator/Admin_Database/wma_applicants.php";
-require_once "../../../Administrator/Admin_Database/wma_users.php";
+require_once "../../../Administrator/Admin_Database/wma.php";
 
 session_start();
 
@@ -41,14 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    $reference_source = mysqli_real_escape_string($conn, $_POST["reference_source"]);
 
    // Check if the email address already exists
-   $checkEmailQuery = "SELECT * FROM wma_forms.school_partners_form WHERE email_address = '$email_address'";
+   $checkEmailQuery = "SELECT * FROM school_partners_form WHERE email_address = '$email_address'";
    $result = $conn->query($checkEmailQuery);
 
    if ($result->num_rows > 0) {
       echo "Error: Email address already exists!";
    } else {
       // Insert data into the table
-      $insertQuery = "INSERT INTO wma_forms.school_partners_form 
+      $insertQuery = "INSERT INTO school_partners_form 
                        (first_name, middle_name, last_name, school_district, full_address, city, state, country, 
                        email_address, phone_number, time_frame, teacher_category, teacher_estimate, reference_source)
                        VALUES ('$first_name', '$middle_name', '$last_name', '$school_district', '$full_address', '$city', 

@@ -1,7 +1,7 @@
 <?php
 require_once("../../Admin_Global/page_initiators.php");
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,9 +12,7 @@ require_once("../../Admin_Global/page_initiators.php");
    <link rel="stylesheet" href="../../Admin_Global/global.css">
    <link rel="stylesheet" href="../../../Pages/Global/global.css" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
    <link rel="icon" type="image/x-icon" href="../../../Photos/WMA.png">
    <title>Overview</title>
@@ -28,12 +26,12 @@ require_once("../../Admin_Global/page_initiators.php");
       <div class="main_left">
          <div class="main_title">
             <h1>
-               <i class="fa-regular fa-eye"></i> &nbsp; Overview
+               <i class="fa-regular fa-eye" id="toggleIcon"></i> &nbsp; Overview
             </h1>
          </div>
 
-         <div class="applicant_database">
-            <?php require_once "../../Admin_Components/applicants_display.php"; ?>
+         <div class="applicant_database" id="displayContainer">
+            <?php require_once "../../Admin_Components/employers_display.php"; ?>
          </div>
 
          <div class="demographic_stats">
@@ -47,9 +45,7 @@ require_once("../../Admin_Global/page_initiators.php");
             </h3>
 
             <div class="admin_profile_body">
-               <div class="admin_pfp"
-                  style="background-image:url(../../Admin_Profile/Profile_Picture/<?php echo $_SESSION['email_address'] . ".jpg"; ?>);"
-                  alt="">
+               <div class="admin_pfp" style="background-image:url(../../Admin_Profile/Profile_Picture/<?php echo $_SESSION['email_address'] . ".jpg"; ?>);" alt="">
                </div>
                <div class="admin_info">
                   <h3>

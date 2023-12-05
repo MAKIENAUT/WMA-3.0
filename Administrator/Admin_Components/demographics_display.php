@@ -27,7 +27,9 @@
          <p>
             <?php echo $user['email']; ?>
          </p>
-
+         <p>
+            <?php echo $user['user_type']; ?>
+         </p>
          <p>Google Account</p>
       </div>
    <?php endforeach; ?>

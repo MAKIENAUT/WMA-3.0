@@ -1,19 +1,18 @@
 <?php
 require_once "../../Admin_Global/page_initiators.php";
 require_once "../../Admin_Global/fetch_applicants.php";
-require_once "../../Admin_Database/wma_content.php";
-require_once "../../Admin_Database/wma_users.php";
+require_once "../../Admin_Database/wma.php";
 ?>
 <div class="content_container">
    <?php
    $content_sql = "SELECT c.*,
                         COUNT(DISTINCT us.content_id) as standard_like_count,
                         COUNT(DISTINCT ug.content_id) as google_like_count
-                        FROM wma_content.content c
-                        LEFT JOIN wma_users.wma_standard_content us ON c.id = us.content_id
-                        LEFT JOIN wma_users.wma_google_content ug ON c.id = ug.content_id
+                        FROM wma_content c
+                        LEFT JOIN wma_standard_content us ON c.id = us.content_id
+                        LEFT JOIN wma_google_content ug ON c.id = ug.content_id
                         GROUP BY c.id";
-   $content_result = $conn->query($content_sql);
+   $display_result = $conn->query($content_sql);
 
    function getLikeCount($conn, $content_id)
    {
@@ -22,7 +21,7 @@ require_once "../../Admin_Database/wma_users.php";
       return $slc + $glc;
    }
 
-   while ($row = $content_result->fetch_assoc()) {
+   while ($row = $display_result->fetch_assoc()) {
       $title = $row['title'];
       $content_id = $row['id'];
       $content = $row['content'];
@@ -88,7 +87,7 @@ require_once "../../Admin_Database/wma_users.php";
       </div>
       <?php
    }
-   if ($content_result->num_rows === 0) {
+   if ($display_result->num_rows === 0) {
       echo "No posts found.";
    }
    ?>

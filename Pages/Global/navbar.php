@@ -37,7 +37,7 @@ if ($result !== null && $result->num_rows > 0) {
          </button>
       </div>
       <div id="navbarLinkContainer" class="navbar-link-container">
-         <a class="navbar-link" href="/Pages/News/news.php">News</a>
+         <a class="navbar-link" href="/Pages/News/news.php">News/Blog</a>
          <a class="navbar-link" href="/Pages/About-us/about.php">About Us</a>
          <div class="navbar-category-container" href="javascript:void(0)">
             <p id="navbarCategoryContainer" onclick="toggleCategory()">Process<i class="fa-solid fa-caret-down"></i>
@@ -60,13 +60,7 @@ if ($result !== null && $result->num_rows > 0) {
             </div>
          </div>
          /
-         <div class="navbar-category-container" href="javascript:void(0)">
-            <p id="navbarCategoryContainer3" onclick="toggleCategory3()">Partnership<i class="fa-solid fa-caret-down"></i></p>
-            <div id="navbarCategory3" class="navbar-category">
-               <a class="navbar-category-link" href="/Pages/Categories/Partnership/school_forms.php">Schools</a>
-               <a class="navbar-category-link" href="/Pages/Categories/Partnership/school_forms.php">Employers</a>
-            </div>
-         </div>
+         <a class="navbar-link" href="/Pages/Categories/Partnership/school_forms.php">Partnership</a>
 
          <?php
          if (isset($_SESSION['user_token'])) {

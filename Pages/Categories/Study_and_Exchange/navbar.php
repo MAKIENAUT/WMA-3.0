@@ -20,8 +20,6 @@ if ($result !== null && $result->num_rows > 0) {
    $userinfo = $result->fetch_assoc();
 }
 ?>
-
-
 <nav class="navbar-parent">
    <div class="navbar-container">
       <div class="navbar-main-container">
@@ -32,8 +30,8 @@ if ($result !== null && $result->num_rows > 0) {
          </button>
       </div>
       <div id="navbarLinkContainer" class="navbar-link-container">
-         <a class="navbar-link" href="/Pages/News/news.php">News</a>
-      <a class="navbar-link" href="/Pages/About-us/about.php">About Us</a>
+         <a class="navbar-link" href="/Pages/News/news.php">News/Blog</a>
+         <a class="navbar-link" href="/Pages/About-us/about.php">About Us</a>
          <div class="navbar-category-container" href="javascript:void(0)">
             <p id="navbarCategoryContainer" onclick="toggleCategory()">Process<i class="fa-solid fa-caret-down"></i>
             </p>
@@ -43,7 +41,6 @@ if ($result !== null && $result->num_rows > 0) {
                <a class="navbar-category-link" href="/Pages/Process/temporary-employment.php">Temporary Employment</a>
             </div>
          </div>
-
 
          <div class="navbar-category-container" href="javascript:void(0)">
             <p id="navbarCategoryContainer2" onclick="toggleCategory2()">Applicants<i class="fa-solid fa-caret-down"></i></p>
@@ -56,13 +53,7 @@ if ($result !== null && $result->num_rows > 0) {
             </div>
          </div>
          /
-         <div class="navbar-category-container" href="javascript:void(0)">
-            <p id="navbarCategoryContainer3" onclick="toggleCategory3()">Partnership<i class="fa-solid fa-caret-down"></i></p>
-            <div id="navbarCategory3" class="navbar-category">
-               <a class="navbar-category-link" href="/Pages/Categories/Partnership/school_forms.php">Schools</a>
-               <a class="navbar-category-link" href="/Pages/Categories/Partnership/school_forms.php">Employers</a>
-            </div>
-         </div>
+         <a class="navbar-link" href="/Pages/Categories/Partnership/school_forms.php">Partnership</a>
 
          <?php
          if (isset($_SESSION['user_token'])) {
@@ -81,7 +72,7 @@ if ($result !== null && $result->num_rows > 0) {
                function confirmLogout() {
                   var confirmLogout = confirm("Are you sure you want to logout?");
                   if (confirmLogout) {
-                     window.location.href = '../../../Users/User_Login_Google/logout.php';
+                     window.location.href = '../../Users/User_Login_Google/logout.php';
                   }
                }
             </script>
@@ -91,7 +82,7 @@ if ($result !== null && $result->num_rows > 0) {
             $pfp = $userinfo['profile_picture'];
          ?>
             <a href="#" class="navbar-link profile-holder">
-               <div class="profile" style="background-image: url(../../../Users/Standard_User/<?php echo substr($pfp, 3) ?>);"></div>
+               <div class="profile" style="background-image: url(../../Users/Standard_User/<?php echo substr($pfp, 3) ?>);"></div>
                <?php echo $userinfo['first_name']; ?>
                <div onclick="confirmLogout()" class="logout"><i class="fa-solid fa-power-off"></i></div>
             </a>
@@ -99,7 +90,7 @@ if ($result !== null && $result->num_rows > 0) {
                function confirmLogout() {
                   var confirmLogout = confirm("Are you sure you want to logout?");
                   if (confirmLogout) {
-                     window.location.href = '../../../Users/User_Login_Google/logout.php';
+                     window.location.href = '../../Users/User_Login_Google/logout.php';
                   }
                }
             </script>

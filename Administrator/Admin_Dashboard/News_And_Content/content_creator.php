@@ -1,6 +1,6 @@
 <?php
 require_once "../../Admin_Global/page_initiators.php";
-require_once "../../Admin_Database/wma_content.php";
+require_once "../../Admin_Database/wma.php";
 
 $errors = "";
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    $date_published = date('Y-m-d H:i:s');
 
    // Use parameterized query to prevent SQL injection
-   $insert_content = $conn->prepare("INSERT INTO wma_content.content (title, content, excerpt, post_status, category, date_published) VALUES (?, ?, ?, ?, ?, ?)");
+   $insert_content = $conn->prepare("INSERT INTO wma_content (title, content, excerpt, post_status, category, date_published) VALUES (?, ?, ?, ?, ?, ?)");
 
    $insert_content->bind_param("ssssss", $title, $content, $excerpt, $post_status, $category, $date_published);
 

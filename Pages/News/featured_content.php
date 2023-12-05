@@ -3,7 +3,7 @@ require_once "functions.php";
 
 $post_status = 'featured';
 
-$featured_sql = "SELECT * FROM wma_content.content WHERE post_status = 'featured'";
+$featured_sql = "SELECT * FROM wma_content WHERE post_status = 'featured'";
 
 $featured_result = $conn->query($featured_sql);
 

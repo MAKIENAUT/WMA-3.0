@@ -1,3 +1,13 @@
+
+document.addEventListener('click', function (event) {
+   if (
+      !navLinkContainer.contains(event.target) &&
+      event.target !== navMobileIcon
+   ) {
+      navLinkContainer.classList.remove('active');
+   }
+});
+
 function filter_content(category) {
    const postCards = document.querySelectorAll('.post_card');
 
@@ -11,26 +21,20 @@ function filter_content(category) {
    });
 }
 
-const navLinkContainer = document.getElementById('navbarLinkContainer');
-const navMobileIcon = document.getElementById('navbarMobileIcon');
 
-function toggleNavbar() {
-   navLinkContainer.classList.toggle('active');
-}
-
-document.addEventListener('click', function (event) {
-   if (
-      !navLinkContainer.contains(event.target) &&
-      event.target !== navMobileIcon
-   ) {
-      navLinkContainer.classList.remove('active');
-   }
-});
 
 function toggleSocialIcons(contentId) {
    var socialIcons = document.getElementById('socialIcons_' + contentId);
-   socialIcons.style.display = (socialIcons.style.display === 'none' || socialIcons.style.display === '') ? 'flex' : 'none';
+
+   if (socialIcons.style.display === 'none') {
+      socialIcons.style.display = 'flex';
+   } else {
+      socialIcons.style.display = 'none';
+   }
+   console.log(socialIcons.style.display);
+   console.log(contentId);
 }
+
 
 function incrementShareCount(contentId) {
    // Toggle social icons

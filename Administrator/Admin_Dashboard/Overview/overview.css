@@ -120,6 +120,19 @@ main {
    justify-content: flex-start;
 }
 
+.employer_card {
+   width: 24%;
+   height: 95%;
+   border-radius: 5px;
+   padding: 5px;
+   border: 1px solid rgb(72, 72, 72);
+
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: flex-start;
+}
+
 .applicant_picture {
    width: 100%;
    aspect-ratio: 1/1;
@@ -144,6 +157,14 @@ main {
    display: flex;
    align-items: center;
    justify-content: center;
+}
+
+#my_modal {
+   height: fit-content;
+}
+
+#modalContent {
+   height: fit-content;
 }
 
 .applicant_actions {

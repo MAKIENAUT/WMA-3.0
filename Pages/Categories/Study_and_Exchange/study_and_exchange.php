@@ -1,5 +1,5 @@
 <?php
-require_once "../../../Administrator/Admin_Database/wma_users.php";
+require_once "../../../Administrator/Admin_Database/wma.php";
 session_start();
 
 $errors = "";

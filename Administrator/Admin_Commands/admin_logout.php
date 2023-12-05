@@ -1,7 +1,7 @@
 <?php
 session_name('admin_session');
 session_start();
-require_once '../Admin_Database/wma_administrators.php';
+require_once '../Admin_Database/wma.php';
 
 if (isset($_SESSION["admin_id"])) {
    // Update the last logout time in the database
