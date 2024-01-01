@@ -16,10 +16,10 @@
             <div class="misc-photos">
                <a href="https://westmigrationconsultancy.com/"><img src="/Photos/wmc-logo.png" alt="WMC logo"></a>
                <a href="https://www.uscis.gov/"><img src="/Photos/USCIS.svg" alt="USCIS logo"></a>
-               <a href="https://www.dol.gov/"><img src="https://www.dol.gov/themes/opa_theme/img/logo-primary.svg"
-                     alt="DOL logo"></a>
-               <a href="https://www.ed.gov/"><img src="https://www.ed.gov/profiles/ed_main/themes/ed3/logo.png"
-                     alt="DEPED logo"></a>
+               <a href="https://www.dol.gov/"><img class="img2"
+                     src="https://www.dol.gov/themes/opa_theme/img/logo-primary.svg" alt="DOL logo"></a>
+               <a href="https://www.ed.gov/"><img class="img2"
+                     src="https://www.ed.gov/profiles/ed_main/themes/ed3/logo.png" alt="DEPED logo"></a>
             </div>
          </section>
          <section class="footer-info">

@@ -320,6 +320,10 @@ p.active i {
    transition: var(--gen-transition);
 }
 
+.misc-photos a .img2 {
+   width: 70%;
+}
+
 .misc-photos a img:hover {
    opacity: 0.7;
 }
